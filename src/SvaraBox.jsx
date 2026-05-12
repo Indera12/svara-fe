@@ -269,19 +269,19 @@ export default function SvaraBox() {
   // Responsive item positions — mobile: compact circle, desktop: wide spread
   const items = isMobile
     ? [
-        { key: "jacket",  label: "jacket + shorts", delay: 0.55, tx: -120, ty: -160, svg: <JacketSVG scale={svgScale} /> },
-        { key: "earring", label: "earring",          delay: 0.75, tx:  120, ty: -150, svg: <EarringSVG scale={svgScale} /> },
-        { key: "pendant", label: "pendant",          delay: 0.85, tx: -140, ty:   40, svg: <PendantSVG scale={svgScale} /> },
-        { key: "bangles", label: "bangles",          delay: 0.65, tx:    0, ty: -200, svg: <BanglesSVG scale={svgScale} /> },
-        { key: "shoes",   label: "loafers",          delay: 1.15, tx:  130, ty:  100, svg: <ShoesSVG scale={svgScale} /> },
-      ]
+      { key: "jacket", label: "jacket + shorts", delay: 0.55, tx: -120, ty: -160, svg: <JacketSVG scale={svgScale} /> },
+      { key: "earring", label: "earring", delay: 0.75, tx: 120, ty: -150, svg: <EarringSVG scale={svgScale} /> },
+      { key: "pendant", label: "pendant", delay: 0.85, tx: -140, ty: 40, svg: <PendantSVG scale={svgScale} /> },
+      { key: "bangles", label: "bangles", delay: 0.65, tx: 0, ty: -200, svg: <BanglesSVG scale={svgScale} /> },
+      { key: "shoes", label: "loafers", delay: 1.15, tx: 130, ty: 100, svg: <ShoesSVG scale={svgScale} /> },
+    ]
     : [
-        { key: "jacket",  label: "jacket + shorts", delay: 0.55, tx: -230, ty: -190, svg: <JacketSVG scale={svgScale} /> },
-        { key: "earring", label: "earring",          delay: 0.75, tx:  230, ty: -200, svg: <EarringSVG scale={svgScale} /> },
-        { key: "pendant", label: "pendant",          delay: 0.85, tx: -270, ty:   70, svg: <PendantSVG scale={svgScale} /> },
-        { key: "bangles", label: "bangles",          delay: 0.65, tx:   -10, ty: -250, svg: <BanglesSVG scale={svgScale} /> },
-        { key: "shoes",   label: "loafers",          delay: 1.15, tx:  255, ty:  150, svg: <ShoesSVG scale={svgScale} /> },
-      ];
+      { key: "jacket", label: "jacket + shorts", delay: 0.55, tx: -230, ty: -190, svg: <JacketSVG scale={svgScale} /> },
+      { key: "earring", label: "earring", delay: 0.75, tx: 230, ty: -200, svg: <EarringSVG scale={svgScale} /> },
+      { key: "pendant", label: "pendant", delay: 0.85, tx: -270, ty: 70, svg: <PendantSVG scale={svgScale} /> },
+      { key: "bangles", label: "bangles", delay: 0.65, tx: -10, ty: -250, svg: <BanglesSVG scale={svgScale} /> },
+      { key: "shoes", label: "loafers", delay: 1.15, tx: 255, ty: 150, svg: <ShoesSVG scale={svgScale} /> },
+    ];
 
   useEffect(() => {
     if (!document.querySelector("#svara-fonts")) {
@@ -375,7 +375,23 @@ export default function SvaraBox() {
         position: "absolute", fontSize: isMobile ? "28vw" : "22vw", fontFamily: "'Cinzel',serif",
         color: "rgba(201,168,76,0.03)", top: "50%", left: "50%",
         transform: "translate(-50%,-50%)", pointerEvents: "none", userSelect: "none", whiteSpace: "nowrap",
-      }}>SVARA</div>
+      }}>
+        SVARA
+        {/* <img
+  src="/svara_icon.jpg"
+  alt="SVARA"
+  style={{
+    position: "absolute",
+    width: isMobile ? "28vw" : "22vw",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    pointerEvents: "none",
+    userSelect: "none",
+    opacity: 0.03,
+  }}
+/> */}
+      </div>
 
       {/* Radial glow */}
       <div style={{
