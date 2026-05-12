@@ -1,43 +1,112 @@
 import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
 
+// function Navbar() {
+//   const [scrolled, setScrolled] = useState(false);
+//   const [open, setOpen] = useState(false);
+//   useEffect(() => {
+//     const fn = () => setScrolled(window.scrollY > 50);
+//     window.addEventListener("scroll", fn, { passive:true });
+//     return () => window.removeEventListener("scroll", fn);
+//   }, []);
+// //   const links = ["Collections","Philosophy","The Box","Stories","Contact"];
+// const links = [{
+//     name:"Book Your Box", id:"Book"
+// },
+// {
+//     name:"Contact", id:"Contact"
+// }];
+//   return (
+//     <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
+//       <div className="sv-nav-logo">Svara</div>
+//       <div className="sv-nav-links">
+//         {links.map(l => <a key={l.id} href={`#${l.id.toLowerCase().replace(" ","-")}`}>{l.name}</a>)}
+//         {/* <button className="sv-nav-btn">Shop Now</button> */}
+//       </div>
+//       <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
+//         {[0,1,2].map(i => <span key={i} />)}
+//       </button>
+//       {open && (
+//         <div style={{ position:"fixed",inset:0,background:"#0a1208",zIndex:300,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:40 }}>
+//           <button onClick={() => setOpen(false)} style={{ position:"absolute",top:24,right:24,background:"none",border:"none",color:"#e8dcc8",fontSize:"1.5rem",cursor:"pointer" }}>✕</button>
+//           {links.map(l => (
+//             <a key={l.id} href={`#${l.id.toLowerCase().replace(" ","-")}`} onClick={() => setOpen(false)}
+//               style={{ fontFamily:"'Cormorant Garamond',serif",fontSize:"2.8rem",fontStyle:"italic",color:"#e8dcc8",letterSpacing:"0.06em" }}>
+//               {l.name}
+//             </a>
+//           ))}
+//         </div>
+//       )}
+//     </nav>
+//   );
+// }
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", fn, { passive:true });
+    window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
-//   const links = ["Collections","Philosophy","The Box","Stories","Contact"];
-const links = [{
-    name:"Book Your Box", id:"Book"
-},
-{
-    name:"Contact", id:"Contact"
-}];
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const links = [
+    { name: "Book Your Box", id: "Book" },
+    { name: "Contact", id: "Contact" }
+  ];
+
   return (
-    <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
-      <div className="sv-nav-logo">Svara</div>
-      <div className="sv-nav-links">
-        {links.map(l => <a key={l.id} href={`#${l.id.toLowerCase().replace(" ","-")}`}>{l.name}</a>)}
-        {/* <button className="sv-nav-btn">Shop Now</button> */}
-      </div>
-      <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
-        {[0,1,2].map(i => <span key={i} />)}
-      </button>
-      {open && (
-        <div style={{ position:"fixed",inset:0,background:"#0a1208",zIndex:300,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:40 }}>
-          <button onClick={() => setOpen(false)} style={{ position:"absolute",top:24,right:24,background:"none",border:"none",color:"#e8dcc8",fontSize:"1.5rem",cursor:"pointer" }}>✕</button>
-          {links.map(l => (
-            <a key={l.id} href={`#${l.id.toLowerCase().replace(" ","-")}`} onClick={() => setOpen(false)}
-              style={{ fontFamily:"'Cormorant Garamond',serif",fontSize:"2.8rem",fontStyle:"italic",color:"#e8dcc8",letterSpacing:"0.06em" }}>
-              {l.name}
-            </a>
-          ))}
+    <>
+      <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
+        <div className="sv-nav-logo">Svara</div>
+        <div className="sv-nav-links">
+          {links.map(l => <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`}>{l.name}</a>)}
         </div>
+        <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
+          {[0, 1, 2].map(i => <span key={i} />)}
+        </button>
+      </nav>
+
+      {/* Backdrop — outside nav */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed", inset: 0,
+            background: "rgba(0,0,0,0.4)",
+            zIndex: 300
+          }}
+        />
       )}
-    </nav>
+
+      {/* Offcanvas — outside nav */}
+      <div style={{
+        position: "fixed", top: 0, right: 0,
+        width: "min(300px, 80vw)", height: "100%",
+        background: "#0a1208",
+        zIndex: 350,
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", gap: 40,
+        transform: open ? "translateX(0)" : "translateX(100%)",
+        transition: "transform 0.4s cubic-bezier(0.16,1,0.3,1)"
+      }}>
+        <button
+          onClick={() => setOpen(false)}
+          style={{ position: "absolute", top: 24, right: 24, background: "none", border: "none", color: "#e8dcc8", fontSize: "1.5rem", cursor: "pointer" }}
+        >✕</button>
+        {links.map(l => (
+          <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`} onClick={() => setOpen(false)}
+            style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.8rem", fontStyle: "italic", color: "#e8dcc8", letterSpacing: "0.06em" }}>
+            {l.name}
+          </a>
+        ))}
+      </div>
+    </>
   );
 }
 function Hero() {
