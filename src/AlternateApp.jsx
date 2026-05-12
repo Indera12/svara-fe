@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
 
 function Navbar() {
@@ -77,6 +78,18 @@ function Marquee() {
     </div>
   );
 }
+function useReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setVis(true); io.disconnect(); }
+    }, { threshold });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, [threshold]);
+  return [ref, vis];
+}
 function Footer() {
   const [ctaRef, ctaVis] = useReveal();
   const [contactRef, contactVis] = useReveal();
@@ -154,7 +167,10 @@ try {
       <div className="contact-card-email">hello@svara.co</div>
 
       <a href="mailto:hello@svara.co" className="contact-cta">
-        Email Us
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 8 }}>
+          <path d="M2 5.5C2 4.12 3.12 3 4.5 3h15c1.38 0 2.5 1.12 2.5 2.5v13c0 1.38-1.12 2.5-2.5 2.5h-15C3.12 21 2 19.88 2 18.5v-13Zm2.5-.5L12 11.5 19.5 5H4.5Zm0 2.08V18.5h15V7.08l-7.5 5.64L4.5 7.08Z" fill="currentColor" />
+        </svg>
+        <span className="mx-1">Email Us</span>
       </a>
      <a href="https://www.instagram.com/svara_ig/" className="contact-cta" target="_blank" rel="noopener noreferrer">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,22 +180,31 @@ try {
 </a>
 
       <div className="contact-socials">
-        {[
-          {
-            label: "Email",
-            href: "mailto:hello@svara.co",
-            icon: (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 6.5C4 5.67 4.67 5 5.5 5h13c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5v-11Zm1.33.5L12 12.05l6.67-5.05H5.33Zm12.17 9.5V8.42l-6.17 4.67a.75.75 0 0 1-.84 0L6.5 8.42V16.5h11Zm-11.34 0V8.42l5.17 3.92 5.17-3.92V16.5h-10.34Z" fill="currentColor" />
-              </svg>
-            ),
-          },
-        ].map((item) => (
-          <a key={item.label} href={item.href} aria-label={item.label} className="contact-social-icon">
-            {item.icon}
-          </a>
-        ))}
-      </div>
+  {[
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/svarabengaluru/",
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.94 5a2 2 0 1 1-4-.002A2 2 0 0 1 6.94 5ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68Z" fill="currentColor" />
+        </svg>
+      ),
+    },
+    {
+      label: "Pinterest",
+      href: " https://pin.it/6EOBLEcXI",
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.852 0 1.265.64 1.265 1.408 0 .858-.546 2.14-.828 3.33-.236.995.498 1.806 1.476 1.806 1.772 0 3.137-1.868 3.137-4.564 0-2.387-1.715-4.057-4.163-4.057-2.836 0-4.498 2.126-4.498 4.323 0 .856.33 1.773.741 2.273a.3.3 0 0 1 .069.286c-.076.312-.244.995-.277 1.134-.044.183-.146.222-.337.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.967-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2Z" fill="currentColor" />
+        </svg>
+      ),
+    },
+  ].map((item) => (
+    <a key={item.label} href={item.href} aria-label={item.label} className="contact-social-icon" target="_blank" rel="noopener noreferrer">
+      {item.icon}
+    </a>
+  ))}
+</div>
     </div>
   </div>
 </section>
