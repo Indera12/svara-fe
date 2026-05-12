@@ -6,17 +6,16 @@ const G = {
   gold: "#c9a84c",
   goldBright: "#e4c46a",
   goldDim: "#a08038",
-  dark: "#060e0c",
-  deepGreen: "#0a1c16",
-  midGreen: "#112a20",
-  boxFront: "#1f5542",
-  boxSide: "#174535",
-  boxTop: "#266650",
-  boxBottom: "#0f3028",
+  dark: "#060d0e",
+  deepGreen: "#0a1718",
+  midGreen: "#112224",
+  boxFront: "#1f5557",
+  boxSide: "#174244",
+  boxTop: "#266668",
+  boxBottom: "#0f2f31",
   brown: "#7a4a22",
   brownLight: "#9a6040",
 };
-
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {

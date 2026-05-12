@@ -114,13 +114,13 @@ function Hero() {
   useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
 
   return (
-    <section id="hero" style={{ minHeight:"100vh",background: `radial-gradient(ellipse 85% 85% at 50% 58%, #102419 0%, #071410 55%, #030908 100%)`,position:"relative",overflow:"hidden",paddingTop:70 }}>    
+    <section id="hero" style={{ minHeight:"100vh", background: `radial-gradient(ellipse 85% 85% at 50% 58%, #0d2e33 0%, #071a1e 55%, #030a0b 100%)`, position:"relative", overflow:"hidden", paddingTop:70 }}>    
       <div>
         {/* LEFT */}
         <div className="d-flex justify-content-center pt-2">
-          <h1 style={{ fontFamily:"'Cormorant Garamond',serif",fontWeight:300,fontSize:"clamp(3.7rem,5.5vw,6rem)",lineHeight:0.92,color:"#e8dcc8",marginTop:32,opacity:loaded?1:0,transform:loaded?"none":"translateY(40px)",transition:"all 1s ease 0.2s" }}>
+          <h1 style={{ fontFamily:"'Cormorant Garamond',serif", fontWeight:300, fontSize:"clamp(3.7rem,5.5vw,6rem)", lineHeight:0.92, color:"#e8dcc8", marginTop:32, opacity:loaded?1:0, transform:loaded?"none":"translateY(40px)", transition:"all 1s ease 0.2s" }}>
             Wear.
-            <em className="mx-3" style={{ fontStyle:"italic",color:"#c5ac6e" }}>Your.</em>
+            <em className="mx-3" style={{ fontStyle:"italic", color:"#5f9ea0" }}>Your.</em>
             Voice.
           </h1>
         </div>
@@ -192,28 +192,28 @@ try {
   return (
     <>
       {/* CTA */}
-      <section id="book" ref={ctaRef} style={{ background:"#0a1208",padding:"130px 5%",position:"relative",overflow:"hidden" }}>
-        <div style={{ position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:700,height:700,borderRadius:"50%",background:"radial-gradient(circle,rgba(61,122,94,0.08) 0%,transparent 70%)",pointerEvents:"none" }} />
-        <div className={`reveal${ctaVis?" in":""}`} style={{ maxWidth:660,margin:"0 auto",textAlign:"center" }}>
-          <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"0.68rem",letterSpacing:"0.45em",textTransform:"uppercase",color:"#c5ac6e",marginBottom:22 }}>Join the SVARA Circle</div>
-          <h2 style={{ fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(2.2rem,4.5vw,4.8rem)",fontWeight:300,color:"#e8dcc8",lineHeight:1.05,marginBottom:22 }}>
-            Be the first to<br /><em style={{ color:"#c5ac6e" }}>step forward.</em>
-          </h2>
-          <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"0.9rem",lineHeight:1.85,color:"rgba(232,220,200,0.4)",marginBottom:44 }}>
-            Early access to new edits. Stories behind the curation. The life of SVARA — delivered to you.
-          </p>
-          <div style={{ display:"flex",maxWidth:460,margin:"0 auto",border:"1px solid rgba(61,122,94,0.35)",borderRadius:50,overflow:"hidden" }}>
-            <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="Your email address"
-              style={{ flex:1,padding:"15px 22px",background:"transparent",border:"none",outline:"none",fontFamily:"'DM Sans',sans-serif",fontSize:"0.85rem",color:"#e8dcc8" }} />
-            <button style={{ padding:"15px 26px",background:"#3d7a5e",border:"none",color:"#e8dcc8",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:"0.72rem",letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:500,transition:"background 0.3s",whiteSpace:"nowrap" }}
-              onMouseEnter={e=>e.target.style.background="#4a8a6e"}
-              onMouseLeave={e=>e.target.style.background="#3d7a5e"}
-              onClick={handleJoin}>
-              Join
-            </button>
-          </div>
-        </div>
-      </section>
+      <section id="book" ref={ctaRef} style={{ background:"#080f10",padding:"130px 5%",position:"relative",overflow:"hidden" }}>
+  <div style={{ position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:700,height:700,borderRadius:"50%",background:"radial-gradient(circle,rgba(95,158,160,0.08) 0%,transparent 70%)",pointerEvents:"none" }} />
+  <div className={`reveal${ctaVis?" in":""}`} style={{ maxWidth:660,margin:"0 auto",textAlign:"center" }}>
+    <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"0.68rem",letterSpacing:"0.45em",textTransform:"uppercase",color:"#c5ac6e",marginBottom:22 }}>Join the SVARA Circle</div>
+    <h2 style={{ fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(2.2rem,4.5vw,4.8rem)",fontWeight:300,color:"#e8dcc8",lineHeight:1.05,marginBottom:22 }}>
+      Be the first to<br /><em style={{ color:"#c5ac6e" }}>step forward.</em>
+    </h2>
+    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"0.9rem",lineHeight:1.85,color:"rgba(232,220,200,0.4)",marginBottom:44 }}>
+      Early access to new edits. Stories behind the curation. The life of SVARA — delivered to you.
+    </p>
+    <div style={{ display:"flex",maxWidth:460,margin:"0 auto",border:"1px solid rgba(95,158,160,0.35)",borderRadius:50,overflow:"hidden" }}>
+      <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="Your email address"
+        style={{ flex:1,padding:"15px 22px",background:"transparent",border:"none",outline:"none",fontFamily:"'DM Sans',sans-serif",fontSize:"0.85rem",color:"#e8dcc8" }} />
+      <button style={{ padding:"15px 26px",background:"#5f9ea0",border:"none",color:"#e8dcc8",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:"0.72rem",letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:500,transition:"background 0.3s",whiteSpace:"nowrap" }}
+        onMouseEnter={e=>e.target.style.background="#4a8a6e"}
+        onMouseLeave={e=>e.target.style.background="#5f9ea0"}
+        onClick={handleJoin}>
+        Join
+      </button>
+    </div>
+  </div>
+</section>
       <section id="contact" ref={contactRef} className="contact-section">
   <div className="contact-bg-radial" />
 
@@ -232,8 +232,7 @@ try {
     </div>
 
     <div className="contact-card">
-      <div className="contact-card-title">Say hello</div>
-      <div className="contact-card-email">hello@svara.co</div>
+      <div className="contact-card-title">Join the Experience</div>
 
       <a href="mailto:hello@svara.co" className="contact-cta">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 8 }}>
@@ -278,14 +277,14 @@ try {
   </div>
 </section>
 
-      <footer style={{ background:"#060c05",padding:"60px 5% 38px",borderTop:"1px solid rgba(61,122,94,0.1)" }}>
-        <div style={{ maxWidth:1100,margin:"0 auto" }}>
-          <div style={{ borderTop:"1px solid rgba(232,220,200,0.06)",paddingTop:28,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:12 }}>
-            <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"0.72rem",color:"rgba(232,220,200,0.2)" }}>© 2026 SVARA. All rights reserved.</div>
-            <div style={{ fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"0.88rem",color:"rgba(197,172,110,0.35)" }}>Wear Your Voice.</div>
-          </div>
-        </div>
-      </footer>
+      <footer style={{ background:"#060c0d",padding:"60px 5% 38px",borderTop:"1px solid rgba(95,158,160,0.1)" }}>
+  <div style={{ maxWidth:1100,margin:"0 auto" }}>
+    <div style={{ borderTop:"1px solid rgba(232,220,200,0.06)",paddingTop:28,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:12 }}>
+      <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:"0.72rem",color:"rgba(232,220,200,0.2)" }}>© 2026 SVARA. All rights reserved.</div>
+      <div style={{ fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"0.88rem",color:"rgba(197,172,110,0.35)" }}>Wear Your Voice.</div>
+    </div>
+  </div>
+</footer>
     </>
   );
 }
