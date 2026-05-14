@@ -286,8 +286,8 @@ a { text-decoration: none; }
 }
 
 /* CONTACT */
-.contact-section {
-  background: #060d0e;
+/* .contact-section {
+  background: #060d0e; 
   padding: 100px 5%;
   position: relative;
   overflow: hidden;
@@ -296,10 +296,22 @@ a { text-decoration: none; }
 .contact-bg-radial {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(95,158,160,0.08) 0%, transparent 45%);
+  background: radial-gradient(ellipse 85% 85% at 50% 58%, rgba(13, 46, 51, 0.3) 0%, rgba(7, 26, 30, 0.3) 55%, rgba(3, 10, 11, 0.3) 100%);
   pointer-events: none;
+} */
+.contact-section {
+  background: radial-gradient(ellipse 85% 85% at 50% 58%, #0d2e33 0%, #071a1e 55%, #030a0b 100%);
+  padding: 100px 5%;
+  position: relative;
+  overflow: hidden;
 }
 
+.contact-bg-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(95, 158, 160, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
 .contact-grid {
   max-width: 1100px;
   margin: 0 auto;
@@ -367,8 +379,8 @@ a { text-decoration: none; }
   justify-content: center;
   padding: 14px 24px;
   border-radius: 999px;
-  background: #5f9ea0;
-  color: #e8dcc8;
+  background: #c5ac6e;
+  color: #000;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-family: 'DM Sans', sans-serif;

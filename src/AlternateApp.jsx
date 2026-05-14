@@ -192,7 +192,7 @@ function Footer() {
   return (
     <>
       {/* CTA */}
-      <section id="book" ref={ctaRef} style={{ background: "#080f10", padding: "130px 5%", position: "relative", overflow: "hidden" }}>
+      <section id="book" ref={ctaRef} style={{ background: `radial-gradient(ellipse 85% 85% at 50% 58%, #0d2e33 0%, #071a1e 55%, #030a0b 100%)`, padding: "130px 5%", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle,rgba(95,158,160,0.08) 0%,transparent 70%)", pointerEvents: "none" }} />
         <div className={`reveal${ctaVis ? " in" : ""}`} style={{ maxWidth: 660, margin: "0 auto", textAlign: "center" }}>
           <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.68rem", letterSpacing: "0.45em", textTransform: "uppercase", color: "#c5ac6e", marginBottom: 22 }}>Join the SVARA Circle</div>
@@ -279,9 +279,9 @@ function Footer() {
 
       <footer style={{ background: "#060c0d", padding: "60px 5% 38px", borderTop: "1px solid rgba(95,158,160,0.1)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ borderTop: "1px solid rgba(232,220,200,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-            <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.72rem", color: "rgba(232,220,200,0.2)" }}>© 2026 SVARA. All rights reserved.</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "0.88rem", color: "rgba(197,172,110,0.35)" }}>Wear Your Voice.</div>
+          <div style={{ borderTop: "1px solid #d7d1c1", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+            <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.72rem", color: "#d7d1c1" }}>© 2026 SVARA. All rights reserved.</div>
+            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "0.88rem", color: "#d7d1c1" }}>Wear Your Voice.</div>
           </div>
         </div>
       </footer>
