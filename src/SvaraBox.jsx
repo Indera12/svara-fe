@@ -42,6 +42,7 @@ function Box3D({ isOpen, W, H, D }) {
         {/* Front */}
         <div style={{ ...faceBase, width: W, height: H, background: `linear-gradient(160deg, ${G.boxFront}, #154235)`, border: `1px solid rgba(201,168,76,0.35)`, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)", transform: `translateZ(${D / 2}px)`, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
           <span style={{ fontFamily: "'Cinzel',serif", color: G.gold, fontSize: W * 0.082, letterSpacing: 6 }}>SVARA</span>
+          {/* <img src="/Svara_skeleton_logo.png" alt="Svara Logo" style={{ width: "40px", height: "40px", filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.4))" }} /> */}
           <span style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", color: G.goldDim, fontSize: W * 0.036, letterSpacing: 5, marginTop: 4 }}>wear your voice</span>
           <div style={{ position: "absolute", bottom: 14, width: 34, height: 9, background: `linear-gradient(135deg,#e0b85a,${G.gold},#b08038)`, borderRadius: 3, boxShadow: "0 2px 6px rgba(0,0,0,0.5)" }} />
           {[40, 80, 120, 160, 200].filter(x => x < W).map(x => <div key={x} style={{ position: "absolute", left: x, top: 0, width: 1, height: "100%", background: "rgba(0,0,0,0.06)" }} />)}
