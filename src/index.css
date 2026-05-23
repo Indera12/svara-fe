@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
-  background-color: #f8f9fa;
+  background: linear-gradient(160deg, rgb(232, 201, 110) 0%, rgb(212, 169, 58) 40%, rgb(200, 155, 40) 100%);
 }
 
 #root {
