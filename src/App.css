@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Brittany+Signature&display=swap");
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: #060d0e; overflow-x: hidden; }
+body { background: #060d0e; overflow-x: hidden; font-family: Montserrat, sans-serif; }
 ::selection { background: rgba(197,172,110,0.3); color: #e8dcc8; }
 input::placeholder { color: rgba(232,220,200,0.28); }
 a { text-decoration: none; }
@@ -48,14 +48,14 @@ a { text-decoration: none; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
 }
 .svara-lid-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: Montserrat, sans-serif;
   font-size: 2.4rem; font-weight: 400; font-style: italic;
   color: #c5ac6e; letter-spacing: 0.06em;
 }
 .svara-lid-tag {
   font-size: 0.52rem; letter-spacing: 0.5em; text-transform: uppercase;
   color: rgba(197,172,110,0.55);
-  font-family: 'DM Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 .svara-lid-border {
   position: absolute; inset: 16px; border-radius: 8px;
@@ -80,12 +80,12 @@ a { text-decoration: none; }
   transition: opacity 0.4s ease;
 }
 .svara-face-front .ff-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: Montserrat, sans-serif;
   font-size: 2.8rem; font-style: italic; color: #c5ac6e; letter-spacing: 0.06em;
 }
 .svara-face-front .ff-tag {
   font-size: 0.52rem; letter-spacing: 0.48em; text-transform: uppercase;
-  color: rgba(197,172,110,0.55); font-family: 'DM Sans', sans-serif;
+  color: rgba(197,172,110,0.55); font-family: Montserrat, sans-serif;
 }
 .svara-face-front .ff-border {
   position: absolute; inset: 16px; border-radius: 8px;
@@ -94,7 +94,7 @@ a { text-decoration: none; }
 .svara-face-front .ff-hint {
   position: absolute; bottom: 20px;
   font-size: 0.5rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: rgba(197,172,110,0.35); font-family: 'DM Sans', sans-serif;
+  color: rgba(197,172,110,0.35); font-family: Montserrat, sans-serif;
   animation: hintBlink 2.5s ease-in-out infinite;
 }
 @keyframes hintBlink { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
@@ -119,12 +119,12 @@ a { text-decoration: none; }
   display: flex; align-items: center; justify-content: space-between;
 }
 .inside-hdr-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: Montserrat, sans-serif;
   font-style: italic; color: #c5ac6e; font-size: 1rem; letter-spacing: 0.08em;
 }
 .inside-hdr-sub {
   font-size: 0.48rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: rgba(197,172,110,0.6); font-family: 'DM Sans', sans-serif;
+  color: rgba(197,172,110,0.6); font-family: Montserrat, sans-serif;
 }
 .inside-slots { display: flex; flex: 1; }
 .inside-slot {
@@ -137,12 +137,12 @@ a { text-decoration: none; }
 .inside-slot:hover { background: #e8e2d8; }
 .slot-icon { font-size: 1.4rem; }
 .slot-nm {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: Montserrat, sans-serif;
   font-size: 0.78rem; color: #0e2425; letter-spacing: 0.04em;
 }
 .slot-sub {
   font-size: 0.42rem; letter-spacing: 0.22em; text-transform: uppercase; color: #5f9ea0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 .box-gnd-shadow {
   position: absolute; bottom: -20px; left: 50%;
@@ -186,18 +186,18 @@ a { text-decoration: none; }
 }
 .cat-card:hover .cat-icon-wrap { background: rgba(95,158,160,0.2); transform: scale(1.1); }
 .cat-nm {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: Montserrat, sans-serif;
   font-size: 1.05rem; color: #0e2425; letter-spacing: 0.05em;
 }
 .cat-sub {
   font-size: 0.5rem; letter-spacing: 0.26em; text-transform: uppercase;
-  color: #5f9ea0; font-family: 'DM Sans', sans-serif;
+  color: #5f9ea0; font-family: Montserrat, sans-serif;
 }
 .cat-pill {
   margin-top: 4px; padding: 4px 12px; border-radius: 20px;
   background: rgba(95,158,160,0.1);
   font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: #2e6466; font-family: 'DM Sans', sans-serif;
+  color: #2e6466; font-family: Montserrat, sans-serif;
 }
 
 /* NAVBAR */
@@ -213,13 +213,13 @@ a { text-decoration: none; }
   backdrop-filter: blur(20px);
 }
 .sv-nav-logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Brittany Signature', cursive;
   font-size: 1.6rem; font-style: italic;
   color: #c5ac6e; letter-spacing: 0.12em;
 }
 .sv-nav-links { display: flex; gap: 36px; align-items: center; }
 .sv-nav-links a {
-  font-family: 'DM Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
   color: #f0eee9;
   transition: color 0.3s;
@@ -230,7 +230,7 @@ a { text-decoration: none; }
   border: 1px solid rgba(197,172,110,0.4);
   background: transparent; color: #c5ac6e;
   border-radius: 40px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
   cursor: pointer; transition: all 0.3s;
 }
@@ -334,7 +334,7 @@ a { text-decoration: none; }
   }
  
   .cta-label {
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.5em;
     text-transform: uppercase;
@@ -343,7 +343,7 @@ a { text-decoration: none; }
   }
  
   .cta-heading {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Montserrat, sans-serif;
     font-size: clamp(2.4rem, 4.5vw, 5rem);
     font-weight: 300;
     color: #163F43;
@@ -358,7 +358,7 @@ a { text-decoration: none; }
   }
  
   .cta-body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 0.92rem;
     line-height: 1.85;
     color: rgba(22, 63, 67, 0.58);
@@ -393,7 +393,7 @@ a { text-decoration: none; }
     background: transparent;
     border: none;
     outline: none;
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 0.88rem;
     color: #163F43;
     min-width: 0;
@@ -409,7 +409,7 @@ a { text-decoration: none; }
     border: none;
     color: #EECB72;
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 0.7rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
@@ -427,7 +427,7 @@ a { text-decoration: none; }
   /* ── Trust note below pill ── */
   .cta-trust {
     margin-top: 16px;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Montserrat, sans-serif;
     font-style: italic;
     font-size: 0.82rem;
     color: rgba(22,63,67,0.4);
@@ -469,7 +469,7 @@ a { text-decoration: none; }
  
   /* ── Left copy — dark teal on gold for contrast ── */
   .contact-label {
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.45em;
     text-transform: uppercase;
@@ -479,7 +479,7 @@ a { text-decoration: none; }
   }
  
   .contact-heading {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Montserrat, sans-serif;
     font-size: clamp(2.4rem, 4vw, 4.8rem);
     font-weight: 300;
     color: #163F43;
@@ -493,7 +493,7 @@ a { text-decoration: none; }
   }
  
   .contact-description {
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 0.95rem;
     line-height: 1.85;
     color: rgba(22, 63, 67, 0.65);
@@ -512,7 +512,7 @@ a { text-decoration: none; }
   }
  
   .contact-card-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Montserrat, sans-serif;
     font-size: 1.7rem;
     font-weight: 300;
     color: #E8DCC8;
@@ -529,7 +529,7 @@ a { text-decoration: none; }
     color: #163F43;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    font-family: 'DM Sans', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-size: 10px;
     font-weight: 600;
     text-decoration: none;

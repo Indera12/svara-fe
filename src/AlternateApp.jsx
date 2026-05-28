@@ -62,7 +62,7 @@ function Navbar() {
         >✕</button>
         {links.map(l => (
           <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`} onClick={() => setOpen(false)}
-            style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.8rem", fontStyle: "italic", color: "#f0eee9", letterSpacing: "0.06em" }}>
+            style={{ fontFamily: "Montserrat, sans-serif", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}>
             {l.name}
           </a>
         ))}
@@ -78,7 +78,7 @@ function Hero() {
       <div>
         {/* LEFT */}
         <div className="d-flex justify-content-center pt-2">
-          <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontWeight: 300, fontSize: "clamp(3.7rem,5.5vw,6rem)", lineHeight: 0.92, color: "#163F43", marginTop: 32, opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(40px)", transition: "all 1s ease 0.2s" }}>
+          <h1 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 300, fontSize: "clamp(3.7rem,5.5vw,6rem)", lineHeight: 0.92, color: "#163F43", marginTop: 32, opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(40px)", transition: "all 1s ease 0.2s" }}>
             Wear.
             <em className="mx-3" style={{ fontStyle: "italic", color: "#1E5A5E" }}>Your.</em>
             Voice.
@@ -147,7 +147,7 @@ function Footer() {
         <div className="cta-ornament">
           <div className="cta-ornament-diamond" />
         </div>
-        <div className="cta-label">Join the SVARA Circle</div>
+        <div className="cta-label">Join the <span style={{ fontFamily: "'Brittany Signature', cursive" }}>SVARA</span> Circle</div>
  
         {/* Heading */}
         <h2 className="cta-heading" style={{ marginTop: 18 }}>
@@ -158,7 +158,7 @@ function Footer() {
         {/* Body */}
         <p className="cta-body">
           Early access to new edits. Stories behind the curation.
-          The life of SVARA — delivered to you.
+          The life of <span style={{ fontFamily: "'Brittany Signature', cursive" }}>SVARA</span> — delivered to you.
         </p>
  
         {/* Pill */}
@@ -189,7 +189,7 @@ function Footer() {
             <div className="contact-label">Contact</div>
             <h2 className="contact-heading">
               Let's build your<br />
-              <em>SVARA experience.</em>
+              <em><span style={{ fontFamily: "'Brittany Signature', cursive" }}>SVARA</span> experience.</em>
             </h2>
             <p className="contact-description">
               Reach out for bespoke wardrobe curation, press inquiries, or custom
@@ -247,8 +247,8 @@ function Footer() {
       <footer style={{ background: "rgb(40, 115, 119)", padding: "60px 5% 38px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid #D7B25A" }}>
           <div style={{ paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-            <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.72rem", color: "#D7B25A" }}>© 2026 SVARA. All rights reserved.</div>
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "0.88rem", color: "#D7B25A" }}>Wear Your Voice.</div>
+            <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.72rem", color: "#D7B25A" }}>© 2026 <span style={{ fontFamily: "'Brittany Signature', cursive" }}>SVARA</span>. All rights reserved.</div>
+            <div style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontSize: "0.88rem", color: "#D7B25A" }}>Wear Your Voice.</div>
           </div>
         </div>
       </footer>

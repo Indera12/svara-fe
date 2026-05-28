@@ -5,7 +5,7 @@ function Marquee() {
     <div style={{ background: "#c5ac6e", padding: "13px 0", overflow: "hidden" }}>
       <div style={{ display: "flex", gap: 56, width: "max-content", animation: "marqueeScroll 22s linear infinite" }}>
         {items.map((w, i) => (
-          <span key={i} style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.05rem", fontStyle: "italic", color: "#0a1208", whiteSpace: "nowrap", letterSpacing: "0.04em" }}>
+          <span key={i} style={{ fontFamily: "Montserrat, sans-serif", fontSize: "1.05rem", fontStyle: "italic", color: "#0a1208", whiteSpace: "nowrap", letterSpacing: "0.04em" }}>
             {w} <span style={{ opacity: 0.35 }}>·</span>
           </span>
         ))}
@@ -43,7 +43,7 @@ function Marquee() {
 //           <button onClick={() => setOpen(false)} style={{ position:"absolute",top:24,right:24,background:"none",border:"none",color:"#e8dcc8",fontSize:"1.5rem",cursor:"pointer" }}>✕</button>
 //           {links.map(l => (
 //             <a key={l.id} href={`#${l.id.toLowerCase().replace(" ","-")}`} onClick={() => setOpen(false)}
-//               style={{ fontFamily:"'Cormorant Garamond',serif",fontSize:"2.8rem",fontStyle:"italic",color:"#e8dcc8",letterSpacing:"0.06em" }}>
+//               style={{ fontFamily:"Montserrat, sans-serif",fontSize:"2.8rem",fontStyle:"italic",color:"#e8dcc8",letterSpacing:"0.06em" }}>
 //               {l.name}
 //             </a>
 //           ))}
