@@ -1,7 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 
-// Load Montserrat (for most text) and Brittany Signature (fallback for Belinda)
-const FONT_LINK = "https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Brittany+Signature&display=swap";
+// Load Montserrat from Google Fonts and Brittany Signature locally
+const FONT_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+  @font-face {
+    font-family: 'Brittany Signature';
+    src: url('/BrittanySignature.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+`;
 
 const G = {
   gold: "#D6B15B",
@@ -44,7 +52,7 @@ function Box3D({ isOpen, W, H, D }) {
       <div style={{ position: "absolute", top: D, width: W, height: H, transformStyle: "preserve-3d" }}>
         {/* Front */}
         <div style={{ ...faceBase, width: W, height: H, background: `linear-gradient(160deg, ${G.boxFront}, #4c7071)`, border: `1px solid rgba(214,177,91,0.35)`, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)", transform: `translateZ(${D / 2}px)`, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-          <span style={{ fontFamily: "'Brittany Signature', cursive", color: G.gold, fontSize: W * 0.082, letterSpacing: 6 }}>SVARA</span>
+          <span style={{ fontFamily: 'Brittany Signature', color: G.gold, fontSize: W * 0.082, letterSpacing: 6 }}>Svara</span>
           <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", color: G.goldDim, fontSize: W * 0.036, letterSpacing: 5, marginTop: 4 }}>wear your voice</span>
           <div style={{ position: "absolute", bottom: 14, width: 34, height: 9, background: `linear-gradient(135deg,#e0b85a,${G.gold},#b08038)`, borderRadius: 3, boxShadow: "0 2px 6px rgba(0,0,0,0.5)" }} />
           {[40, 80, 120, 160, 200].filter(x => x < W).map(x => <div key={x} style={{ position: "absolute", left: x, top: 0, width: 1, height: "100%", background: "rgba(0,0,0,0.06)" }} />)}
@@ -89,7 +97,7 @@ function Box3D({ isOpen, W, H, D }) {
         </div>
         {/* Lid front strip */}
         <div style={{ ...faceBase, width: W, height: D * 0.12, background: `linear-gradient(160deg,${G.boxFront}, #4c7071)`, border: `1px solid rgba(214,177,91,0.3)`, borderTop: "none", transform: `translateZ(${D / 2}px)`, bottom: 0, position: "absolute" }}>
-          <span style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", fontFamily: "'Brittany Signature', cursive", fontStyle: "italic", color: "rgba(214,177,91,0.6)", fontSize: 9, letterSpacing: 4, whiteSpace: "nowrap" }}>✦ svara ✦</span>
+          <span style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", fontFamily: "Brittany Signature", fontStyle: "italic", color: "rgba(214,177,91,0.6)", fontSize: 9, letterSpacing: 4, whiteSpace: "nowrap" }}>✦ svara ✦</span>
         </div>
         <div style={{ ...faceBase, width: W, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
         <div style={{ ...faceBase, width: D, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
@@ -133,7 +141,7 @@ function JacketSVG({ scale = 1 }) {
       <path d="M112 139 L112 182 Q106 192 90 192 L78 168 L78 139 Z" fill="#6a3c14" />
       <line x1="70" y1="139" x2="70" y2="178" stroke="rgba(0,0,0,0.12)" strokeWidth="1.5" />
       <rect x="74" y="40" width="24" height="15" rx="2" fill="#f0e890" opacity="0.92" />
-      <text x="86" y="51" textAnchor="middle" fill="#2a1a08" fontSize="6.5" fontFamily="'Brittany Signature', cursive">SVARA</text>
+      <text x="86" y="51" textAnchor="middle" fill="#2a1a08" fontSize="6.5" fontFamily="Brittany Signature">Svara</text>
     </svg>
   );
 }
@@ -346,15 +354,16 @@ export default function SvaraBox() {
 
   useEffect(() => {
     if (!document.querySelector("#svara-fonts")) {
-      const l = document.createElement("link");
-      l.id = "svara-fonts"; l.rel = "stylesheet"; l.href = FONT_LINK;
-      document.head.appendChild(l);
+      const style = document.createElement("style");
+      style.id = "svara-fonts";
+      style.textContent = FONT_CSS;
+      document.head.appendChild(style);
     }
     if (!document.querySelector("#svara-kf")) {
-      const style = document.createElement("style");
-      style.id = "svara-kf";
-      style.textContent = surroundStyles;
-      document.head.appendChild(style);
+      const styleKf = document.createElement("style");
+      styleKf.id = "svara-kf";
+      styleKf.textContent = surroundStyles;
+      document.head.appendChild(styleKf);
     }
   }, []);
 
@@ -485,8 +494,8 @@ useEffect(() => {
 
       {/* Watermark */}
       <div style={{
-        position: "absolute", fontSize: isMobile ? "28vw" : "22vw", fontFamily: "'Brittany Signature', cursive",
-        color: "rgba(160,100,0,0.06)", top: "50%", left: "50%",
+        position: "absolute", fontSize: isMobile ? "28vw" : "20vw",
+        color: "rgba(160,100,0,0.06)", top: "60%", left: "50%",
         transform: "translate(-50%,-50%)", pointerEvents: "none", userSelect: "none", whiteSpace: "nowrap",
         zIndex: 0,
       }}>
@@ -538,7 +547,7 @@ useEffect(() => {
       YOU{" "}
       <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
       {" "}
-      <span style={{ fontFamily: "'Brittany Signature', cursive", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>SVARA</span>
+      <span style={{ fontFamily: "Brittany Signature", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>Svara</span>
     </div>
 
     {/* "Svara × YOU" — slides in from the right when open */}
@@ -553,7 +562,7 @@ useEffect(() => {
       opacity: isOpen ? 1 : 0,
       pointerEvents: "none",
     }}>
-      <span style={{ fontFamily: "'Brittany Signature', cursive", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>SVARA</span>
+      <span style={{ fontFamily: "Brittany Signature", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>Svara</span>
       {" "}
       <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
       {" "}YOU

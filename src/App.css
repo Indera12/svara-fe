@@ -5,6 +5,10 @@ body { background: #060d0e; overflow-x: hidden; font-family: Montserrat, sans-se
 ::selection { background: rgba(197,172,110,0.3); color: #e8dcc8; }
 input::placeholder { color: rgba(232,220,200,0.28); }
 a { text-decoration: none; }
+@font-face {
+  font-family: Brittany Signature;
+  src: url('/BrittanySignature.ttf') format('truetype');
+}
 
 /* custom scrollbar */
 ::-webkit-scrollbar { width: 3px; }
@@ -213,8 +217,8 @@ a { text-decoration: none; }
   backdrop-filter: blur(20px);
 }
 .sv-nav-logo {
-  font-family: 'Brittany Signature', cursive;
-  font-size: 1.6rem; font-style: italic;
+  font-family: 'Brittany Signature';
+  font-size: 1.6rem;
   color: #c5ac6e; letter-spacing: 0.12em;
 }
 .sv-nav-links { display: flex; gap: 36px; align-items: center; }
