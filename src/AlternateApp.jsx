@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
+import Box from "./Box";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -265,7 +266,6 @@ export default function AlternateApp() {
       <Navbar />
       <br />
       <SvaraBox />
-      {/* <Hero /> */}
       <Footer />
     </>
   );
