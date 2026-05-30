@@ -71,28 +71,7 @@ function Navbar() {
     </>
   );
 }
-function Hero() {
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setTimeout(() => setLoaded(true), 80); }, []);
-  return (
-    <section id="hero" style={{ minHeight: "100vh", background: `linear-gradient(160deg, rgb(232, 201, 110) 0%, rgb(212, 169, 58) 40%, rgb(200, 155, 40) 100%)`, position: "relative", overflow: "hidden", paddingTop: 70 }}>
-      <div>
-        {/* LEFT */}
-        <div className="d-flex justify-content-center pt-2">
-          <h1 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 300, fontSize: "clamp(3.7rem,5.5vw,6rem)", lineHeight: 0.92, color: "#163F43", marginTop: 32, opacity: loaded ? 1 : 0, transform: loaded ? "none" : "translateY(40px)", transition: "all 1s ease 0.2s" }}>
-            Wear.
-            <em className="mx-3" style={{ fontStyle: "italic", color: "#1E5A5E" }}>Your.</em>
-            Voice.
-          </h1>
-        </div>
 
-        {/* RIGHT — 3D Box + cards */}
-        <SvaraBox />
-
-      </div>
-    </section>
-  );
-}
 
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
@@ -111,7 +90,7 @@ function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [contactRef, contactVis] = useReveal(0.25);
- 
+
   const handleJoin = async () => {
     if (!email || status === "loading") return;
     setStatus("loading");
@@ -136,55 +115,55 @@ function Footer() {
       setTimeout(() => setStatus("idle"), 3000);
     }
   };
- 
+
   const handleKey = (e) => { if (e.key === "Enter") handleJoin(); };
   return (
     <>
       {/* CTA */}
-       <section id="book" ref={ctaRef} className="cta-section">
-      <div className={`cta-inner reveal${ctaVis ? " in" : ""}`}>
- 
-        {/* Ornament + label */}
-        <div className="cta-ornament">
-          <div className="cta-ornament-diamond" />
+      <section id="book" ref={ctaRef} className="cta-section">
+        <div className={`cta-inner reveal${ctaVis ? " in" : ""}`}>
+
+          {/* Ornament + label */}
+          <div className="cta-ornament">
+            <div className="cta-ornament-diamond" />
+          </div>
+          <div >
+            <span className="cta-label">Join the</span>
+            <span style={{ fontFamily: "Brittany Signature", fontSize: "18px", marginLeft: 4, marginRight: 8 }}>Svara</span>
+            <span className="cta-label">Circle</span></div>
+
+          {/* Heading */}
+          <h2 className="cta-heading" style={{ marginTop: 18 }}>
+            Be the first to
+            <em>step forward.</em>
+          </h2>
+
+          {/* Body */}
+          <p className="cta-body">
+            Early access to new edits. Stories behind the curation.
+            The life of <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span> — delivered to you.
+          </p>
+
+          {/* Pill */}
+          <div className="cta-pill">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleKey}
+              placeholder="Your email address"
+              disabled={status === "loading"}
+            />
+            <button
+              className="cta-pill-btn"
+              onClick={handleJoin}
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "···" : status === "done" ? "✓ Joined" : "Join"}
+            </button>
+          </div>
         </div>
-        <div >
-          <span className="cta-label">Join the</span> 
-          <span style={{ fontFamily: "Brittany Signature", fontSize: "18px", marginLeft: 4, marginRight: 8 }}>Svara</span> 
-          <span className="cta-label">Circle</span></div>
- 
-        {/* Heading */}
-        <h2 className="cta-heading" style={{ marginTop: 18 }}>
-          Be the first to
-          <em>step forward.</em>
-        </h2>
- 
-        {/* Body */}
-        <p className="cta-body">
-          Early access to new edits. Stories behind the curation.
-          The life of <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span> — delivered to you.
-        </p>
- 
-        {/* Pill */}
-        <div className="cta-pill">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={handleKey}
-            placeholder="Your email address"
-            disabled={status === "loading"}
-          />
-          <button
-            className="cta-pill-btn"
-            onClick={handleJoin}
-            disabled={status === "loading"}
-          >
-            {status === "loading" ? "···" : status === "done" ? "✓ Joined" : "Join"}
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
       <section id="contact" ref={contactRef} className="contact-section">
         <div className="contact-bg-radial" />
 
@@ -265,8 +244,10 @@ export default function AlternateApp() {
     <>
       <Navbar />
       <br />
-      <SvaraBox />
-      <Footer />
+      <div style={{ background: "linear-gradient(160deg, rgb(238, 203, 114) 0%, rgb(215, 178, 90) 55%, rgb(201, 160, 48) 100%)" }}>
+        <SvaraBox />
+        <Footer />
+      </div>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { earrings, heels, rings, dress, bag } from "./assets";
+import { earrings, shoes, rings, dress, bag } from "./assets";
 
 const FONT_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
@@ -220,8 +220,8 @@ export default function SvaraBox() {
 
   // Image sizes per breakpoint
   const imgSizes = isMobile
-    ? { dress: [75, 95], bag: [70, 70], earrings: [55, 55], heels: [82, 55], rings: [65, 54] }
-    : { dress: [110, 140], bag: [100, 100], earrings: [80, 80], heels: [120, 80], rings: [100, 84] };
+    ? { dress: [75, 95], bag: [70, 70], earrings: [55, 55], shoes: [82, 55], rings: [65, 54] }
+    : { dress: [110, 140], bag: [100, 100], earrings: [80, 80], shoes: [120, 80], rings: [100, 84] };
 
   // Mobile: dress top-left, rings top-center, earrings top-right, bag bottom-left, heels bottom-right
   // Box anchor is at 38% of stage height (shifted up), items use offset from that center point
@@ -231,13 +231,13 @@ export default function SvaraBox() {
         { key: "rings",    label: "rings",    delay: 0.62, tx:   -5, ty: -168, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
         { key: "earrings", label: "earrings", delay: 0.70, tx:   95, ty: -145, src: earrings, w: imgSizes.earrings[0], h: imgSizes.earrings[1] },
         { key: "bag",      label: "bag",      delay: 0.85, tx:  -95, ty:  165, src: bag,      w: imgSizes.bag[0],      h: imgSizes.bag[1] },
-        { key: "heels",    label: "heels",    delay: 1.00, tx:   95, ty:  165, src: heels,    w: imgSizes.heels[0],    h: imgSizes.heels[1] },
+        { key: "shoes",    label: "footwear",    delay: 1.00, tx:   95, ty:  165, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
       ]
     : [
         { key: "dress",    label: "dress",    delay: 0.55, tx: -190, ty: -140, src: dress,    w: imgSizes.dress[0],    h: imgSizes.dress[1] },
         { key: "earrings", label: "earrings", delay: 0.70, tx:  190, ty: -150, src: earrings, w: imgSizes.earrings[0], h: imgSizes.earrings[1] },
         { key: "bag",      label: "bag",      delay: 0.85, tx: -200, ty:  100, src: bag,      w: imgSizes.bag[0],      h: imgSizes.bag[1] },
-        { key: "heels",    label: "heels",    delay: 1.00, tx:  195, ty:  115, src: heels,    w: imgSizes.heels[0],    h: imgSizes.heels[1] },
+        { key: "shoes",    label: "footwear",    delay: 1.00, tx:  195, ty:  115, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
         { key: "rings",    label: "rings",    delay: 0.62, tx:    0, ty: -180, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
       ];
 
@@ -325,7 +325,7 @@ export default function SvaraBox() {
     <div style={{
       width: "100vw",
       minHeight: "100vh",
-      background: "linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%)",
+      // background: "linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",

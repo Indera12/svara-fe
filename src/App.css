@@ -287,7 +287,7 @@ a { text-decoration: none; }
 }
 /* CTA Section */
  .cta-section {
-  background: rgb(201, 160, 48);
+  /* background: rgb(201, 160, 48); */
     /* background: linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%); */
     padding: 60px 5%;
     position: relative;
@@ -445,7 +445,7 @@ a { text-decoration: none; }
 
 /* CONTACT */
  .contact-section {
-  background: rgb(201, 160, 48);
+  /* background: rgb(201, 160, 48); */
     /* background: linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%); */
     /* background: linear-gradient(160deg, rgb(232, 201, 110) 0%, rgb(212, 169, 58) 40%, rgb(200, 155, 40) 100%); */
     padding: 100px 5%;
