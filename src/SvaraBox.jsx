@@ -113,7 +113,6 @@ function Box3D({ isOpen, W, H, D }) {
   );
 }
 
-/* ── Product Image Item ── */
 function ProductImage({ src, alt, width, height, style = {} }) {
   return (
     <img
@@ -135,7 +134,6 @@ function ProductImage({ src, alt, width, height, style = {} }) {
   );
 }
 
-/* ── Item Card ── */
 function ItemCard({ isOpen, label, delay, targetX, targetY, children }) {
   return (
     <div style={{
@@ -197,10 +195,6 @@ const surroundStyles = `
     from { opacity:0; letter-spacing:0.5em; }
     to   { opacity:1; letter-spacing:0.35em; }
   }
-  @keyframes svaraFadeUp {
-    from { opacity:0; transform:translateY(18px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
 `;
 
 export default function SvaraBox() {
@@ -209,35 +203,31 @@ export default function SvaraBox() {
   const [particles, setParticles] = useState([]);
   const particleId = useRef(0);
   const cardRef = useRef(null);
-  const lastScrollY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
-  const scrollDir = useRef(null);
+  // Track scroll position to determine direction reliably
+  const lastScrollY = useRef(0);
   const isFirstIntersect = useRef(true);
 
-  // Box dimensions
   const W = isMobile ? 150 : 220;
   const H = isMobile ? 105 : 160;
   const D = isMobile ? 150 : 220;
 
-  // Image sizes per breakpoint
   const imgSizes = isMobile
     ? { dress: [75, 95], bag: [70, 70], earrings: [55, 55], shoes: [82, 55], rings: [65, 54] }
     : { dress: [110, 140], bag: [100, 100], earrings: [80, 80], shoes: [120, 80], rings: [100, 84] };
 
-  // Mobile: dress top-left, rings top-center, earrings top-right, bag bottom-left, heels bottom-right
-  // Box anchor is at 38% of stage height (shifted up), items use offset from that center point
   const items = isMobile
     ? [
         { key: "dress",    label: "dress",    delay: 0.55, tx:  -95, ty: -155, src: dress,    w: imgSizes.dress[0],    h: imgSizes.dress[1] },
         { key: "rings",    label: "rings",    delay: 0.62, tx:   -5, ty: -168, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
         { key: "earrings", label: "earrings", delay: 0.70, tx:   95, ty: -145, src: earrings, w: imgSizes.earrings[0], h: imgSizes.earrings[1] },
         { key: "bag",      label: "bag",      delay: 0.85, tx:  -95, ty:  165, src: bag,      w: imgSizes.bag[0],      h: imgSizes.bag[1] },
-        { key: "shoes",    label: "footwear",    delay: 1.00, tx:   95, ty:  165, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
+        { key: "shoes",    label: "footwear", delay: 1.00, tx:   95, ty:  165, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
       ]
     : [
         { key: "dress",    label: "dress",    delay: 0.55, tx: -190, ty: -140, src: dress,    w: imgSizes.dress[0],    h: imgSizes.dress[1] },
         { key: "earrings", label: "earrings", delay: 0.70, tx:  190, ty: -150, src: earrings, w: imgSizes.earrings[0], h: imgSizes.earrings[1] },
         { key: "bag",      label: "bag",      delay: 0.85, tx: -200, ty:  100, src: bag,      w: imgSizes.bag[0],      h: imgSizes.bag[1] },
-        { key: "shoes",    label: "footwear",    delay: 1.00, tx:  195, ty:  115, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
+        { key: "shoes",    label: "footwear", delay: 1.00, tx:  195, ty:  115, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
         { key: "rings",    label: "rings",    delay: 0.62, tx:    0, ty: -180, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
       ];
 
@@ -290,42 +280,21 @@ export default function SvaraBox() {
   const handleMouseEnter = () => { if (!isMobile) { burst(); setIsOpen(true); } };
   const handleMouseLeave = () => { if (!isMobile) setIsOpen(false); };
 
-  // Mobile: open/close on scroll into view (scrolling up = open)
   useEffect(() => {
-    if (!isMobile || !cardRef.current) return;
-    lastScrollY.current = window.scrollY;
-    scrollDir.current = null;
-
-    const handleScroll = () => {
-      const y = window.scrollY;
-      scrollDir.current = y < lastScrollY.current ? "up" : "down";
-      lastScrollY.current = y;
+    if (!isMobile) return;
+    const onScroll = () => {
+      setIsOpen(true);
+      burst();
+      window.removeEventListener("scroll", onScroll);
     };
-
-    const observer = new IntersectionObserver(([entry]) => {
-      const yNow = window.scrollY;
-      if (yNow < lastScrollY.current) scrollDir.current = "up";
-      else if (yNow > lastScrollY.current) scrollDir.current = "down";
-      lastScrollY.current = yNow;
-
-      if (entry.isIntersecting) {
-        if (isFirstIntersect.current) { isFirstIntersect.current = false; return; }
-        if (scrollDir.current === "up") { setIsOpen(true); burst(); }
-      } else {
-        setIsOpen(false);
-      }
-    }, { threshold: 0.5 });
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    observer.observe(cardRef.current);
-    return () => { window.removeEventListener("scroll", handleScroll); observer.disconnect(); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, [isMobile]);
 
   return (
     <div style={{
       width: "100vw",
       minHeight: "100vh",
-      // background: "linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -334,7 +303,7 @@ export default function SvaraBox() {
       overflow: "hidden",
       fontFamily: "Montserrat, sans-serif",
       touchAction: "manipulation",
-     gap: 0,
+      gap: 0,
       paddingTop: 80,
       paddingBottom: isMobile ? 32 : 48,
       boxSizing: "border-box",
@@ -390,7 +359,7 @@ export default function SvaraBox() {
             opacity: isOpen ? 0 : 1, pointerEvents: "none",
           }}>
             YOU{" "}
-            <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
+            <span style={{ fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
             {" "}
             <span style={{ fontFamily: "Brittany Signature", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>Svara</span>
           </div>
@@ -402,7 +371,7 @@ export default function SvaraBox() {
           }}>
             <span style={{ fontFamily: "Brittany Signature", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>Svara</span>
             {" "}
-            <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
+            <span style={{ fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
             {" "}YOU
           </div>
         </div>
@@ -414,20 +383,18 @@ export default function SvaraBox() {
         }}>WEAR YOUR VOICE</div>
       </div>
 
-      {/* Stage — the 3D box + floating items */}
+      {/* Stage */}
       <div style={{
         position: "relative", flexShrink: 0, zIndex: 10,
         width: isMobile ? "100vw" : 600,
-        // On mobile: top zone (items above) + box + bottom zone (items below)
-        // Total: ~210 (top items) + 130 (box) + 210 (bottom items) = 550
         height: isMobile ? 600 : 520,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // On mobile push box down from top by 38% so top-items have space above
         paddingBottom: isMobile ? 120 : 0,
+        boxSizing: "border-box",
       }}>
-        {/* Glow bloom when open */}
+        {/* Glow bloom */}
         <div style={{
           position: "absolute", top: "50%", left: "50%",
           transform: isOpen ? "translate(-50%,-50%) scale(1)" : "translate(-50%,-50%) scale(0)",
@@ -439,26 +406,14 @@ export default function SvaraBox() {
           pointerEvents: "none", zIndex: 1,
         }} />
 
-        {/* Product image items */}
+        {/* Product items */}
         {items.map(item => (
-          <ItemCard
-            key={item.key}
-            isOpen={isOpen}
-            label={item.label}
-            delay={item.delay}
-            targetX={item.tx}
-            targetY={item.ty}
-          >
-            <ProductImage
-              src={item.src}
-              alt={item.label}
-              width={item.w}
-              height={item.h}
-            />
+          <ItemCard key={item.key} isOpen={isOpen} label={item.label} delay={item.delay} targetX={item.tx} targetY={item.ty}>
+            <ProductImage src={item.src} alt={item.label} width={item.w} height={item.h} />
           </ItemCard>
         ))}
 
-        {/* 3D Box */}
+        {/* 3D Box — ref is here so observer watches the box itself */}
         <div
           ref={cardRef}
           onMouseEnter={handleMouseEnter}
