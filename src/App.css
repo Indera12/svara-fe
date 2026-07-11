@@ -58,11 +58,11 @@ a { text-decoration: none; }
   font-size: var(--font-size-logo-sm); font-weight: var(--font-weight-regular); font-style: italic;
   color: var(--color-accent-gold); letter-spacing: var(--letter-spacing-md);
 }
-.svara-lid-tag {
-  font-size: var(--font-size-sm-alt); letter-spacing: var(--letter-spacing-8xl); text-transform: uppercase;
-  color: rgba(197,172,110,0.55);
-  font-family: var(--font-family-primary);
-}
+  .svara-lid-tag {
+    font-size: var(--font-size-sm-alt); letter-spacing: var(--letter-spacing-8xl); text-transform: uppercase;
+    color: rgba(230,205,181,0.55);
+    font-family: var(--font-family-primary);
+  }
 .svara-lid-border {
   position: absolute; inset: var(--size-inset); border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-accent); pointer-events: none;
@@ -89,20 +89,20 @@ a { text-decoration: none; }
   font-family: var(--font-family-primary);
   font-size: var(--font-size-logo-lg); font-style: italic; color: var(--color-accent-gold); letter-spacing: var(--letter-spacing-md);
 }
-.svara-face-front .ff-tag {
-  font-size: var(--font-size-sm-alt); letter-spacing: var(--letter-spacing-4xl); text-transform: uppercase;
-  color: rgba(197,172,110,0.55); font-family: var(--font-family-primary);
-}
-.svara-face-front .ff-border {
-  position: absolute; inset: var(--size-inset); border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border-accent-light); pointer-events: none;
-}
-.svara-face-front .ff-hint {
-  position: absolute; bottom: var(--spacing-4xl);
-  font-size: var(--font-size-sm); letter-spacing: var(--letter-spacing-6xl); text-transform: uppercase;
-  color: rgba(197,172,110,0.35); font-family: var(--font-family-primary);
-  animation: hintBlink 2.5s ease-in-out infinite;
-}
+  .svara-face-front .ff-tag {
+    font-size: var(--font-size-sm-alt); letter-spacing: var(--letter-spacing-4xl); text-transform: uppercase;
+    color: rgba(230,205,181,0.55); font-family: var(--font-family-primary);
+  }
+  .svara-face-front .ff-border {
+    position: absolute; inset: var(--size-inset); border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-accent-light); pointer-events: none;
+  }
+  .svara-face-front .ff-hint {
+    position: absolute; bottom: var(--spacing-4xl);
+    font-size: var(--font-size-sm); letter-spacing: var(--letter-spacing-6xl); text-transform: uppercase;
+    color: rgba(230,205,181,0.35); font-family: var(--font-family-primary);
+    animation: hintBlink 2.5s ease-in-out infinite;
+  }
 @keyframes hintBlink { 0%,100%{opacity:0.35} 50%{opacity:0.85} }
 .svara-face-back   { background:var(--color-primary-deep); transform:translateZ(-150px) rotateY(180deg); }
 .svara-face-left   { background:var(--gradient-left); transform:rotateY(-90deg) translateZ(150px); }
@@ -128,10 +128,10 @@ a { text-decoration: none; }
   font-family: var(--font-family-primary);
   font-style: italic; color: var(--color-accent-gold); font-size: var(--font-size-4xl); letter-spacing: var(--letter-spacing-lg);
 }
-.inside-hdr-sub {
-  font-size: var(--font-size-xs-alt); letter-spacing: var(--letter-spacing-3xl); text-transform: uppercase;
-  color: rgba(197,172,110,0.6); font-family: var(--font-family-primary);
-}
+  .inside-hdr-sub {
+    font-size: var(--font-size-xs-alt); letter-spacing: var(--letter-spacing-3xl); text-transform: uppercase;
+    color: rgba(230,205,181,0.6); font-family: var(--font-family-primary);
+  }
 .inside-slots { display: flex; flex: 1; }
 .inside-slot {
   flex: 1;
@@ -474,102 +474,152 @@ a { text-decoration: none; }
   }
   
   /* ── Left copy — dark teal on gold for contrast ── */
-  .contact-label {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-md-alt);
-    letter-spacing: var(--letter-spacing-7xl);
-    text-transform: uppercase;
-    color: var(--color-accent-teal-dark);
-    margin-bottom: var(--spacing-4xl);
-    opacity: 0.7;
-  }
-  
-  .contact-heading {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-contact-heading);
-    font-weight: var(--font-weight-light);
-    color: var(--color-accent-teal-dark);
-    line-height: 1.05;
-    margin-bottom: var(--spacing-4xl);
-  }
-  
-  .contact-heading em {
-    font-style: italic;
-    color: var(--color-accent-teal);
-  }
-  
-  .contact-description {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-3xl);
-    line-height: 1.85;
-    color: var(--color-overlay-teal-very-dark);
-    max-width: var(--size-pill-max-width);
-  }
-  .contact-card {
-    background: rgb(40, 115, 119);
-    border-radius: var(--radius-2xl);
-    padding: var(--spacing-9xl) var(--spacing-8xl);
-    display: grid;
-    gap: var(--spacing-2xl);
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid var(--color-border-teal);
-    box-shadow: var(--shadow-contact);
-  }
-  
-  .contact-card-title {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-8xl);
-    font-weight: var(--font-weight-light);
-    color: var(--color-bg-offwhite-alt);
-    margin-bottom: var(--spacing-xs);
-  }
-  
-  .contact-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-md) var(--spacing-7xl);
-    border-radius: var(--radius-pill);
-    background: var(--color-accent-gold-light);
-    color: var(--color-accent-teal-dark);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-2xl);
-    font-family: var(--font-family-primary);
-    font-size: 10px;
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    transition: background var(--transition-medium), color var(--transition-medium);
-    gap: var(--spacing-sm);
-  }
-  
-  .contact-cta:hover {
-    background: var(--color-accent-gold-lighter);
-    color: var(--color-accent-teal);
-  }
-  
-  .contact-socials {
-    display: flex;
-    gap: var(--spacing-xs);
-    margin-top: var(--spacing-xs);
-  }
-  
-  .contact-social-icon {
-    width: var(--size-icon-small);
-    height: var(--size-icon-small);
-    border-radius: var(--radius-full);
-    border: 1px solid var(--color-border-teal);
-    color: var(--color-accent-gold-light);
-    background: var(--color-border-teal);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: color var(--transition-medium), background var(--transition-medium);
-    flex-shrink: 0;
-  }
-  
-  .contact-social-icon:hover {
-    background: var(--color-accent-gold-light);
-    color: var(--color-primary);
-  }
+ /* ── decorative divider (line–diamond–line) ── */
+.contact-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.contact-divider-line {
+  width: 60px;
+  height: 1px;
+  background: var(--color-accent-teal-dark);
+  opacity: 0.5;
+}
+.contact-divider-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent-teal-dark);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.contact-divider-line--onteal {
+  background: var(--color-accent-gold-light);
+  opacity: 0.4;
+}
+.contact-divider-diamond--onteal {
+  background: var(--color-accent-gold-light);
+  opacity: 0.7;
+}
+.contact-label-row--onteal { margin: 10px 0 28px; }
+
+.contact-label {
+  text-align: center;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md-alt);
+  letter-spacing: var(--letter-spacing-7xl);
+  text-transform: uppercase;
+  color: var(--color-accent-teal-dark);
+}
+.brand-script {
+  font-family: "Brittany Signature";
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0 4px;
+  display: inline-block;
+}
+
+/* ── card ── */
+.contact-card {
+  background: rgb(40, 115, 119);
+  border-radius: 32px;
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 1px solid rgba(212, 175, 90, 0.35);
+  outline: 1px solid rgba(212, 175, 90, 0.25);
+  outline-offset: -10px;
+  box-shadow: var(--shadow-contact);
+  text-align: center;
+}
+
+.contact-card-title {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-8xl);
+  font-weight: var(--font-weight-light);
+  color: var(--color-bg-offwhite-alt);
+}
+
+/* ── pill buttons: icon-left / text-center / arrow-right ── */
+.contact-cta {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-gold-light);
+  color: var(--color-accent-teal-dark);
+  text-decoration: none;
+  transition: background var(--transition-medium), color var(--transition-medium);
+}
+.contact-cta:hover {
+  background: var(--color-accent-gold-lighter);
+  color: var(--color-accent-teal);
+}
+.contact-cta-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(40, 115, 119, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-teal-dark);
+}
+.contact-cta-text {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-2xl);
+  font-family: var(--font-family-primary);
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+}
+.contact-cta-arrow {
+  width: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-teal-dark);
+}
+
+/* ── socials with a divider between them ── */
+.contact-socials {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+.contact-social-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--color-accent-gold-light);
+  opacity: 0.4;
+}
+.contact-social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(230, 205, 181, 0.4);
+  color: var(--color-accent-gold-light);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: color var(--transition-medium), background var(--transition-medium);
+  flex-shrink: 0;
+}
+.contact-social-icon:hover {
+  background: var(--color-accent-gold-light);
+  color: var(--color-primary);
+}

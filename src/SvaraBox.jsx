@@ -12,9 +12,9 @@ const FONT_CSS = `
 `;
 
 const G = {
-  gold: "#D6B15B",
-  goldBright: "#F4E6A7",
-  goldDim: "#D7B25A",
+  gold: "#e6cdb5",
+  goldBright: "#f6e6d9",
+  goldDim: "#d8b88a",
   sparkle: "#f0eee9",
   dark: "#0a1f20",
   deepGreen: "#163F43",
@@ -52,21 +52,21 @@ function Box3D({ isOpen, W, H, D }) {
         <div style={{
           ...faceBase, width: W, height: H,
           background: `linear-gradient(160deg, ${G.boxFront}, #4c7071)`,
-          border: `1px solid rgba(214,177,91,0.35)`,
+          border: `1px solid rgba(230,205,181,0.35)`,
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)",
           transform: `translateZ(${D / 2}px)`,
           display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"
         }}>
           <span style={{ fontFamily: 'Brittany Signature', color: G.gold, fontSize: W * 0.082 }}>Svara</span>
           <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", color: G.goldDim, fontSize: W * 0.036, letterSpacing: 5, marginTop: 4 }}>wear your voice</span>
-          <div style={{ position: "absolute", bottom: 14, width: 34, height: 9, background: `linear-gradient(135deg,#e0b85a,${G.gold},#b08038)`, borderRadius: 3, boxShadow: "0 2px 6px rgba(0,0,0,0.5)" }} />
+          <div style={{ position: "absolute", bottom: 14, width: 34, height: 9, background: `linear-gradient(135deg,#e6cdb5,${G.gold},#c6a26e)`, borderRadius: 3, boxShadow: "0 2px 6px rgba(0,0,0,0.5)" }} />
         </div>
         {/* Back */}
-        <div style={{ ...faceBase, width: W, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(214,177,91,0.2)`, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
+        <div style={{ ...faceBase, width: W, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(230,205,181,0.2)`, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
         {/* Left */}
-        <div style={{ ...faceBase, width: D, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(214,177,91,0.25)`, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
+        <div style={{ ...faceBase, width: D, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(230,205,181,0.25)`, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
         {/* Right */}
-        <div style={{ ...faceBase, width: D, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(214,177,91,0.25)`, transform: `rotateY(90deg) translateZ(${W / 2}px)` }} />
+        <div style={{ ...faceBase, width: D, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(230,205,181,0.25)`, transform: `rotateY(90deg) translateZ(${W / 2}px)` }} />
         {/* Bottom */}
         <div style={{ ...faceBase, width: W, height: D, background: G.boxBottom, transform: `rotateX(-90deg) translateZ(${H}px)` }} />
         {/* Inner floor */}
@@ -85,25 +85,25 @@ function Box3D({ isOpen, W, H, D }) {
         <div style={{
           ...faceBase, width: W, height: D,
           background: `linear-gradient(160deg,${G.boxTop},#4c7071)`,
-          border: `1px solid rgba(214,177,91,0.4)`,
+          border: `1px solid rgba(230,205,181,0.4)`,
           transform: `rotateX(90deg) translateZ(${D / 2}px)`,
           display: "flex", alignItems: "center", justifyContent: "center"
         }}>
-          <div style={{ position: "absolute", width: "100%", height: 2, background: `linear-gradient(90deg,transparent,rgba(214,177,91,0.5),transparent)`, top: "50%", transform: "translateY(-50%)" }} />
-          <div style={{ position: "absolute", height: "100%", width: 2, background: `linear-gradient(180deg,transparent,rgba(214,177,91,0.5),transparent)`, left: "50%", transform: "translateX(-50%)" }} />
+          <div style={{ position: "absolute", width: "100%", height: 2, background: `linear-gradient(90deg,transparent,rgba(230,205,181,0.5),transparent)`, top: "50%", transform: "translateY(-50%)" }} />
+          <div style={{ position: "absolute", height: "100%", width: 2, background: `linear-gradient(180deg,transparent,rgba(230,205,181,0.5),transparent)`, left: "50%", transform: "translateX(-50%)" }} />
           <svg width="56" height="30" viewBox="0 0 56 30" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}>
-            <path d="M28 15 Q20 4 8 7 Q2 8 4 15 Q6 21 15 19 Q22 18 28 15 Z" fill="rgba(214,177,91,0.6)" stroke="rgba(214,177,91,0.8)" strokeWidth="0.8" />
-            <path d="M28 15 Q36 4 48 7 Q54 8 52 15 Q50 21 41 19 Q34 18 28 15 Z" fill="rgba(214,177,91,0.6)" stroke="rgba(214,177,91,0.8)" strokeWidth="0.8" />
-            <ellipse cx="28" cy="15" rx="4" ry="4" fill="rgba(214,177,91,0.9)" />
+            <path d="M28 15 Q20 4 8 7 Q2 8 4 15 Q6 21 15 19 Q22 18 28 15 Z" fill="rgba(230,205,181,0.6)" stroke="rgba(230,205,181,0.8)" strokeWidth="0.8" />
+            <path d="M28 15 Q36 4 48 7 Q54 8 52 15 Q50 21 41 19 Q34 18 28 15 Z" fill="rgba(230,205,181,0.6)" stroke="rgba(230,205,181,0.8)" strokeWidth="0.8" />
+            <ellipse cx="28" cy="15" rx="4" ry="4" fill="rgba(230,205,181,0.9)" />
           </svg>
         </div>
         <div style={{
           ...faceBase, width: W, height: D * 0.12,
           background: `linear-gradient(160deg,${G.boxFront}, #4c7071)`,
-          border: `1px solid rgba(214,177,91,0.3)`, borderTop: "none",
+          border: `1px solid rgba(230,205,181,0.3)`, borderTop: "none",
           transform: `translateZ(${D / 2}px)`, bottom: 0, position: "absolute"
         }}>
-          <span style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", fontFamily: "Brittany Signature", fontStyle: "italic", color: "rgba(214,177,91,0.6)", fontSize: 9, letterSpacing: 4, whiteSpace: "nowrap" }}>✦ svara ✦</span>
+          <span style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", fontFamily: "Brittany Signature", fontStyle: "italic", color: "rgba(230,205,181,0.6)", fontSize: 9, letterSpacing: 4, whiteSpace: "nowrap" }}>✦ svara ✦</span>
         </div>
         <div style={{ ...faceBase, width: W, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
         <div style={{ ...faceBase, width: D, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
@@ -308,7 +308,7 @@ export default function SvaraBox() {
       <div style={{
         position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
         width: "80%", height: "55%",
-        background: "radial-gradient(ellipse at 50% 0%, rgba(255,245,200,0.42) 0%, transparent 70%)",
+        background: "radial-gradient(ellipse at 50% 0%, rgba(230,205,181,0.42) 0%, transparent 70%)",
         pointerEvents: "none",
       }} />
       <div style={{
@@ -395,7 +395,7 @@ export default function SvaraBox() {
           transform: isOpen ? "translate(-50%,-50%) scale(1)" : "translate(-50%,-50%) scale(0)",
           width: isMobile ? 300 : 480, height: isMobile ? 300 : 480,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,210,80,0.55) 0%, rgba(214,177,91,0.25) 40%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(230,205,181,0.55) 0%, rgba(216,184,138,0.25) 40%, transparent 70%)",
           opacity: isOpen ? 1 : 0,
           transition: "transform 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s, opacity 1s ease 0.3s",
           pointerEvents: "none", zIndex: 1,

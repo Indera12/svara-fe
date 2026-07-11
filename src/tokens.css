@@ -12,10 +12,10 @@
   --color-primary-very-dark: #1f4446;
 
   /* Accent Colors */
-  --color-accent-gold: #c5ac6e;
-  --color-accent-gold-light: #EECB72;
-  --color-accent-gold-lighter: #F4E6A7;
-  --color-accent-gold-bright: #D6B15B;
+  --color-accent-gold: #e6cdb5;
+  --color-accent-gold-light: #f0d9c2;
+  --color-accent-gold-lighter: #f6e6d9;
+  --color-accent-gold-bright: #d8b88a;
   --color-accent-teal: #1E5A5E;
   --color-accent-teal-dark: #163F43;
   --color-accent-teal-very-dark: #0a1f20;
@@ -32,17 +32,17 @@
   /* Text Colors */
   --color-text-primary: #0e2425;
   --color-text-light: #e8dcc8;
-  --color-text-accent: #c5ac6e;
+  --color-text-accent: #e6cdb5;
   --color-text-teal-dark: #1a3c3f;
   --color-text-teal-medium: #2a5254;
 
   /* Border Colors */
-  --color-border-accent: rgba(197, 172, 110, 0.22);
-  --color-border-accent-light: rgba(197, 172, 110, 0.2);
-  --color-border-accent-lighter: rgba(197, 172, 110, 0.1);
-  --color-border-accent-gold: rgba(214, 177, 91, 0.35);
-  --color-border-accent-gold-light: rgba(214, 177, 91, 0.2);
-  --color-border-accent-gold-lighter: rgba(214, 177, 91, 0.1);
+  --color-border-accent: rgba(230, 205, 181, 0.22);
+  --color-border-accent-light: rgba(230, 205, 181, 0.2);
+  --color-border-accent-lighter: rgba(230, 205, 181, 0.1);
+  --color-border-accent-gold: rgba(216, 184, 138, 0.35);
+  --color-border-accent-gold-light: rgba(216, 184, 138, 0.2);
+  --color-border-accent-gold-lighter: rgba(216, 184, 138, 0.1);
   --color-border-teal: rgba(95, 158, 160, 0.35);
   --color-border-teal-light: rgba(95, 158, 160, 0.1);
   --color-border-teal-medium: rgba(95, 158, 160, 0.2);
@@ -57,24 +57,24 @@
   --color-overlay-teal-darker: rgba(22, 63, 67, 0.4);
   --color-overlay-teal-darkest: rgba(22, 63, 67, 0.58);
   --color-overlay-teal-very-dark: rgba(22, 63, 67, 0.65);
-  --color-overlay-selection: rgba(197, 172, 110, 0.3);
-  --color-overlay-placeholder: rgba(232, 220, 200, 0.28);
+  --color-overlay-selection: rgba(230, 205, 181, 0.3);
+  --color-overlay-placeholder: rgba(230, 205, 181, 0.28);
   --color-overlay-placeholder-dark: rgba(22, 63, 67, 0.4);
   --color-overlay-input: rgba(255, 255, 255, 0.22);
-  --color-overlay-gold-light: rgba(255, 245, 200, 0.42);
-  --color-overlay-gold-medium: rgba(255, 210, 80, 0.55);
-  --color-overlay-gold-dark: rgba(214, 177, 91, 0.25);
+  --color-overlay-gold-light: rgba(230, 205, 181, 0.42);
+  --color-overlay-gold-medium: rgba(216, 184, 138, 0.55);
+  --color-overlay-gold-dark: rgba(216, 184, 138, 0.25);
   --color-overlay-brown: rgba(140, 90, 0, 0.2);
-  --color-overlay-gold-accent: rgba(214, 177, 91, 0.5);
-  --color-overlay-gold-accent-light: rgba(214, 177, 91, 0.3);
-  --color-overlay-gold-accent-dark: rgba(214, 177, 91, 0.4);
-  --color-overlay-gold-accent-very-dark: rgba(214, 177, 91, 0.6);
-  --color-overlay-gold-accent-faint: rgba(214, 177, 91, 0.8);
-  --color-overlay-gold-accent-faint-alt: rgba(214, 177, 91, 0.85);
-  --color-overlay-gold-accent-faint-dark: rgba(214, 177, 91, 0.65);
-  --color-overlay-gold-accent-faint-very-dark: rgba(214, 177, 91, 0.35);
-  --color-overlay-gold-accent-faint-very-faint: rgba(214, 177, 91, 0.12);
-  --color-overlay-gold-accent-faint-faint: rgba(214, 177, 91, 0.1);
+  --color-overlay-gold-accent: rgba(216, 184, 138, 0.5);
+  --color-overlay-gold-accent-light: rgba(216, 184, 138, 0.3);
+  --color-overlay-gold-accent-dark: rgba(216, 184, 138, 0.4);
+  --color-overlay-gold-accent-very-dark: rgba(216, 184, 138, 0.6);
+  --color-overlay-gold-accent-faint: rgba(216, 184, 138, 0.8);
+  --color-overlay-gold-accent-faint-alt: rgba(216, 184, 138, 0.85);
+  --color-overlay-gold-accent-faint-dark: rgba(216, 184, 138, 0.65);
+  --color-overlay-gold-accent-faint-very-dark: rgba(216, 184, 138, 0.35);
+  --color-overlay-gold-accent-faint-very-faint: rgba(216, 184, 138, 0.12);
+  --color-overlay-gold-accent-faint-faint: rgba(216, 184, 138, 0.1);
 }
 
 /* ── Typography ── */
@@ -229,10 +229,10 @@
   --gradient-primary-full: linear-gradient(150deg, #5f9ea0 0%, #4a8a8c 50%, #2e6466 100%);
   --gradient-left: linear-gradient(160deg, #5f9ea0, #2e6466);
   --gradient-right: linear-gradient(160deg, #4a8a8c, #2a5557);
-  --gradient-body: linear-gradient(160deg, rgb(232, 201, 110) 0%, rgb(212, 169, 58) 40%, rgb(200, 155, 40) 100%);
+  --gradient-body: linear-gradient(160deg, rgb(230, 205, 181) 0%, rgb(220, 193, 162) 40%, rgb(210, 180, 145) 100%);
   --gradient-card: linear-gradient(145deg, #f5f0e8, #ede8dc);
-  --gradient-gold-light: linear-gradient(135deg, #e0b85a, #D6B15B, #b08038);
-  --gradient-gold-accent: linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%);
+  --gradient-gold-light: linear-gradient(135deg, #e6cdb5, #d8b88a, #c6a26e);
+  --gradient-gold-accent: linear-gradient(160deg, #e6cdb5 0%, #d8b88a 55%, #c6a26e 100%);
   --gradient-teal-light: linear-gradient(160deg, #5F9EA0, #4c7071);
   --gradient-teal-dark: linear-gradient(160deg, #163F43, #4c7071);
   --gradient-teal-very-dark: linear-gradient(180deg, #0f3028, #0a2018);
