@@ -1,15 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-// Load Montserrat from Google Fonts and Brittany Signature locally
-const FONT_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
-  @font-face {
-    font-family: 'Brittany Signature';
-    src: url('/BrittanySignature.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-`;
+import './svara-box.css';
 
 const G = {
   gold: "#D6B15B",
@@ -39,69 +29,46 @@ function useIsMobile() {
 }
 
 function Box3D({ isOpen, W, H, D }) {
-  const faceBase = {
-    position: "absolute",
-    backfaceVisibility: "hidden",
-    WebkitBackfaceVisibility: "hidden",
-    boxSizing: "border-box",
-  };
-
   return (
-    <div style={{ position: "relative", width: W, height: H + D, transformStyle: "preserve-3d" }}>
+    <div className="svara-3d-box" style={{ "--width": W, "--height": H, "--depth": D, "--depth-half": D / 2 }}>
       {/* BODY */}
-      <div style={{ position: "absolute", top: D, width: W, height: H, transformStyle: "preserve-3d" }}>
+      <div className="svara-3d-box-body">
         {/* Front */}
-        <div style={{ ...faceBase, width: W, height: H, background: `linear-gradient(160deg, ${G.boxFront}, #4c7071)`, border: `1px solid rgba(214,177,91,0.35)`, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)", transform: `translateZ(${D / 2}px)`, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-          <span style={{ fontFamily: 'Brittany Signature', color: G.gold, fontSize: W * 0.082, letterSpacing: 6 }}>Svara</span>
-          <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", color: G.goldDim, fontSize: W * 0.036, letterSpacing: 5, marginTop: 4 }}>wear your voice</span>
-          <div style={{ position: "absolute", bottom: 14, width: 34, height: 9, background: `linear-gradient(135deg,#e0b85a,${G.gold},#b08038)`, borderRadius: 3, boxShadow: "0 2px 6px rgba(0,0,0,0.5)" }} />
-          {[40, 80, 120, 160, 200].filter(x => x < W).map(x => <div key={x} style={{ position: "absolute", left: x, top: 0, width: 1, height: "100%", background: "rgba(0,0,0,0.06)" }} />)}
+        <div className="svara-3d-face svara-3d-face-front" style={{ width: W, height: H, transform: `translateZ(${D / 2}px)` }}>
+          <span className="svara-3d-logo" style={{ fontSize: W * 0.082 }}>Svara</span>
+          <span className="svara-3d-tag" style={{ letterSpacing: 5 }}>wear your voice</span>
+          <div className="svara-3d-glint" />
         </div>
         {/* Back */}
-        <div style={{ ...faceBase, width: W, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(214,177,91,0.2)`, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
+        <div className="svara-3d-face svara-3d-face-back" style={{ width: W, height: H, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
         {/* Left */}
-        <div style={{ ...faceBase, width: D, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(214,177,91,0.25)`, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }}>
-          {[44, 88, 132, 176].filter(x => x < D).map(x => <div key={x} style={{ position: "absolute", left: x, top: 0, width: 1, height: "100%", background: "rgba(0,0,0,0.07)" }} />)}
-        </div>
+        <div className="svara-3d-face svara-3d-face-left" style={{ width: D, height: H, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
         {/* Right */}
-        <div style={{ ...faceBase, width: D, height: H, background: `linear-gradient(160deg, ${G.boxSide}, #4c7071)`, border: `1px solid rgba(214,177,91,0.25)`, transform: `rotateY(90deg) translateZ(${W / 2}px)` }}>
-          {[44, 88, 132, 176].filter(x => x < D).map(x => <div key={x} style={{ position: "absolute", left: x, top: 0, width: 1, height: "100%", background: "rgba(0,0,0,0.07)" }} />)}
-        </div>
+        <div className="svara-3d-face svara-3d-face-right" style={{ width: D, height: H, transform: `rotateY(90deg) translateZ(${W / 2}px)` }} />
         {/* Bottom */}
-        <div style={{ ...faceBase, width: W, height: D, background: G.boxBottom, transform: `rotateX(-90deg) translateZ(${H}px)` }} />
+        <div className="svara-3d-face svara-3d-face-bottom" style={{ width: W, height: D, transform: `rotateX(-90deg) translateZ(${H}px)` }} />
         {/* Inner floor */}
-        <div style={{ ...faceBase, width: W, height: D, background: `linear-gradient(180deg,#0f3028,#0a2018)`, transform: `rotateX(90deg) translateZ(0px)` }} />
+        <div className="svara-3d-face svara-3d-face-floor" style={{ width: W, height: D, transform: `rotateX(90deg) translateZ(0px)` }} />
       </div>
 
       {/* LID */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        width: W,
-        height: D,
-        transformStyle: "preserve-3d",
-        transformOrigin: `center ${D}px`,
-        transform: isOpen ? `rotateX(115deg)` : `rotateX(0deg)`,
-        transition: "transform 1.6s cubic-bezier(0.4,0,0.15,1), opacity 0.3s ease 1.3s",
-        opacity: isOpen ? 0 : 1,
-      }}>
-        {/* Lid top */}
-        <div style={{ ...faceBase, width: W, height: D, background: `linear-gradient(160deg,${G.boxTop},#4c7071)`, border: `1px solid rgba(214,177,91,0.4)`, transform: `rotateX(90deg) translateZ(${D / 2}px)`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ position: "absolute", width: "100%", height: 2, background: `linear-gradient(90deg,transparent,rgba(214,177,91,0.5),transparent)`, top: "50%", transform: "translateY(-50%)" }} />
-          <div style={{ position: "absolute", height: "100%", width: 2, background: `linear-gradient(180deg,transparent,rgba(214,177,91,0.5),transparent)`, left: "50%", transform: "translateX(-50%)" }} />
+      <div
+        className={`svara-lid ${isOpen ? 'svara-lid-open' : 'svara-lid-closed'}`}
+        style={{ "--width": W, "--depth": D }}
+      >
+        <div className="svara-lid-top svara-lid-top-open" style={{ width: W, height: D }}>
+          <div style={{ position: "absolute", width: "100%", height: 2, background: `linear-gradient(90deg,transparent,var(--color-overlay-gold-accent),transparent)`, top: "50%", transform: "translateY(-50%)" }} />
+          <div style={{ position: "absolute", height: "100%", width: 2, background: `linear-gradient(180deg,transparent,var(--color-overlay-gold-accent-light),transparent)`, left: "50%", transform: "translateX(-50%)" }} />
           <svg width="56" height="30" viewBox="0 0 56 30" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}>
             <path d="M28 15 Q20 4 8 7 Q2 8 4 15 Q6 21 15 19 Q22 18 28 15 Z" fill="rgba(214,177,91,0.6)" stroke="rgba(214,177,91,0.8)" strokeWidth="0.8" />
             <path d="M28 15 Q36 4 48 7 Q54 8 52 15 Q50 21 41 19 Q34 18 28 15 Z" fill="rgba(214,177,91,0.6)" stroke="rgba(214,177,91,0.8)" strokeWidth="0.8" />
             <ellipse cx="28" cy="15" rx="4" ry="4" fill="rgba(214,177,91,0.9)" />
           </svg>
         </div>
-        {/* Lid front strip */}
-        <div style={{ ...faceBase, width: W, height: D * 0.12, background: `linear-gradient(160deg,${G.boxFront}, #4c7071)`, border: `1px solid rgba(214,177,91,0.3)`, borderTop: "none", transform: `translateZ(${D / 2}px)`, bottom: 0, position: "absolute" }}>
-          <span style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", fontFamily: "Brittany Signature", fontStyle: "italic", color: "rgba(214,177,91,0.6)", fontSize: 9, letterSpacing: 4, whiteSpace: "nowrap" }}>✦ svara ✦</span>
-        </div>
-        <div style={{ ...faceBase, width: W, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
-        <div style={{ ...faceBase, width: D, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
-        <div style={{ ...faceBase, width: D, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(90deg) translateZ(${W / 2}px)` }} />
+        <div className="svara-lid-strip" style={{ "--width": W, "--depth": D }} />
+        <div className="svara-3d-face" style={{ width: W, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }} />
+        <div className="svara-3d-face" style={{ width: D, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }} />
+        <div className="svara-3d-face" style={{ width: D, height: D * 0.12, background: G.boxSide, position: "absolute", bottom: 0, transform: `rotateY(90deg) translateZ(${W / 2}px)` }} />
       </div>
     </div>
   );
@@ -222,102 +189,44 @@ function PendantSVG({ scale = 1 }) {
 /* ── Particle ── */
 function Particle({ x, y, size, duration, delay, drift }) {
   return (
-    <div style={{
-      position: "absolute", left: x, top: y,
-      width: size, height: size, borderRadius: "50%",
-      background: G.sparkle,
-      animation: `svaraFloat ${duration}s ease-in ${delay}s infinite`,
-      "--drift": `${drift}px`,
-      opacity: 0, pointerEvents: "none",
-    }} />
+    <div
+      className="svara-particle"
+      style={{
+        left: x,
+        top: y,
+        width: size,
+        height: size,
+        animation: `svaraFloat ${duration}s ease-in ${delay}s infinite`,
+        "--drift": `${drift}px`,
+      }}
+    />
   );
 }
 
 /* ── Item Card ── */
 function ItemCard({ isOpen, label, delay, targetX, targetY, children }) {
   return (
-    <div style={{
-      position: "absolute",
-      left: "50%", top: "50%",
-      transform: isOpen
-        ? `translate(calc(-50% + ${targetX}px), calc(-50% + ${targetY}px)) scale(1)`
-        : `translate(-50%, -50%) scale(0.05)`,
-      opacity: isOpen ? 1 : 0,
-      transition: `transform 1.1s cubic-bezier(0.15,0.9,0.3,1.05) ${delay}s, opacity 0.7s ease ${delay}s`,
-      zIndex: 15,
-      display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
-      filter: isOpen ? "drop-shadow(0 8px 24px rgba(0,0,0,0.6))" : "none",
-      pointerEvents: "none",
-    }}>
+    <div
+      className={`svara-item-card ${isOpen ? 'svara-item-card-active' : ''}`}
+      style={{
+        "--target-x": targetX,
+        "--target-y": targetY,
+        transition: `transform 1.1s cubic-bezier(0.15,0.9,0.3,1.05) ${delay}s, opacity 0.7s ease ${delay}s`,
+      }}
+    >
       {children}
-      <span style={{
-        fontFamily: "Montserrat, sans-serif", fontStyle: "italic",
-        color: "#f0eee9", fontSize: 9, letterSpacing: 2, whiteSpace: "nowrap",
-        opacity: isOpen ? 1 : 0,
-        transition: `opacity 0.5s ease ${delay + 0.3}s`,
-      }}>
+      <span
+        className="svara-item-label"
+        style={{
+          opacity: isOpen ? 1 : 0,
+          transition: `opacity 0.5s ease ${delay + 0.3}s`,
+        }}
+      >
         {label}
       </span>
     </div>
   );
 }
-
-
-/* ── Golden Surround Styles ── */
-const surroundStyles = `
-  @keyframes svaraFloat {
-    0%   { opacity:0; transform:translateY(0) translateX(0) scale(1); }
-    15%  { opacity:0.85; }
-    80%  { opacity:0.15; }
-    100% { opacity:0; transform:translateY(-130px) translateX(var(--drift,0px)) scale(0.2); }
-  }
-  @keyframes svaraFadeDown {
-    from { opacity:0; transform:translateX(-50%) translateY(-18px); }
-    to   { opacity:1; transform:translateX(-50%) translateY(0); }
-  }
-  @keyframes svaraFadeUp {
-    from { opacity:0; transform:translateY(18px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
-  @keyframes svaraHeadlineIn {
-    from { opacity:0; transform:translateY(-16px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
-  @keyframes svaraSubIn {
-    from { opacity:0; letter-spacing:0.5em; }
-    to   { opacity:1; letter-spacing:0.35em; }
-  }
-  @keyframes svaraBtnIn {
-    from { opacity:0; transform:translateY(16px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
-  @keyframes svaraSlideOutLeft {
-    from { opacity:1; transform:translateX(0%); }
-    to   { opacity:0; transform:translateX(-120%); }
-  }
-  @keyframes svaraSlideInRight {
-    from { opacity:0; transform:translateX(120%); }
-    to   { opacity:1; transform:translateX(0%); }
-  }
-
-  .svara-cta {
-    font-family: Montserrat, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: #1a3c3f;
-    border: 1.5px solid #1a3c3f;
-    background: transparent;
-    padding: 14px 36px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: background 0.3s, color 0.3s;
-    animation: svaraBtnIn 1s cubic-bezier(0.2,0.8,0.3,1) 0.9s both;
-  }
-  .svara-cta:hover {
-    background: #1a3c3f;
-    color: #e8c96e;
-  }
-`;
 
 /* ── Main Component ── */
 export default function SvaraBox() {
@@ -327,7 +236,7 @@ export default function SvaraBox() {
   const particleId = useRef(0);
   const cardRef = useRef(null);
   const lastScrollY = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
-  const scrollDir = useRef(null); // 'up' | 'down'
+  const scrollDir = useRef(null);
   const isFirstIntersect = useRef(true);
 
   const W = isMobile ? 150 : 220;
@@ -338,34 +247,19 @@ export default function SvaraBox() {
 
   const items = isMobile
     ? [
-      { key: "jacket",  label: "jacket + shorts", delay: 0.55, tx: -105, ty: -105, svg: <JacketSVG scale={svgScale} /> },
-      { key: "earring", label: "earring",          delay: 0.75, tx:  105, ty: -100, svg: <EarringSVG scale={svgScale} /> },
-      { key: "pendant", label: "pendant",          delay: 0.85, tx: -115, ty:   60, svg: <PendantSVG scale={svgScale} /> },
-      { key: "bangles", label: "bangles",          delay: 0.65, tx:    0, ty: -130, svg: <BanglesSVG scale={svgScale} /> },
-      { key: "shoes",   label: "loafers",          delay: 1.15, tx:  110, ty:   80, svg: <ShoesSVG scale={svgScale} /> },
-    ]
+        { key: "jacket",  label: "jacket + shorts", delay: 0.55, tx: -105, ty: -105, svg: <JacketSVG scale={svgScale} /> },
+        { key: "earring", label: "earring",          delay: 0.75, tx:  105, ty: -100, svg: <EarringSVG scale={svgScale} /> },
+        { key: "pendant", label: "pendant",          delay: 0.85, tx: -115, ty:   60, svg: <PendantSVG scale={svgScale} /> },
+        { key: "bangles", label: "bangles",          delay: 0.65, tx:    0, ty: -130, svg: <BanglesSVG scale={svgScale} /> },
+        { key: "shoes",   label: "loafers",          delay: 1.15, tx:  110, ty:   80, svg: <ShoesSVG scale={svgScale} /> },
+      ]
     : [
-      { key: "jacket",  label: "jacket + shorts", delay: 0.55, tx: -190, ty: -130, svg: <JacketSVG scale={svgScale} /> },
-      { key: "earring", label: "earring",          delay: 0.75, tx:  185, ty: -140, svg: <EarringSVG scale={svgScale} /> },
-      { key: "pendant", label: "pendant",          delay: 0.85, tx: -200, ty:   90, svg: <PendantSVG scale={svgScale} /> },
-      { key: "bangles", label: "bangles",          delay: 0.65, tx:    0, ty: -170, svg: <BanglesSVG scale={svgScale} /> },
-      { key: "shoes",   label: "loafers",          delay: 1.15, tx:  190, ty:  110, svg: <ShoesSVG scale={svgScale} /> },
-    ];
-
-  useEffect(() => {
-    if (!document.querySelector("#svara-fonts")) {
-      const style = document.createElement("style");
-      style.id = "svara-fonts";
-      style.textContent = FONT_CSS;
-      document.head.appendChild(style);
-    }
-    if (!document.querySelector("#svara-kf")) {
-      const styleKf = document.createElement("style");
-      styleKf.id = "svara-kf";
-      styleKf.textContent = surroundStyles;
-      document.head.appendChild(styleKf);
-    }
-  }, []);
+        { key: "jacket",  label: "jacket + shorts", delay: 0.55, tx: -190, ty: -130, svg: <JacketSVG scale={svgScale} /> },
+        { key: "earring", label: "earring",          delay: 0.75, tx:  185, ty: -140, svg: <EarringSVG scale={svgScale} /> },
+        { key: "pendant", label: "pendant",          delay: 0.85, tx: -200, ty:   90, svg: <PendantSVG scale={svgScale} /> },
+        { key: "bangles", label: "bangles",          delay: 0.65, tx:    0, ty: -170, svg: <BanglesSVG scale={svgScale} /> },
+        { key: "shoes",   label: "loafers",          delay: 1.15, tx:  190, ty:  110, svg: <ShoesSVG scale={svgScale} /> },
+      ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -402,256 +296,123 @@ export default function SvaraBox() {
 
   const handleMouseEnter = () => { if (!isMobile) { burst(); setIsOpen(true); } };
   const handleMouseLeave = () => { if (!isMobile) setIsOpen(false); };
-  // const handleTap = () => {
-  //   if (isMobile) {
-  //     if (!isOpen) burst();
-  //     setIsOpen(prev => !prev);
-  //   }
-  // };
-useEffect(() => {
-  if (!isMobile || !cardRef.current) return;
 
-  // seed refs
-  lastScrollY.current = window.scrollY;
-  scrollDir.current = null;
-
-  const handleScroll = () => {
-    const y = window.scrollY;
-    if (y < lastScrollY.current) scrollDir.current = 'up';
-    else if (y > lastScrollY.current) scrollDir.current = 'down';
-    lastScrollY.current = y;
+  const handleTap = () => {
+    if (!isMobile) return;
+    burst();
+    setIsOpen(prev => !prev);
   };
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      // ensure direction is up-to-date around intersection moment
-      const yNow = window.scrollY;
-      if (yNow < lastScrollY.current) scrollDir.current = 'up';
-      else if (yNow > lastScrollY.current) scrollDir.current = 'down';
-      lastScrollY.current = yNow;
+  useEffect(() => {
+    if (!isMobile || !cardRef.current) return;
 
-      if (entry.isIntersecting) {
-        // ignore the very first intersection after mount
-        if (isFirstIntersect.current) {
-          isFirstIntersect.current = false;
-          return;
+    lastScrollY.current = window.scrollY;
+    scrollDir.current = null;
+
+    const handleScroll = () => {
+      const y = window.scrollY;
+      if (y < lastScrollY.current) scrollDir.current = 'up';
+      else if (y > lastScrollY.current) scrollDir.current = 'down';
+      lastScrollY.current = y;
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const yNow = window.scrollY;
+        if (yNow < lastScrollY.current) scrollDir.current = 'up';
+        else if (yNow > lastScrollY.current) scrollDir.current = 'down';
+        lastScrollY.current = yNow;
+
+        if (entry.isIntersecting) {
+          if (isFirstIntersect.current) {
+            isFirstIntersect.current = false;
+            return;
+          }
+
+          if (scrollDir.current === 'up') {
+            setIsOpen(true);
+            burst();
+          }
+        } else {
+          setIsOpen(false);
         }
+      },
+      { threshold: 0.5 }
+    );
 
-        if (scrollDir.current === 'up') {
-          setIsOpen(true);
-          burst();
-        }
-      } else {
-        setIsOpen(false);
-      }
-    },
-    { threshold: 0.5 }
-  );
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    observer.observe(cardRef.current);
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  observer.observe(cardRef.current);
-
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    observer.disconnect();
-  };
-}, [isMobile]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   return (
-    <div style={{
-      width: "100vw",
-      height: "100vh",
-      background: "linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%)",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "relative",
-      overflow: "hidden",
-      fontFamily: "Montserrat, sans-serif",
-      touchAction: "manipulation",
-      gap: isMobile ? 48 : 28,
-      paddingTop: isMobile ? 0 : 48,
-    }}>
-
+    <div className="svara-box-container" style={{ gap: 0, paddingTop: 80, paddingBottom: isMobile ? 32 : 48 }}>
       {/* Radial light bloom top-center */}
-      <div style={{
-        position: "absolute", top: 0, left: "50%",
-        transform: "translateX(-50%)",
-        width: "80%", height: "55%",
-        background: "radial-gradient(ellipse at 50% 0%, rgba(255,245,200,0.42) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
-
-      {/* Shadow bloom bottom */}
-      <div style={{
-        position: "absolute", bottom: 0, left: "50%",
-        transform: "translateX(-50%)",
-        width: "80%", height: "40%",
-        background: "radial-gradient(ellipse at 50% 100%, rgba(140,90,0,0.2) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
+      <div className="svara-bloom-top" />
+      <div className="svara-bloom-bottom" />
 
       {/* Watermark */}
-      <div style={{
-        position: "absolute", fontSize: isMobile ? "28vw" : "20vw",
-        color: "rgba(160,100,0,0.06)", top: "60%", left: "50%",
-        transform: "translate(-50%,-50%)", pointerEvents: "none", userSelect: "none", whiteSpace: "nowrap",
-        zIndex: 0,
-      }}>
-        SVARA
-      </div>
+      <div className={`svara-watermark ${isMobile ? 'svara-watermark-mobile' : ''}`}>SVARA</div>
 
-      {/* Particles — absolute to full viewport, purely decorative */}
-      <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2 }}>
+      {/* Particles */}
+      <div className="svara-particles">
         {particles.map(p => <Particle key={p.id} {...p} />)}
       </div>
 
+      {/* Headline */}
+      <div className="svara-headline svara-headline-animate">
+        <div className={`svara-headline-text ${isMobile ? 'svara-headline-text-mobile' : 'svara-headline-text-desktop'}`}>
+          <div className={`svara-headline-slide ${isOpen ? 'svara-headline-slide-in' : 'svara-headline-slide-out'}`}>
+            YOU{" "}
+            <span className="svara-headline-italic">×</span>
+            {" "}
+            <span style={{ fontFamily: "Brittany Signature" }} className="svara-headline-italic">Svara</span>
+          </div>
+          <div className={`svara-headline-slide ${isOpen ? 'svara-headline-slide-active' : 'svara-headline-slide-in'}`}>
+            <span style={{ fontFamily: "Brittany Signature" }} className="svara-headline-italic">Svara</span>
+            {" "}
+            <span className="svara-headline-italic">×</span>
+            {" "}YOU
+          </div>
+        </div>
+        <div className={`svara-subtext ${isMobile ? 'svara-subtext-mobile' : ''} svara-subtext-animate`}>
+          WEAR YOUR VOICE
+        </div>
+      </div>
 
-      <div style={{
-        position: "relative",
-        zIndex: 20,
-        width: "100%",
-        textAlign: "center",
-        whiteSpace: "nowrap",
-        animation: "svaraHeadlineIn 1s cubic-bezier(0.2,0.8,0.3,1) 0.1s both",
-        flexShrink: 0,
-        pointerEvents: "none",
-      }}>
-  <div style={{
-    fontFamily: "Montserrat, sans-serif",
-    fontSize: isMobile ? "clamp(18px,5.5vw,26px)" : "clamp(24px,3vw,38px)",
-    fontWeight: 400,
-    color: "#1a3c3f",
-    letterSpacing: "0.08em",
-    lineHeight: 1.3,
-    position: "relative",
-    height: "1.6em",
-    overflow: "visible",
-    whiteSpace: "nowrap",
-    width: isMobile ? "100%" : "min(900px, 60vw)",
-    margin: "0 auto",
-  }}>
-    {/* "YOU × Svara" — slides out to the left when open */}
-    <div style={{
-      position: "absolute",
-      width: "100%",
-      top: 0,
-      left: "50%",
-      textAlign: "center",
-      transition: "transform 0.65s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease",
-      transform: isOpen ? "translateX(calc(-50% - 120%))" : "translateX(-50%)",
-      opacity: isOpen ? 0 : 1,
-      pointerEvents: "none",
-    }}>
-      YOU{" "}
-      <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
-      {" "}
-      <span style={{ fontFamily: "Brittany Signature", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>Svara</span>
-    </div>
+      {/* Stage */}
+      <div className={`svara-stage ${isMobile ? 'svara-stage-mobile' : 'svara-stage-desktop'}`}>
+        {/* Glow bloom */}
+        <div className={`svara-glow-bloom ${isOpen ? 'svara-glow-bloom-active' : ''}`} />
 
-    {/* "Svara × YOU" — slides in from the right when open */}
-    <div style={{
-      position: "absolute",
-      width: "100%",
-      top: 0,
-      left: "50%",
-      textAlign: "center",
-      transition: "transform 0.65s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease",
-      transform: isOpen ? "translateX(-50%)" : "translateX(calc(-50% + 120%))",
-      opacity: isOpen ? 1 : 0,
-      pointerEvents: "none",
-    }}>
-      <span style={{ fontFamily: "Brittany Signature", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>Svara</span>
-      {" "}
-      <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.22em", letterSpacing: "0.02em" }}>×</span>
-      {" "}YOU
-    </div>
-  </div>
-
-  <div style={{
-    fontFamily: "Montserrat, sans-serif",
-    fontSize: isMobile ? 9 : 11,
-    letterSpacing: "0.35em",
-    color: "#2a5254",
-    marginTop: 10,
-    animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s both",
-  }}>
-    WEAR YOUR VOICE
-  </div>
-</div>
-      <div style={{
-        position: "relative",
-        flexShrink: 0,
-        zIndex: 10,
-        width: isMobile ? 340 : 500,
-        height: isMobile ? 320 : 420,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}>
-        <div style={{
-          position: "absolute",
-          top: "50%", left: "50%",
-          transform: isOpen ? "translate(-50%,-50%) scale(1)" : "translate(-50%,-50%) scale(0)",
-          width: isMobile ? 300 : 480,
-          height: isMobile ? 300 : 480,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,210,80,0.6) 0%, rgba(214,177,91,0.3) 35%, transparent 70%)",
-          opacity: isOpen ? 1 : 0,
-          transition: "transform 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s, opacity 1s ease 0.3s",
-          pointerEvents: "none",
-          zIndex: 1,
-        }} />
-
-        {/* Items — spread out from center of stage */}
+        {/* Items */}
         {items.map(item => (
           <ItemCard key={item.key} isOpen={isOpen} label={item.label} delay={item.delay} targetX={item.tx} targetY={item.ty}>
             {item.svg}
           </ItemCard>
         ))}
 
-        {/* 3D Box — center of stage */}
+        {/* 3D Box */}
         <div
           ref={cardRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          // onClick={handleTap}
+          onTouchStart={handleTap}
+          className="svara-box-wrapper"
           style={{
-            position: "relative", zIndex: 10,
             perspective: isMobile ? 600 : 900,
             perspectiveOrigin: "50% 40%",
-            cursor: "pointer",
-            WebkitTapHighlightColor: "transparent",
           }}
         >
-          <div style={{
-            transformStyle: "preserve-3d",
-            transform: isOpen
-              ? `rotateX(14deg) rotateY(-22deg) scale(${isMobile ? 1.05 : 1.03})`
-              : `rotateX(12deg) rotateY(-18deg)`,
-            transition: "transform 0.5s ease",
-          }}>
+          <div className={`svara-box-transform ${isOpen ? 'svara-box-transform-open' : 'svara-box-transform-closed'}`}>
             <Box3D isOpen={isOpen} W={W} H={H} D={D} />
           </div>
         </div>
       </div>
-
-      {/* ── HINT — bottom flex child ── */}
-      {/* <div style={{
-        position: "relative",
-        zIndex: 30,
-        fontFamily: "Montserrat, sans-serif", fontStyle: "italic",
-        color: "rgba(22,63,67,0.5)", fontSize: isMobile ? 11 : 12, letterSpacing: 3,
-        animation: "svaraFadeUp 1.6s cubic-bezier(0.2,0.8,0.3,1) 0.5s both",
-        whiteSpace: "nowrap",
-        flexShrink: 0,
-        opacity: isOpen ? 0 : 1,
-        transition: "opacity 0.4s ease",
-        minHeight: "1.4em",
-      }}>
-        {isMobile ? "tap to unveil the collection" : "hover to unveil the collection"}
-      </div> */}
     </div>
   );
 }
