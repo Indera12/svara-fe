@@ -5,7 +5,7 @@
 /* ── Colors ── */
 :root {
   /* Primary Colors */
-  --color-primary: #5f9ea0;
+  --color-primary: #50816b;
   --color-primary-dark: #4a8a8c;
   --color-primary-darker: #2e6466;
   --color-primary-deep: #2a5557;
@@ -43,9 +43,9 @@
   --color-border-accent-gold: rgba(216, 184, 138, 0.35);
   --color-border-accent-gold-light: rgba(216, 184, 138, 0.2);
   --color-border-accent-gold-lighter: rgba(216, 184, 138, 0.1);
-  --color-border-teal: rgba(95, 158, 160, 0.35);
-  --color-border-teal-light: rgba(95, 158, 160, 0.1);
-  --color-border-teal-medium: rgba(95, 158, 160, 0.2);
+  --color-border-teal: rgba(80, 129, 107, 0.35);
+  --color-border-teal-light: rgba(80, 129, 107, 0.1);
+  --color-border-teal-medium: rgba(80, 129, 107, 0.2);
 
   /* Overlay Colors */
   --color-overlay-dark: rgba(0, 0, 0, 0.4);
@@ -225,15 +225,15 @@
 
 /* ── Gradients ── */
 :root {
-  --gradient-primary: linear-gradient(150deg, #5f9ea0 0%, #4a8a8c 40%, #2e6466 100%);
-  --gradient-primary-full: linear-gradient(150deg, #5f9ea0 0%, #4a8a8c 50%, #2e6466 100%);
-  --gradient-left: linear-gradient(160deg, #5f9ea0, #2e6466);
+  --gradient-primary: linear-gradient(150deg, #50816b 0%, #4a8a8c 40%, #2e6466 100%);
+  --gradient-primary-full: linear-gradient(150deg, #50816b 0%, #4a8a8c 50%, #2e6466 100%);
+  --gradient-left: linear-gradient(160deg, #50816b, #2e6466);
   --gradient-right: linear-gradient(160deg, #4a8a8c, #2a5557);
   --gradient-body: linear-gradient(160deg, rgb(230, 205, 181) 0%, rgb(220, 193, 162) 40%, rgb(210, 180, 145) 100%);
   --gradient-card: linear-gradient(145deg, #f5f0e8, #ede8dc);
   --gradient-gold-light: linear-gradient(135deg, #e6cdb5, #d8b88a, #c6a26e);
   --gradient-gold-accent: linear-gradient(160deg, #e6cdb5 0%, #d8b88a 55%, #c6a26e 100%);
-  --gradient-teal-light: linear-gradient(160deg, #5F9EA0, #4c7071);
+  --gradient-teal-light: linear-gradient(160deg, #50816b, #4c7071);
   --gradient-teal-dark: linear-gradient(160deg, #163F43, #4c7071);
   --gradient-teal-very-dark: linear-gradient(180deg, #0f3028, #0a2018);
 }

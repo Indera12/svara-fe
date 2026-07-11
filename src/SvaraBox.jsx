@@ -19,9 +19,9 @@ const G = {
   dark: "#0a1f20",
   deepGreen: "#163F43",
   midGreen: "#1E5A5E",
-  boxFront: "#5F9EA0",
+  boxFront: "#50816b",
   boxSide: "#163F43",
-  boxTop: "#5F9EA0",
+  boxTop: "#50816b",
   boxBottom: "#0a1f20",
 };
 

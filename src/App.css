@@ -213,7 +213,7 @@ a { text-decoration: none; }
   display: flex; align-items: center; justify-content: space-between;
   height: 70px;
   transition: background var(--transition-slower), border-color var(--transition-slower);
-  background: rgb(40, 115, 119);
+  background: var(--color-primary);
 }
 .sv-nav.scrolled {
   backdrop-filter: blur(20px);
@@ -288,193 +288,186 @@ a { text-decoration: none; }
   .cat-cards-row { gap: 12px !important; }
 }
 /* CTA Section */
- .cta-section {
-  /* background: rgb(201, 160, 48); */
-    /* background: linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%); */
-    padding: var(--spacing-10xl) 5%;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* subtle radial bloom */
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px; height: 700px;
-    border-radius: var(--radius-full);
-    background: radial-gradient(circle, var(--color-overlay-teal) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  
+.cta-section {
+  padding: var(--spacing-10xl) 5%;
+  position: relative;
+  overflow: hidden;
+}
 
-  
-  .cta-inner {
-    max-width: var(--size-cta-max-width);
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* ornament line above label */
-  .cta-ornament {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-lg);
-    justify-content: center;
-    margin-bottom: var(--spacing-4xl);
-  }
-  .cta-ornament::before,
-  .cta-ornament::after {
-    content: '';
-    width: var(--size-oranament-line); height: 1px;
-    background: var(--color-overlay-teal-darker);
-  }
-  .cta-ornament-diamond {
-    width: var(--size-diamond); height: var(--size-diamond);
-    background: var(--color-accent-teal-dark);
-    transform: rotate(45deg);
-    opacity: 0.4;
-  }
-  
-  .cta-label {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-md);
-    letter-spacing: var(--letter-spacing-9xl);
-    text-transform: uppercase;
-    color: var(--color-accent-teal-dark);
-    opacity: 0.6;
-  }
-  
-  .cta-heading {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-cta-heading);
-    font-weight: var(--font-weight-light);
-    color: var(--color-accent-teal-dark);
-    line-height: 1.0;
-    margin-bottom: var(--spacing-4xl);
-  }
-  
-  .cta-heading em {
-    font-style: italic;
-    color: var(--color-accent-teal);
-    display: block;
-  }
-  
-  .cta-body {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-2xl);
-    line-height: 1.85;
-    color: var(--color-overlay-teal-darkest);
-    margin-bottom: var(--spacing-10xl);
-    max-width: var(--size-pill-max-width);
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* ── Pill input ── */
-  .cta-pill {
-    display: flex;
-    max-width: var(--size-pill-max-width);
-    margin: 0 auto;
-    border-radius: var(--radius-pill);
-    overflow: hidden;
-    background: var(--color-overlay-input);
-    border: 1px solid var(--color-overlay-teal-darker);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
-  }
-  
-  .cta-pill:focus-within {
-    border-color: var(--color-overlay-teal-very-dark);
-    box-shadow: var(--shadow-focus);
-  }
-  
-  .cta-pill input {
-    flex: 1;
-    padding: var(--spacing-lg) var(--spacing-7xl);
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-xl-alt);
-    color: var(--color-accent-teal-dark);
-    min-width: 0;
-  }
-  
-  .cta-pill input::placeholder {
-    color: var(--color-overlay-placeholder-dark);
-  }
-  
-  .cta-pill-btn {
-    padding: var(--spacing-lg) var(--spacing-8xl);
-    background: rgb(40, 115, 119);
-    border: none;
-    color: var(--color-accent-gold-light);
-    cursor: pointer;
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-sm-plus);
-    letter-spacing: var(--letter-spacing-5xl);
-    text-transform: uppercase;
-    font-weight: var(--font-weight-medium);
-    white-space: nowrap;
-    transition: background var(--transition-medium), color var(--transition-medium);
-    flex-shrink: 0;
-  }
-  
-  .cta-pill-btn:hover {
-    background: var(--color-accent-teal);
-    color: var(--color-accent-gold-light);
-  }
-  
-  /* ── Trust note below pill ── */
-  .cta-trust {
-    margin-top: var(--spacing-md);
-    font-family: var(--font-family-primary);
-    font-style: italic;
-    font-size: var(--font-size-xl);
-    color: var(--color-overlay-teal-dark);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-  
-  /* ── Reveal ── */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--transition-easing-smooth), transform 0.9s var(--transition-easing-smooth); }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-  
+/* subtle radial bloom */
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, var(--color-overlay-teal) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+
+.cta-inner {
+  max-width: var(--size-cta-max-width);
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ornament line above label */
+.cta-ornament {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  justify-content: center;
+  margin-bottom: var(--spacing-4xl);
+}
+.cta-ornament::before,
+.cta-ornament::after {
+  content: '';
+  width: var(--size-oranament-line); height: 1px;
+  background: var(--color-overlay-teal-darker);
+}
+.cta-ornament-diamond {
+  width: var(--size-diamond); height: var(--size-diamond);
+  background: var(--color-accent-teal-dark);
+  transform: rotate(45deg);
+  opacity: 0.4;
+}
+
+.cta-label {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+  letter-spacing: var(--letter-spacing-9xl);
+  text-transform: uppercase;
+  color: var(--color-accent-teal-dark);
+  opacity: 0.6;
+}
+
+.cta-heading {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-cta-heading);
+  font-weight: var(--font-weight-light);
+  color: var(--color-accent-teal-dark);
+  line-height: 1.0;
+  margin-bottom: var(--spacing-4xl);
+}
+
+.cta-heading em {
+  font-style: italic;
+  color: var(--color-accent-teal);
+  display: block;
+}
+
+.cta-body {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-2xl);
+  line-height: 1.85;
+  color: var(--color-overlay-teal-darkest);
+  margin-bottom: var(--spacing-10xl);
+  max-width: var(--size-pill-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Pill input ── */
+.cta-pill {
+  display: flex;
+  max-width: var(--size-pill-max-width);
+  margin: 0 auto;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: var(--color-overlay-input);
+  border: 1px solid var(--color-overlay-teal-darker);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.cta-pill:focus-within {
+  border-color: var(--color-overlay-teal-very-dark);
+  box-shadow: var(--shadow-focus);
+}
+
+.cta-pill input {
+  flex: 1;
+  padding: var(--spacing-lg) var(--spacing-7xl);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xl-alt);
+  color: var(--color-accent-teal-dark);
+  min-width: 0;
+}
+
+.cta-pill input::placeholder {
+  color: var(--color-overlay-placeholder-dark);
+}
+
+.cta-pill-btn {
+  padding: var(--spacing-lg) var(--spacing-8xl);
+  background: rgb(40, 65, 54);
+  border: none;
+  color: var(--color-accent-gold-light);
+  cursor: pointer;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm-plus);
+  letter-spacing: var(--letter-spacing-5xl);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  transition: background var(--transition-medium), color var(--transition-medium);
+  flex-shrink: 0;
+}
+
+.cta-pill-btn:hover {
+  background: var(--color-accent-teal);
+  color: var(--color-accent-gold-light);
+}
+
+/* ── Trust note below pill ── */
+.cta-trust {
+  margin-top: var(--spacing-md);
+  font-family: var(--font-family-primary);
+  font-style: italic;
+  font-size: var(--font-size-xl);
+  color: var(--color-overlay-teal-dark);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--transition-easing-smooth), transform 0.9s var(--transition-easing-smooth); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
 
 /* CONTACT */
- .contact-section {
-  /* background: rgb(201, 160, 48); */
-    /* background: linear-gradient(160deg, #EECB72 0%, #D7B25A 55%, #c9a030 100%); */
-    /* background: linear-gradient(160deg, rgb(232, 201, 110) 0%, rgb(212, 169, 58) 40%, rgb(200, 155, 40) 100%); */
-    padding: 100px 5%;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .contact-bg-radial {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 50% 50%, var(--color-overlay-teal) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  
-  .contact-grid {
-    max-width: var(--size-contact-max-width);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-    gap: var(--spacing-10xl);
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* ── Left copy — dark teal on gold for contrast ── */
- /* ── decorative divider (line–diamond–line) ── */
+.contact-section {
+  padding: 100px 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-bg-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, var(--color-overlay-teal) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-grid {
+  max-width: var(--size-contact-max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: var(--spacing-10xl);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── decorative divider (line–diamond–line) ── */
 .contact-label-row {
   display: flex;
   align-items: center;
@@ -524,7 +517,7 @@ a { text-decoration: none; }
 
 /* ── card ── */
 .contact-card {
-  background: rgb(40, 115, 119);
+  background: var(--color-primary);
   border-radius: 32px;
   padding: 56px 48px;
   display: flex;
@@ -570,7 +563,7 @@ a { text-decoration: none; }
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(40, 115, 119, 0.12);
+  background: rgba(40, 65, 54, 0.12);
   display: inline-flex;
   align-items: center;
   justify-content: center;

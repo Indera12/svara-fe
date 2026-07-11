@@ -157,7 +157,7 @@ function Footer() {
         </div>
       </section>
 
-      <footer style={{ background: "rgb(40, 115, 119)", padding: "60px 5% 38px" }}>
+      <footer style={{ background: "var(--color-primary)", padding: "60px 5% 38px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid #d8b88a" }}>
           <div style={{ paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.72rem", color: "#d8b88a" }}>© 2026 <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span>. All rights reserved.</div>
