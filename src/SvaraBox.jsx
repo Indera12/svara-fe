@@ -280,16 +280,11 @@ export default function SvaraBox() {
   const handleMouseEnter = () => { if (!isMobile) { burst(); setIsOpen(true); } };
   const handleMouseLeave = () => { if (!isMobile) setIsOpen(false); };
 
-  useEffect(() => {
+  const handleTap = () => {
     if (!isMobile) return;
-    const onScroll = () => {
-      setIsOpen(true);
-      burst();
-      window.removeEventListener("scroll", onScroll);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isMobile]);
+    burst();
+    setIsOpen(prev => !prev);
+  };
 
   return (
     <div style={{
@@ -418,6 +413,7 @@ export default function SvaraBox() {
           ref={cardRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTap}
           style={{
             position: "relative", zIndex: 10,
             perspective: isMobile ? 600 : 900,
