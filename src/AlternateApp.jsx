@@ -174,7 +174,7 @@ export default function AlternateApp() {
     <>
       <Navbar />
       <br />
-      <div style={{ background: "linear-gradient(160deg, rgb(230, 205, 181) 0%, rgb(216, 184, 138) 55%, rgb(200, 170, 110) 100%)" }}>
+      <div style={{ background:"linear-gradient(160deg, var(--color-accent-gold-lighter) 0%, var(--color-accent-gold) 55%, var(--color-accent-gold-bright) 100%)" }}>
         <SvaraBox />
         <Footer />
       </div>

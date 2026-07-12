@@ -216,7 +216,7 @@ a { text-decoration: none; }
   background: var(--color-primary);
 }
 .sv-nav.scrolled {
-  backdrop-filter: blur(20px);
+  background: var(--color-primary);
 }
 .sv-nav-logo {
   font-family: var(--font-family-accent);
@@ -504,7 +504,7 @@ a { text-decoration: none; }
   font-size: var(--font-size-md-alt);
   letter-spacing: var(--letter-spacing-7xl);
   text-transform: uppercase;
-  color: var(--color-accent-teal-dark);
+  color: var(--color-bg-offwhite-alt);
 }
 .brand-script {
   font-family: "Brittany Signature";
@@ -574,7 +574,7 @@ a { text-decoration: none; }
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-2xl);
   font-family: var(--font-family-primary);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
 }
 .contact-cta-arrow {
