@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { earrings, shoes, rings, dress, bag } from "./assets";
+import "./tokens.css";
 
 const FONT_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
@@ -12,17 +13,17 @@ const FONT_CSS = `
 `;
 
 const G = {
-  gold: "#e6cdb5",
-  goldBright: "#f6e6d9",
-  goldDim: "#d8b88a",
-  sparkle: "#f0eee9",
-  dark: "#0a1f20",
-  deepGreen: "#163F43",
-  midGreen: "#1E5A5E",
-  boxFront: "#50816b",
-  boxSide: "#163F43",
-  boxTop: "#50816b",
-  boxBottom: "#0a1f20",
+  gold: "var(--color-accent-gold)",              // #e6cdb5
+  goldBright: "var(--color-accent-gold-lighter)", // #f6e6d9
+  goldDim: "var(--color-accent-gold-bright)",     // #d8b88a
+  sparkle: "var(--color-bg-sparkle)",             // #f0eee9
+  dark: "var(--color-accent-teal-very-dark)",     // #0a1f20
+  deepGreen: "var(--color-accent-teal-dark)",     // #163F43
+  midGreen: "var(--color-accent-teal)",           // #1E5A5E
+  boxFront: "var(--color-primary)",               // #50816b
+  boxSide: "var(--color-accent-teal-dark)",       // #163F43
+  boxTop: "var(--color-primary)",                 // #50816b
+  boxBottom: "var(--color-accent-teal-very-dark)",// #0a1f20
 };
 
 function useIsMobile() {
