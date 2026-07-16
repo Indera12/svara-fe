@@ -71,17 +71,17 @@ function Navbar({ theme, toggleTheme }) {
       }}>
         <button
           onClick={() => setOpen(false)}
-          style={{ position: "absolute", top: 24, right: 24, background: "none", border: "none", color: "#e8dcc8", fontSize: "1.5rem", cursor: "pointer" }}
+          style={{ position: "absolute", top: 24, right: 24, background: "none", border: "none", color: "var(--color-text-teal-dark)", fontSize: "1.5rem", cursor: "pointer" }}
         >✕</button>
         {links.map(l => (
           <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`} onClick={() => setOpen(false)}
-            style={{ fontFamily: "Montserrat, sans-serif", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}>
+            style={{ fontFamily: "Montserrat, sans-serif", fontSize: "20px", color: "var(--color-text-teal-dark)", letterSpacing: "0.06em" }}>
             {l.name}
           </a>
         ))}
-        <button className="sv-theme-toggle sv-theme-toggle--offcanvas" onClick={toggleTheme} aria-label="Toggle theme">
+        {/* <button className="sv-theme-toggle sv-theme-toggle--offcanvas" onClick={toggleTheme} aria-label="Toggle theme">
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
-        </button>
+        </button> */}
       </div>
     </>
   );
