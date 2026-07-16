@@ -75,6 +75,76 @@
   --color-overlay-gold-accent-faint-very-dark: rgba(216, 184, 138, 0.35);
   --color-overlay-gold-accent-faint-very-faint: rgba(216, 184, 138, 0.12);
   --color-overlay-gold-accent-faint-faint: rgba(216, 184, 138, 0.1);
+
+  /* Offcanvas / drawer bg */
+  --gradient-offcanvas: linear-gradient(160deg, rgb(230, 205, 181) 0%, rgb(220, 193, 162) 40%, rgb(210, 180, 145) 100%);
+}
+
+/* ── Dark Theme — gold (#e6cdb5) → dark (#060d0e) ── */
+[data-theme="dark"] {
+  /* Accent Colors — Gold → warm copper (#b8845c) for visibility on dark bg */
+  --color-accent-gold: #b8845c;
+  --color-accent-gold-light: #d4a682;
+  --color-accent-gold-lighter: #e0bea0;
+  --color-accent-gold-bright: #9c6a45;
+
+  /* Background Colors — Darkened */
+  --color-bg-light: #0a1415;
+  --color-bg-cream: #0f1c1d;
+  --color-bg-offwhite: #0d1819;
+  --color-bg-offwhite-dark: #081213;
+  --color-bg-offwhite-alt: #c8b8a8;
+  --color-bg-sparkle: #0b1617;
+
+  /* Text Colors — readable on dark bg */
+  --color-text-primary: #e8dcc8;
+  --color-text-light: #c8b8a8;
+  --color-text-accent: #b8845c;
+  --color-text-teal-dark: #8a9e98;
+  --color-text-teal-medium: #a0b0aa;
+
+  /* Border Colors */
+  --color-border-accent: rgba(184, 132, 92, 0.22);
+  --color-border-accent-light: rgba(184, 132, 92, 0.2);
+  --color-border-accent-lighter: rgba(184, 132, 92, 0.1);
+  --color-border-accent-gold: rgba(184, 132, 92, 0.35);
+  --color-border-accent-gold-light: rgba(184, 132, 92, 0.2);
+  --color-border-accent-gold-lighter: rgba(184, 132, 92, 0.1);
+
+  /* Overlay Colors */
+  --color-overlay-selection: rgba(184, 132, 92, 0.3);
+  --color-overlay-placeholder: rgba(184, 132, 92, 0.28);
+  --color-overlay-gold-light: rgba(184, 132, 92, 0.42);
+  --color-overlay-gold-medium: rgba(184, 132, 92, 0.55);
+  --color-overlay-gold-dark: rgba(184, 132, 92, 0.25);
+  --color-overlay-brown: rgba(184, 132, 92, 0.25);
+  --color-overlay-gold-accent: rgba(184, 132, 92, 0.5);
+  --color-overlay-gold-accent-light: rgba(184, 132, 92, 0.3);
+  --color-overlay-gold-accent-dark: rgba(184, 132, 92, 0.4);
+  --color-overlay-gold-accent-very-dark: rgba(184, 132, 92, 0.6);
+  --color-overlay-gold-accent-faint: rgba(184, 132, 92, 0.8);
+  --color-overlay-gold-accent-faint-alt: rgba(184, 132, 92, 0.85);
+  --color-overlay-gold-accent-faint-dark: rgba(184, 132, 92, 0.65);
+  --color-overlay-gold-accent-faint-very-dark: rgba(184, 132, 92, 0.35);
+  --color-overlay-gold-accent-faint-very-faint: rgba(184, 132, 92, 0.12);
+  --color-overlay-gold-accent-faint-faint: rgba(184, 132, 92, 0.1);
+
+  /* Teal overlays — slightly stronger on dark bg */
+  --color-overlay-teal: rgba(22, 63, 67, 0.08);
+  --color-overlay-teal-medium: rgba(22, 63, 67, 0.12);
+
+  /* Card gradient — darkened */
+  --gradient-card: linear-gradient(145deg, #0a1415, #0d1819);
+
+  /* Gold gradients → Dark */
+  --gradient-gold-light: linear-gradient(135deg, #060d0e, #040a0b, #020708);
+  --gradient-gold-accent: linear-gradient(160deg, #060d0e 0%, #040a0b 55%, #020708 100%);
+
+  /* Offcanvas */
+  --gradient-offcanvas: linear-gradient(160deg, #060d0e 0%, #040a0b 40%, #020708 100%);
+
+  /* Shadow adjustments */
+  --shadow-contact: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 /* ── Typography ── */
@@ -229,7 +299,7 @@
   --gradient-primary-full: linear-gradient(150deg, #50816b 0%, #4a8a8c 50%, #2e6466 100%);
   --gradient-left: linear-gradient(160deg, #50816b, #2e6466);
   --gradient-right: linear-gradient(160deg, #4a8a8c, #2a5557);
-  --gradient-body: linear-gradient(160deg, rgb(230, 205, 181) 0%, rgb(220, 193, 162) 40%, rgb(210, 180, 145) 100%);
+  --gradient-body: linear-gradient(160deg, var(--color-accent-gold-lighter) 0%, var(--color-accent-gold) 40%, var(--color-accent-gold-bright) 100%);
   --gradient-card: linear-gradient(145deg, #f5f0e8, #ede8dc);
   --gradient-gold-light: linear-gradient(135deg, #e6cdb5, #d8b88a, #c6a26e);
   --gradient-gold-accent: linear-gradient(160deg, #e6cdb5 0%, #d8b88a 55%, #c6a26e 100%);

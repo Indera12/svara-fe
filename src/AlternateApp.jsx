@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
 
-function Navbar() {
+function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -27,9 +27,23 @@ function Navbar() {
         <div className="sv-nav-links">
           {links.map(l => <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`}>{l.name}</a>)}
         </div>
-        <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
-          {[0, 1, 2].map(i => <span key={i} />)}
-        </button>
+        <div className="sv-nav-actions">
+          <button className="sv-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+            {theme === "dark" ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
+          <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
+            {[0, 1, 2].map(i => <span key={i} />)}
+          </button>
+        </div>
       </nav>
 
       {/* Backdrop — outside nav */}
@@ -48,7 +62,7 @@ function Navbar() {
       <div style={{
         position: "fixed", top: 0, right: 0,
         width: "min(300px, 80vw)", height: "100%",
-        background: "linear-gradient(160deg, rgb(230, 205, 181) 0%, rgb(220, 193, 162) 40%, rgb(210, 180, 145) 100%)",
+        background: "var(--gradient-offcanvas)",
         zIndex: 350,
         display: "flex", flexDirection: "column",
         alignItems: "center", justifyContent: "center", gap: 40,
@@ -65,6 +79,9 @@ function Navbar() {
             {l.name}
           </a>
         ))}
+        <button className="sv-theme-toggle sv-theme-toggle--offcanvas" onClick={toggleTheme} aria-label="Toggle theme">
+          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+        </button>
       </div>
     </>
   );
@@ -158,10 +175,10 @@ function Footer() {
       </section>
 
       <footer style={{ background: "var(--color-primary)", padding: "60px 5% 38px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid #d8b88a" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid var(--color-accent-gold-bright)" }}>
           <div style={{ paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-            <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.72rem", color: "#d8b88a" }}>© 2026 <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span>. All rights reserved.</div>
-            <div style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontSize: "0.88rem", color: "#d8b88a" }}>Wear Your Voice.</div>
+            <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.72rem", color: "var(--color-accent-gold-bright)" }}>© 2026 <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span>. All rights reserved.</div>
+            <div style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontSize: "0.88rem", color: "var(--color-accent-gold-bright)" }}>Wear Your Voice.</div>
           </div>
         </div>
       </footer>
@@ -170,11 +187,25 @@ function Footer() {
 }
 
 export default function AlternateApp() {
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("svara-theme");
+    return saved || "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("svara-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === "dark" ? "light" : "dark");
+  };
+
   return (
     <>
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <br />
-      <div style={{ background:"linear-gradient(160deg, var(--color-accent-gold-lighter) 0%, var(--color-accent-gold) 55%, var(--color-accent-gold-bright) 100%)" }}>
+      <div style={{ background: "var(--gradient-body)" }}>
         <SvaraBox />
         <Footer />
       </div>

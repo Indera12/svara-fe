@@ -231,6 +231,48 @@ a { text-decoration: none; }
   transition: color var(--transition-medium);
 }
 .sv-nav-links a:hover { color: var(--color-accent-gold); }
+.sv-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+.sv-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-gold);
+  color: var(--color-primary-very-dark);
+  border: none;
+  border-radius: var(--radius-full);
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  transition: background var(--transition-medium), color var(--transition-medium);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm-plus);
+  letter-spacing: var(--letter-spacing-2xl);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.sv-theme-toggle:hover {
+  background: var(--color-accent-gold-light);
+  color: var(--color-text-primary);
+}
+.sv-theme-toggle svg {
+  display: block;
+}
+.sv-theme-toggle--offcanvas {
+  width: auto;
+  padding: var(--spacing-md) var(--spacing-7xl);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-lg-alt);
+}
+@media (max-width: 900px) {
+  .sv-theme-toggle {
+    width: 30px;
+    height: 30px;
+  }
+}
 .sv-nav-btn {
   padding: var(--spacing-md) var(--spacing-7xl);
   border: 1px solid var(--color-border-accent-lighter);
