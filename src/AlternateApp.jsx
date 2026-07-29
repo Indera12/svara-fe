@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
+import HowItWorks from "./HowItWorks";
 
 function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
@@ -110,6 +111,7 @@ function Footer() {
   const handleKey = (e) => { if (e.key === "Enter") handleJoin(); };
   return (
     <>
+    <HowItWorks />
       {/* CTA */}
       <section id="contact" ref={ctaRef} className="cta-section">
         <div className={`cta-inner reveal${ctaVis ? " in" : ""}`}>
@@ -173,6 +175,8 @@ function Footer() {
           </div>
         </div>
       </section>
+
+      
 
       <footer style={{ background: "var(--color-primary)", padding: "60px 5% 38px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid var(--color-accent-gold-bright)" }}>
