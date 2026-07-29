@@ -76,7 +76,7 @@ function Navbar({ theme, toggleTheme }) {
         >✕</button>
         {links.map(l => (
           <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`} onClick={() => setOpen(false)}
-            style={{ fontFamily: "Montserrat, sans-serif", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}>
+            style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}>
             {l.name}
           </a>
         ))}
@@ -181,8 +181,8 @@ function Footer() {
       <footer style={{ background: "var(--color-primary)", padding: "60px 5% 38px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid var(--color-accent-gold-bright)" }}>
           <div style={{ paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-            <div style={{ fontFamily: "Montserrat, sans-serif", fontSize: "0.72rem", color: "var(--color-accent-gold-bright)" }}>© 2026 <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span>. All rights reserved.</div>
-            <div style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", fontSize: "0.88rem", color: "var(--color-accent-gold-bright)" }}>Wear Your Voice.</div>
+            <div style={{ fontFamily: "var(--font-family-primary)", fontSize: "0.72rem", color: "var(--color-accent-gold-bright)" }}>© 2026 <span style={{ fontFamily: "'Brittany Signature', cursive" }}>Svara</span>. All rights reserved.</div>
+            <div style={{ fontFamily: "var(--font-family-primary)", fontStyle: "italic", fontSize: "0.88rem", color: "var(--color-accent-gold-bright)" }}>Wear Your Voice.</div>
           </div>
         </div>
       </footer>

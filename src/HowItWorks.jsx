@@ -21,6 +21,7 @@ function HowItWorks() {
   ];
 
   const [active, setActive] = useState(null);
+  const [flipped, setFlipped] = useState(false);
 
   return (
     <section className="how-it-works">
@@ -28,8 +29,20 @@ function HowItWorks() {
         {steps.map((step, index) => (
           <div
             key={index}
-            className={`how-it-works-card stack-${index}${active === index ? ' active' : ''}`}
-            onClick={() => setActive(active === index ? null : index)}
+            className={`how-it-works-card stack-${index}${active === index ? ' active' : ''}${active === index && flipped ? ' flipped' : ''}`}
+            onClick={() => {
+              if (active === index) {
+                if (!flipped) {
+                  setFlipped(true);
+                } else {
+                  setActive(null);
+                  setFlipped(false);
+                }
+              } else {
+                setActive(index);
+                setFlipped(false);
+              }
+            }}
           >
             <div className="card-inner">
               <div className="card-front">

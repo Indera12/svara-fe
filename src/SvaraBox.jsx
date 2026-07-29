@@ -3,7 +3,6 @@ import { earrings, shoes, rings, dress, bag } from "./assets";
 import "./tokens.css";
 
 const FONT_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
   @font-face {
     font-family: 'Brittany Signature';
     src: url('/BrittanySignature.ttf') format('truetype');
@@ -59,7 +58,7 @@ function Box3D({ isOpen, W, H, D }) {
           display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"
         }}>
           <span style={{ fontFamily: 'Brittany Signature', color: G.gold, fontSize: W * 0.082 }}>Svara</span>
-          <span style={{ fontFamily: "Montserrat, sans-serif", fontStyle: "italic", color: G.goldDim, fontSize: W * 0.036, letterSpacing: 5, marginTop: 4 }}>wear your voice</span>
+          <span style={{ fontFamily: "var(--font-family-primary)", fontStyle: "italic", color: G.goldDim, fontSize: W * 0.036, letterSpacing: 5, marginTop: 4 }}>wear your voice</span>
           <div style={{ position: "absolute", bottom: 14, width: 34, height: 9, background: `linear-gradient(135deg, var(--color-accent-gold), ${G.gold}, var(--color-accent-gold-bright))`, borderRadius: 3, boxShadow: "0 2px 6px var(--color-overlay-dark-medium)" }} />
         </div>
         {/* Back */}
@@ -151,7 +150,7 @@ function ItemCard({ isOpen, label, delay, targetX, targetY, children }) {
     }}>
       {children}
       <span style={{
-        fontFamily: "Montserrat, sans-serif",
+        fontFamily: "var(--font-family-primary)",
         fontStyle: "italic",
         color: "var(--color-overlay-teal-very-dark)",
         fontSize: 9,
@@ -218,17 +217,17 @@ export default function SvaraBox() {
   const items = isMobile
     ? [
         { key: "dress",    label: "dress",    delay: 0.55, tx:  -95, ty: -155, src: dress,    w: imgSizes.dress[0],    h: imgSizes.dress[1] },
-        { key: "rings",    label: "rings",    delay: 0.62, tx:   -5, ty: -168, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
-        { key: "earrings", label: "earrings", delay: 0.70, tx:   95, ty: -145, src: earrings, w: imgSizes.earrings[0], h: imgSizes.earrings[1] },
-        { key: "bag",      label: "bag",      delay: 0.85, tx:  -95, ty:  165, src: bag,      w: imgSizes.bag[0],      h: imgSizes.bag[1] },
-        { key: "shoes",    label: "footwear", delay: 1.00, tx:   95, ty:  165, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
+        { key: "shoes",    label: "shoes",    delay: 0.62, tx:   -5, ty: -168, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
+        { key: "bag", label: "bag", delay: 0.70, tx:   95, ty: -145, src: bag, w: imgSizes.bag[0], h: imgSizes.bag[1] },
+        { key: "earrings",      label: "earrings",      delay: 0.85, tx:  -95, ty:  165, src: earrings,      w: imgSizes.earrings[0],      h: imgSizes.earrings[1] },
+        { key: "rings",    label: "rings",    delay: 1.00, tx:   95, ty:  165, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
       ]
     : [
         { key: "dress",    label: "dress",    delay: 0.55, tx: -190, ty: -140, src: dress,    w: imgSizes.dress[0],    h: imgSizes.dress[1] },
-        { key: "earrings", label: "earrings", delay: 0.70, tx:  190, ty: -150, src: earrings, w: imgSizes.earrings[0], h: imgSizes.earrings[1] },
+        { key: "shoes",    label: "shoes",    delay: 0.70, tx:  190, ty: -150, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
         { key: "bag",      label: "bag",      delay: 0.85, tx: -200, ty:  100, src: bag,      w: imgSizes.bag[0],      h: imgSizes.bag[1] },
-        { key: "shoes",    label: "footwear", delay: 1.00, tx:  195, ty:  115, src: shoes,    w: imgSizes.shoes[0],    h: imgSizes.shoes[1] },
-        { key: "rings",    label: "rings",    delay: 0.62, tx:    0, ty: -180, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
+        { key: "earrings",      label: "earrings",      delay: 0.62, tx:    0, ty: -180, src: earrings,      w: imgSizes.earrings[0],      h: imgSizes.earrings[1] },
+        { key: "rings",    label: "rings",    delay: 1.00, tx:   95, ty:  165, src: rings,    w: imgSizes.rings[0],    h: imgSizes.rings[1] },
       ];
 
   useEffect(() => {
@@ -296,7 +295,7 @@ export default function SvaraBox() {
       justifyContent: "center",
       position: "relative",
       overflow: "hidden",
-      fontFamily: "Montserrat, sans-serif",
+      fontFamily: "var(--font-family-primary)",
       touchAction: "manipulation",
       gap: 0,
       paddingTop: 80,
@@ -339,7 +338,7 @@ export default function SvaraBox() {
         flexShrink: 0, pointerEvents: "none",
       }}>
         <div style={{
-          fontFamily: "Montserrat, sans-serif",
+          fontFamily: "var(--font-family-primary)",
           fontSize: isMobile ? "clamp(18px,5.5vw,26px)" : "clamp(24px,3vw,38px)",
           fontWeight: 400, color: "var(--color-text-teal-dark)",
           letterSpacing: "0.08em", lineHeight: 1.3,
@@ -371,7 +370,7 @@ export default function SvaraBox() {
           </div>
         </div>
         <div style={{
-          fontFamily: "Montserrat, sans-serif",
+          fontFamily: "var(--font-family-primary)",
           fontSize: isMobile ? 9 : 11, letterSpacing: "0.35em", color: "var(--color-text-teal-medium)",
           marginTop: 10,
           animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s both",
