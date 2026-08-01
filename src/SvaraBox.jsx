@@ -365,8 +365,9 @@ export default function SvaraBox({ onSelectCategory }) {
         <div style={{
           fontFamily: "var(--font-family-primary)",
           fontSize: isMobile ? "clamp(18px,5.5vw,26px)" : "clamp(24px,3vw,38px)",
-          fontWeight: 400, color: "var(--color-text-teal-dark)",
+          fontWeight: 500, color: "var(--color-text-primary)",
           letterSpacing: "0.08em", lineHeight: 1.3,
+          textShadow: "0 1px 10px rgba(0,0,0,0.24)",
           position: "relative", minHeight: "1.6em", overflow: "visible",
           whiteSpace: "normal",
           width: isMobile ? "100%" : "min(900px, 60vw)", margin: "0 auto",
@@ -396,13 +397,14 @@ export default function SvaraBox({ onSelectCategory }) {
         </div>
         <div style={{
           fontFamily: "var(--font-family-primary)",
-          fontSize: isMobile ? 9 : 11, letterSpacing: "0.35em", color: "var(--color-text-teal-medium)",
+          fontSize: isMobile ? 9 : 11, letterSpacing: "0.35em", color: "var(--color-text-primary)",
           marginTop: 10,
+          textShadow: "0 1px 8px rgba(0,0,0,0.18)",
           animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s both",
         }}>WEAR YOUR VOICE</div>
         <div style={{
           fontFamily: "var(--font-family-primary)",
-          fontSize: isMobile ? 10 : 12, letterSpacing: "0.25em", color: "var(--color-text-teal-dark)",
+          fontSize: isMobile ? 10 : 12, letterSpacing: "0.25em", color: "var(--color-text-primary)",
           marginTop: 16,
           opacity: 0.9,
           animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.45s both",
