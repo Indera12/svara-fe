@@ -109,10 +109,10 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit }) {
 
   return (
     <div className="ob-wrap">
-      <header className="ob-brand">
+      {/* <header className="ob-brand">
         <p className="ob-brand-mark">SVARA</p>
         <p className="ob-brand-tagline">wear . your . voice</p>
-      </header>
+      </header> */}
 
       <p className="ob-intro">
         Build your look, piece by piece. Choose the dress and your shoes, bag and finishing
