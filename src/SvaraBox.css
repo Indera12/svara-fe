@@ -1,0 +1,130 @@
+/* =============================================
+   SVARA BOX — category launch items
+   Floating tappable chips around the 3D box.
+   ============================================= */
+
+.sv-item {
+  position: absolute;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* tappable tile */
+.sv-item-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 10px 20px rgba(22, 63, 67, 0.28));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(0) scale(1);
+}
+.sv-item-btn:hover,
+.sv-item-btn:focus-visible {
+  transform: translateY(-6px) scale(1.06);
+  outline: none;
+}
+.sv-item-btn:active {
+  transform: translateY(-2px) scale(0.97);
+}
+
+/* soft halo behind the transparent product art */
+.sv-item-halo {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 205, 181, 0.35) 0%, rgba(230, 205, 181, 0.08) 55%, transparent 72%);
+  transition: transform 0.35s ease, background 0.35s ease;
+}
+.sv-item-btn:hover .sv-item-halo,
+.sv-item-btn:focus-visible .sv-item-halo {
+  transform: scale(1.14);
+  background: radial-gradient(circle, rgba(230, 205, 181, 0.55) 0%, rgba(230, 205, 181, 0.15) 55%, transparent 74%);
+}
+
+/* product art bobs gently */
+.sv-item-art {
+  position: relative;
+  z-index: 1;
+  display: block;
+  animation: svItemBob 4.5s ease-in-out infinite;
+}
+@keyframes svItemBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* add badge */
+.sv-item-plus {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-primary, #50816b);
+  color: var(--color-bg-offwhite, #f5f0e8);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(22, 63, 67, 0.35);
+  border: 1px solid rgba(230, 205, 181, 0.45);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+}
+.sv-item-btn:hover .sv-item-plus,
+.sv-item-btn:focus-visible .sv-item-plus {
+  transform: rotate(90deg);
+  background: var(--color-accent-teal, #1E5A5E);
+}
+
+/* chip label */
+.sv-item-chip {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--color-bg-offwhite, #f5f0e8);
+  border: 1px solid var(--color-border-teal, rgba(80, 129, 107, 0.35));
+  color: var(--color-accent-teal-dark, #1a3c3f);
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(22, 63, 67, 0.18);
+  transition: background 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+.sv-item-chip-arrow {
+  font-size: 13px;
+  transition: transform 0.3s ease;
+}
+.sv-item-btn:hover + .sv-item-chip,
+.sv-item-btn:focus-visible + .sv-item-chip {
+  background: var(--color-accent-teal-dark, #163f43);
+  color: var(--color-bg-light, #f0ece4);
+}
+.sv-item-btn:hover + .sv-item-chip .sv-item-chip-arrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 600px) {
+  .sv-item-chip {
+    padding: 6px 11px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+  }
+  .sv-item-plus {
+    width: 22px;
+    height: 22px;
+  }
+}
