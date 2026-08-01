@@ -24,7 +24,7 @@ function HowItWorks() {
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <section className="how-it-works">
+    <section id="cards" className="how-it-works">
       <div className={`how-it-works-stage${active !== null ? ' has-active' : ''}`}>
         {steps.map((step, index) => (
           <div

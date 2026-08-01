@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
 import HowItWorks from "./HowItWorks";
+import OutfitBuilder from "./OutfitBuilder";
 
-function Navbar({ theme, toggleTheme }) {
+function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(() => Number(localStorage.getItem('svara-cart-count') || 0));
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
@@ -17,8 +19,22 @@ function Navbar({ theme, toggleTheme }) {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
+  useEffect(() => {
+    const h = () => setCartCount(Number(localStorage.getItem('svara-cart-count') || 0));
+    // custom event from same window
+    window.addEventListener('svaraCartUpdated', h);
+    // storage event for other windows
+    window.addEventListener('storage', h);
+    return () => {
+      window.removeEventListener('svaraCartUpdated', h);
+      window.removeEventListener('storage', h);
+    };
+  }, []);
+
   const links = [
-    { name: "Contact", id: "Contact" }
+    { name: "About", id: "Cards" },
+    { name: "Contact", id: "Contact" },
+    { name: "Shop", id: "Shop" },
   ];
 
   return (
@@ -26,7 +42,20 @@ function Navbar({ theme, toggleTheme }) {
       <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
         <div className="sv-nav-logo">Svara</div>
         <div className="sv-nav-links">
-          {links.map(l => <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`}>{l.name}</a>)}
+          {links.map(l => (
+            <a
+              key={l.id}
+              href={`#${l.id.toLowerCase().replace(" ", "-")}`}
+              onClick={(e) => {
+                if (l.name === 'Shop') {
+                  e.preventDefault();
+                  onOpenShop?.();
+                }
+              }}
+            >
+              {l.name}
+            </a>
+          ))}
         </div>
         <div className="sv-nav-actions">
           <button className="sv-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -40,6 +69,13 @@ function Navbar({ theme, toggleTheme }) {
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
+          </button>
+          <button className="sv-nav-box" type="button" onClick={onOpenCart} aria-label="Open box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 7.5L12 3l9 4.5v10.5L12 21 3 18V7.5Z" />
+              <path d="M3 7.5l9 4.5 9-4.5" />
+              <path d="M12 3v4.5" />
+            </svg>
           </button>
           <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
             {[0, 1, 2].map(i => <span key={i} />)}
@@ -75,11 +111,19 @@ function Navbar({ theme, toggleTheme }) {
           style={{ position: "absolute", top: 24, right: 24, background: "none", border: "none", color: "var(--color-text-teal-dark)", fontSize: "1.5rem", cursor: "pointer" }}
         >✕</button>
         {links.map(l => (
-          <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`} onClick={() => setOpen(false)}
-            style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}>
+          <a
+            key={l.id}
+            href={`#${l.id.toLowerCase().replace(" ", "-")}`}
+            onClick={(e) => {
+              setOpen(false);
+              if (l.name === 'Shop') { e.preventDefault(); onOpenShop?.(); }
+            }}
+            style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}
+          >
             {l.name}
           </a>
         ))}
+        
         {/* <button className="sv-theme-toggle sv-theme-toggle--offcanvas" onClick={toggleTheme} aria-label="Toggle theme">
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
         </button> */}
@@ -195,11 +239,19 @@ export default function AlternateApp() {
     const saved = localStorage.getItem("svara-theme");
     return saved || "light";
   });
+  const [builderSection, setBuilderSection] = useState(null);
+  const builderRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("svara-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (builderSection && builderRef.current) {
+      builderRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [builderSection]);
 
   const toggleTheme = () => {
     setTheme(prev => prev === "dark" ? "light" : "dark");
@@ -207,11 +259,26 @@ export default function AlternateApp() {
 
   return (
     <>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <br />
-      <div style={{ background: "var(--gradient-body)" }}>
-        <SvaraBox />
-        <Footer />
+      <Navbar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onOpenShop={() => setBuilderSection('dress')}
+        onOpenCart={() => setBuilderSection('cart')}
+      />
+      <div style={{ position: "relative", background: "var(--gradient-body)" }}>
+        {builderSection ? (
+          <div id="shop" ref={builderRef}>
+            <button type="button" className="ob-back-btn" onClick={() => setBuilderSection(null)}>
+              ‹ Back to collection
+            </button>
+            <OutfitBuilder initialSection={builderSection} onExit={() => setBuilderSection(null)} />
+          </div>
+        ) : (
+          <>
+            <SvaraBox onSelectCategory={setBuilderSection} />
+            <Footer />
+          </>
+        )}
       </div>
     </>
   );

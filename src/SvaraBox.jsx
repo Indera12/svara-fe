@@ -134,7 +134,7 @@ function ProductImage({ src, alt, width, height, style = {} }) {
   );
 }
 
-function ItemCard({ isOpen, label, delay, targetX, targetY, children }) {
+function ItemCard({ isOpen, label, delay, targetX, targetY, children, onClick }) {
   return (
     <div style={{
       position: "absolute",
@@ -146,9 +146,17 @@ function ItemCard({ isOpen, label, delay, targetX, targetY, children }) {
       transition: `transform 1.1s cubic-bezier(0.15,0.9,0.3,1.05) ${delay}s, opacity 0.7s ease ${delay}s`,
       zIndex: 15,
       display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
-      pointerEvents: "none",
+      pointerEvents: isOpen ? "auto" : "none",
+      cursor: onClick ? "pointer" : "default",
     }}>
-      {children}
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={`Open ${label} section`}
+        style={{ padding: 0, border: 0, background: "none", cursor: "inherit" }}
+      >
+        {children}
+      </button>
       <span style={{
         fontFamily: "var(--font-family-primary)",
         fontStyle: "italic",
@@ -163,6 +171,20 @@ function ItemCard({ isOpen, label, delay, targetX, targetY, children }) {
       }}>
         {label}
       </span>
+      {isOpen && (
+        <span style={{
+          fontFamily: "var(--font-family-primary)",
+          color: "var(--color-overlay-teal-medium)",
+          fontSize: 8,
+          letterSpacing: 1.5,
+          textTransform: "uppercase",
+          opacity: 0.85,
+          marginTop: 2,
+          whiteSpace: "nowrap",
+        }}>
+          tap to open
+        </span>
+      )}
     </div>
   );
 }
@@ -197,7 +219,7 @@ const surroundStyles = `
   }
 `;
 
-export default function SvaraBox() {
+export default function SvaraBox({ onSelectCategory }) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const [particles, setParticles] = useState([]);
@@ -279,15 +301,18 @@ export default function SvaraBox() {
   const handleMouseEnter = () => { if (!isMobile) { burst(); setIsOpen(true); } };
   const handleMouseLeave = () => { if (!isMobile) setIsOpen(false); };
 
-  const handleTap = () => {
-    if (!isMobile) return;
+  const handleBoxClick = () => {
     burst();
-    setIsOpen(prev => !prev);
+    if (isOpen) {
+      onSelectCategory?.('dress');
+    } else {
+      setIsOpen(true);
+    }
   };
 
   return (
     <div style={{
-      width: "100vw",
+      width: "100%",
       minHeight: "100vh",
       display: "flex",
       flexDirection: "column",
@@ -322,7 +347,7 @@ export default function SvaraBox() {
         position: "absolute", fontSize: isMobile ? "28vw" : "20vw",
         color: "var(--color-overlay-brown)", top: "60%", left: "50%",
         transform: "translate(-50%,-50%)", pointerEvents: "none",
-        userSelect: "none", whiteSpace: "nowrap", zIndex: 0,
+        userSelect: "none", whiteSpace: "normal", zIndex: 0,
       }}>SVARA</div>
 
       {/* Particles */}
@@ -333,17 +358,18 @@ export default function SvaraBox() {
       {/* Headline */}
       <div style={{
         position: "relative", zIndex: 20, width: "100%",
-        textAlign: "center", whiteSpace: "nowrap",
+        textAlign: "center",
         animation: "svaraHeadlineIn 1s cubic-bezier(0.2,0.8,0.3,1) 0.1s both",
         flexShrink: 0, pointerEvents: "none",
       }}>
         <div style={{
           fontFamily: "var(--font-family-primary)",
           fontSize: isMobile ? "clamp(18px,5.5vw,26px)" : "clamp(24px,3vw,38px)",
-          fontWeight: 400, color: "var(--color-text-teal-dark)",
+          fontWeight: 500, color: "var(--color-text-primary)",
           letterSpacing: "0.08em", lineHeight: 1.3,
-          position: "relative", height: "1.6em", overflow: "visible",
-          whiteSpace: "nowrap",
+          textShadow: "0 1px 10px rgba(0,0,0,0.24)",
+          position: "relative", minHeight: "1.6em", overflow: "visible",
+          whiteSpace: "normal",
           width: isMobile ? "100%" : "min(900px, 60vw)", margin: "0 auto",
         }}>
           <div style={{
@@ -371,16 +397,25 @@ export default function SvaraBox() {
         </div>
         <div style={{
           fontFamily: "var(--font-family-primary)",
-          fontSize: isMobile ? 9 : 11, letterSpacing: "0.35em", color: "var(--color-text-teal-medium)",
+          fontSize: isMobile ? 9 : 11, letterSpacing: "0.35em", color: "var(--color-text-primary)",
           marginTop: 10,
+          textShadow: "0 1px 8px rgba(0,0,0,0.18)",
           animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s both",
         }}>WEAR YOUR VOICE</div>
+        <div style={{
+          fontFamily: "var(--font-family-primary)",
+          fontSize: isMobile ? 10 : 12, letterSpacing: "0.25em", color: "var(--color-text-primary)",
+          marginTop: 16,
+          opacity: 0.9,
+          animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.45s both",
+        }}>Tap any item on the box to open that section in the builder.</div>
       </div>
 
       {/* Stage */}
       <div style={{
         position: "relative", flexShrink: 0, zIndex: 10,
-        width: isMobile ? "100vw" : 600,
+        width: isMobile ? "100%" : 600,
+        maxWidth: 640,
         height: isMobile ? 600 : 520,
         display: "flex",
         alignItems: "center",
@@ -402,7 +437,15 @@ export default function SvaraBox() {
 
         {/* Product items */}
         {items.map(item => (
-          <ItemCard key={item.key} isOpen={isOpen} label={item.label} delay={item.delay} targetX={item.tx} targetY={item.ty}>
+          <ItemCard
+            key={item.key}
+            isOpen={isOpen}
+            label={item.label}
+            delay={item.delay}
+            targetX={item.tx}
+            targetY={item.ty}
+            onClick={() => onSelectCategory?.(item.key === "dress" ? "dress" : item.key === "shoes" ? "shoes" : "acc")}
+          >
             <ProductImage src={item.src} alt={item.label} width={item.w} height={item.h} />
           </ItemCard>
         ))}
@@ -412,7 +455,7 @@ export default function SvaraBox() {
           ref={cardRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onTouchStart={handleTap}
+          onClick={handleBoxClick}
           style={{
             position: "relative", zIndex: 10,
             perspective: isMobile ? 600 : 900,
