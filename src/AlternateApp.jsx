@@ -3,9 +3,10 @@ import SvaraBox from "./SvaraBox";
 import HowItWorks from "./HowItWorks";
 import OutfitBuilder from "./OutfitBuilder";
 
-function Navbar({ theme, toggleTheme }) {
+function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(() => Number(localStorage.getItem('svara-cart-count') || 0));
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
@@ -18,8 +19,23 @@ function Navbar({ theme, toggleTheme }) {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
+  useEffect(() => {
+    const h = () => setCartCount(Number(localStorage.getItem('svara-cart-count') || 0));
+    // custom event from same window
+    window.addEventListener('svaraCartUpdated', h);
+    // storage event for other windows
+    window.addEventListener('storage', h);
+    return () => {
+      window.removeEventListener('svaraCartUpdated', h);
+      window.removeEventListener('storage', h);
+    };
+  }, []);
+
   const links = [
-    { name: "Contact", id: "Contact" }
+    { name: "About", id: "About" },
+    { name: "Contact", id: "Contact" },
+    { name: "Shop", id: "Shop" },
+    { name: "Cart", id: "Cart" },
   ];
 
   return (
@@ -27,7 +43,27 @@ function Navbar({ theme, toggleTheme }) {
       <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
         <div className="sv-nav-logo">Svara</div>
         <div className="sv-nav-links">
-          {links.map(l => <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`}>{l.name}</a>)}
+          {links.map(l => (
+            <a
+              key={l.id}
+              href={`#${l.id.toLowerCase().replace(" ", "-")}`}
+              onClick={(e) => {
+                // prefer hook handlers for Shop/Cart so parent can open builder
+                if (l.name === 'Shop') {
+                  e.preventDefault();
+                  onOpenShop?.();
+                } else if (l.name === 'Cart') {
+                  e.preventDefault();
+                  onOpenCart?.();
+                }
+              }}
+            >
+              {l.name}
+              {l.name === 'Cart' && cartCount > 0 && (
+                <span style={{ display: 'inline-block', marginLeft: 8, minWidth: 20, textAlign: 'center', background: 'var(--color-accent-gold)', color: 'var(--color-primary-very-dark)', borderRadius: 999, padding: '2px 8px', fontSize: 12 }}>{cartCount}</span>
+              )}
+            </a>
+          ))}
         </div>
         <div className="sv-nav-actions">
           <button className="sv-theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -76,8 +112,16 @@ function Navbar({ theme, toggleTheme }) {
           style={{ position: "absolute", top: 24, right: 24, background: "none", border: "none", color: "#e8dcc8", fontSize: "1.5rem", cursor: "pointer" }}
         >✕</button>
         {links.map(l => (
-          <a key={l.id} href={`#${l.id.toLowerCase().replace(" ", "-")}`} onClick={() => setOpen(false)}
-            style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}>
+          <a
+            key={l.id}
+            href={`#${l.id.toLowerCase().replace(" ", "-")}`}
+            onClick={(e) => {
+              setOpen(false);
+              if (l.name === 'Shop') { e.preventDefault(); onOpenShop?.(); }
+              if (l.name === 'Cart') { e.preventDefault(); onOpenCart?.(); }
+            }}
+            style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}
+          >
             {l.name}
           </a>
         ))}
@@ -209,7 +253,12 @@ export default function AlternateApp() {
 
   return (
     <>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onOpenShop={() => setBuilderSection('dress')}
+        onOpenCart={() => setBuilderSection('cart')}
+      />
       <div style={{ position: "relative", background: "var(--gradient-body)" }}>
         {builderSection ? (
           <>

@@ -1,9 +1,10 @@
-import { CATEGORIES, getItem, outfitTotal, inr } from './data';
+import { CATEGORIES, getItem } from './data';
 import Reveal from './Reveal';
 
 // Cart grouped by outfit, with line items, per-outfit and grand totals.
 export default function CartSummary({ outfits, onContinueShopping, onCheckout }) {
-  const grandTotal = outfits.reduce((sum, outfit) => sum + outfitTotal(outfit), 0);
+  // prices removed: do not compute grand total
+  const grandTotal = 0;
 
   return (
     <section className="ob-cart">
@@ -18,7 +19,6 @@ export default function CartSummary({ outfits, onContinueShopping, onCheckout })
           <Reveal key={outfitIndex} className="ob-cart-group" delay={outfitIndex * 120}>
             <div className="ob-cart-group-head">
               <span>outfit {outfitIndex + 1}</span>
-              <span className="ob-cart-group-total">{inr(outfitTotal(outfit))}</span>
             </div>
             <div className="ob-cart-rows">
               {CATEGORIES.map((cat) => {
@@ -32,7 +32,7 @@ export default function CartSummary({ outfits, onContinueShopping, onCheckout })
                       <span className="ob-cart-row-name">{item ? item.name : cat.label}</span>
                       <span className="ob-cart-row-cat">{cat.label}</span>
                     </span>
-                    <span className="ob-cart-row-price">{item ? inr(item.price) : '—'}</span>
+                    {/* price removed */}
                   </div>
                 );
               })}
@@ -41,10 +41,7 @@ export default function CartSummary({ outfits, onContinueShopping, onCheckout })
         ))}
       </div>
 
-      <Reveal className="ob-cart-total" delay={200}>
-        <span>grand total</span>
-        <span className="ob-cart-grand">{inr(grandTotal)}</span>
-      </Reveal>
+      {/* grand total hidden (prices removed) */}
 
       <Reveal className="ob-cart-actions" delay={260}>
         <button type="button" className="ob-ghost-btn ob-ghost-btn--dark" onClick={onContinueShopping}>

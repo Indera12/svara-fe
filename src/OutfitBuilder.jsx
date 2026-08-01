@@ -26,6 +26,15 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  // Honor any initialSection passed from parent (e.g. open cart directly)
+  useEffect(() => {
+    if (initialSection === 'cart') {
+      setPhase('cart');
+    } else if (initialSection === 'moodboard') {
+      setPhase('moodboard');
+    }
+  }, [initialSection]);
+
   // Auto-scroll whenever the phase or active outfit changes.
   useEffect(() => {
     const id = setTimeout(() => {
@@ -233,7 +242,21 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit }) {
             ))}
           </div>
           <div ref={moodRef}>
-            <MoodBoard outfits={outfits} onAddToCart={() => setPhase('cart')} />
+            <MoodBoard
+              outfits={outfits}
+              onAddToCart={() => {
+                // compute total selected items across outfits and store as cart count
+                const count = outfits.reduce((acc, outfit) => {
+                  return (
+                    acc + CATEGORIES.reduce((s, c) => (outfit[c.key] != null ? s + 1 : s), 0)
+                  );
+                }, 0);
+                try { localStorage.setItem('svara-cart-count', String(count)); } catch (e) {}
+                // notify other windows/components
+                try { window.dispatchEvent(new CustomEvent('svaraCartUpdated', { detail: { count } })); } catch (e) {}
+                setPhase('cart');
+              }}
+            />
           </div>
         </div>
       )}

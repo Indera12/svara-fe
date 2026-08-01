@@ -1,4 +1,4 @@
-import { CATEGORIES, getItem, outfitTotal, inr } from './data';
+import { CATEGORIES, getItem } from './data';
 
 // Collapsed summary card for a finished outfit.
 export default function CompleteCard({ outfitNumber, outfit, onEdit }) {
@@ -27,7 +27,6 @@ export default function CompleteCard({ outfitNumber, outfit, onEdit }) {
       </div>
 
       <div className="ob-complete-foot">
-        <span className="ob-complete-total">{inr(outfitTotal(outfit))}</span>
         <div className="ob-complete-actions">
           <button type="button" className="ob-ghost-btn" onClick={() => onEdit(outfitNumber - 1)}>
             view / edit

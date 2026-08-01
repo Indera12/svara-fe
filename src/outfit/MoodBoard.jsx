@@ -1,4 +1,4 @@
-import { CATEGORIES, getItem, outfitTotal, inr } from './data';
+import { CATEGORIES, getItem } from './data';
 import Reveal from './Reveal';
 
 // Gallery-style presentation of all three completed looks.
@@ -28,18 +28,12 @@ export default function MoodBoard({ outfits, onAddToCart }) {
                     </span>
                     <span className="ob-mood-piece-meta">
                       <span className="ob-mood-piece-name">{item ? item.name : cat.label}</span>
-                      <span className="ob-mood-piece-price">
-                        {item ? inr(item.price) : '—'}
-                      </span>
                     </span>
                   </div>
                 );
               })}
             </div>
-            <div className="ob-mood-total">
-              <span>look total</span>
-              <span>{inr(outfitTotal(outfit))}</span>
-            </div>
+            {/* look total removed per request */}
           </Reveal>
         ))}
       </div>

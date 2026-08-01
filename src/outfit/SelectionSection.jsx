@@ -1,4 +1,4 @@
-import { CATEGORIES, inr } from './data';
+import { CATEGORIES } from './data';
 
 // One guided step in an outfit: a category whose options are revealed,
 // then collapsed into a summary strip once chosen.
@@ -42,7 +42,6 @@ export default function SelectionSection({
             </div>
             <div className="ob-chosen-info">
               <span className="ob-chosen-name">{chosen.name}</span>
-              <span className="ob-chosen-price">{inr(chosen.price)}</span>
             </div>
             <button type="button" className="ob-change-btn" onClick={onChange}>
               change
@@ -66,7 +65,6 @@ export default function SelectionSection({
                 </span>
                 <span className="ob-card-meta">
                   <span className="ob-card-name">{option.name}</span>
-                  <span className="ob-card-price">{inr(option.price)}</span>
                 </span>
               </button>
             ))}
