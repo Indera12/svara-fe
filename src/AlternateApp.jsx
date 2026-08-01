@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import SvaraBox from "./SvaraBox";
 import HowItWorks from "./HowItWorks";
+import OutfitBuilder from "./OutfitBuilder";
 
 function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
@@ -195,6 +196,7 @@ export default function AlternateApp() {
     const saved = localStorage.getItem("svara-theme");
     return saved || "light";
   });
+  const [builderSection, setBuilderSection] = useState(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -208,10 +210,20 @@ export default function AlternateApp() {
   return (
     <>
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <br />
-      <div style={{ background: "var(--gradient-body)" }}>
-        <SvaraBox />
-        <Footer />
+      <div style={{ position: "relative", background: "var(--gradient-body)" }}>
+        {builderSection ? (
+          <>
+            <button type="button" className="ob-back-btn" onClick={() => setBuilderSection(null)}>
+              ‹ Back to collection
+            </button>
+            <OutfitBuilder initialSection={builderSection} onExit={() => setBuilderSection(null)} />
+          </>
+        ) : (
+          <>
+            <SvaraBox onSelectCategory={setBuilderSection} />
+            <Footer />
+          </>
+        )}
       </div>
     </>
   );

@@ -309,6 +309,14 @@ a { text-decoration: none; }
   .two-col { grid-template-columns: 1fr !important; }
   .three-col { grid-template-columns: 1fr !important; }
   .four-col { grid-template-columns: 1fr 1fr !important; }
+  .cat-cards-row { gap: 18px; }
+  .cat-card { width: min(100%, 220px); flex: 1 1 220px; padding: 42px 18px 28px; }
+}
+@media (max-width: 720px) {
+  .cat-card { width: min(100%, 240px); padding: 36px 14px 24px; }
+  .sv-nav { padding: 0 4%; }
+  .sv-nav-logo { font-size: 1rem; }
+  .sv-theme-toggle { width: 30px; height: 30px; }
 }
 @media (max-width: 520px) {
   .svara-scene, .svara-box, .svara-face, .svara-lid,
@@ -323,11 +331,39 @@ a { text-decoration: none; }
   .svara-lid-top  { transform: translateZ(120px) !important; }
   .svara-lid-back { transform: translateZ(115px) rotateY(180deg) !important; }
   .svara-inside   { transform: translateZ(120px) !important; }
+  .cat-card { width: 100% !important; padding: 24px 14px 18px !important; }
+  .cat-cards-row { gap: 12px !important; }
+  .cta-section { padding: 64px 4%; }
+  .cta-body { margin-bottom: var(--spacing-6xl); max-width: 100%; }
+  .cta-pill { flex-direction: column; }
+  .cta-pill input { width: 100%; padding: var(--spacing-lg) var(--spacing-7xl); }
+  .cta-pill-btn { width: 100%; padding: var(--spacing-lg) 0; }
+  .contact-card { padding: 42px 24px; }
+  .contact-cta { grid-template-columns: 1fr; gap: 10px; }
+  .contact-socials { gap: 10px; }
+  .sv-nav { padding: 0 3%; }
+  .sv-nav-logo { font-size: 0.95rem; }
+  .sv-nav-actions { gap: 10px; }
+  .sv-theme-toggle { width: 28px; height: 28px; }
+  .sv-hamburger { padding: 6px; }
+  .sv-nav { height: 60px; }
+  .sv-nav-links a { font-size: 11px; }
+  .cat-card { padding: 22px 12px 16px !important; }
+  .cta-section { padding: 42px 3%; }
+  .cta-heading { margin-bottom: 24px; }
+  .cta-heading em { font-size: 1.35em; }
+  .cta-body { font-size: 1rem; line-height: 1.7; }
+  .contact-card { padding: 32px 20px; }
 }
 @media (max-width: 480px) {
-  .cat-card { width: 140px !important; padding: 20px 12px 18px !important; }
-  .cat-cards-row { gap: 12px !important; }
+  .cat-card { width: 100% !important; padding: 18px 12px 16px !important; }
+  .cat-card:hover { transform: translateY(0) scale(1) !important; }
+  .cta-heading { font-size: clamp(2rem, 7vw, 2.6rem); }
+  .cta-pill input { padding: var(--spacing-md) var(--spacing-6xl); }
+  .contact-card { padding: 32px 20px; }
+  .contact-cta { padding: 12px 14px; }
 }
+
 /* CTA Section */
 .cta-section {
   padding: var(--spacing-10xl) 5%;

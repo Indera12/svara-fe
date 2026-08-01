@@ -1,12 +1,17 @@
-@font-face {
+@import './tokens.css';
+
+/* @font-face {
   font-family: 'Allura';
   src: url('/Allura-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+} */
+@font-face {
+  font-family: 'Brittany';
+  src: url('/BrittanySignature.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
-
-@import './tokens.css';
-
 body {
   margin: 0;
   font-family: var(--font-family-primary);
