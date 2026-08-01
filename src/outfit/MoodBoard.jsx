@@ -40,7 +40,7 @@ export default function MoodBoard({ outfits, onAddToCart }) {
 
       <Reveal className="ob-moodboard-cta" delay={200}>
         <button type="button" className="ob-primary-btn ob-primary-btn--large" onClick={onAddToCart}>
-          Love all 3 looks? → Add to cart
+          Love all 3 looks? → Add to box
         </button>
       </Reveal>
     </section>

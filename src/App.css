@@ -260,6 +260,27 @@ a { text-decoration: none; }
 .sv-theme-toggle svg {
   display: block;
 }
+.sv-nav-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-offwhite-alt);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-full);
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  transition: background var(--transition-medium), color var(--transition-medium), border-color var(--transition-medium);
+}
+.sv-nav-box:hover {
+  background: var(--color-accent-gold);
+  color: var(--color-primary-very-dark);
+  border-color: var(--color-accent-gold);
+}
+.sv-nav-box svg {
+  display: block;
+}
 .sv-theme-toggle--offcanvas {
   width: auto;
   padding: var(--spacing-md) var(--spacing-7xl);

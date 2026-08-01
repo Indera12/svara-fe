@@ -32,10 +32,9 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
   }, []);
 
   const links = [
-    { name: "About", id: "About" },
+    { name: "About", id: "Cards" },
     { name: "Contact", id: "Contact" },
     { name: "Shop", id: "Shop" },
-    { name: "Cart", id: "Cart" },
   ];
 
   return (
@@ -48,20 +47,13 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
               key={l.id}
               href={`#${l.id.toLowerCase().replace(" ", "-")}`}
               onClick={(e) => {
-                // prefer hook handlers for Shop/Cart so parent can open builder
                 if (l.name === 'Shop') {
                   e.preventDefault();
                   onOpenShop?.();
-                } else if (l.name === 'Cart') {
-                  e.preventDefault();
-                  onOpenCart?.();
                 }
               }}
             >
               {l.name}
-              {l.name === 'Cart' && cartCount > 0 && (
-                <span style={{ display: 'inline-block', marginLeft: 8, minWidth: 20, textAlign: 'center', background: 'var(--color-accent-gold)', color: 'var(--color-primary-very-dark)', borderRadius: 999, padding: '2px 8px', fontSize: 12 }}>{cartCount}</span>
-              )}
             </a>
           ))}
         </div>
@@ -77,6 +69,13 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             )}
+          </button>
+          <button className="sv-nav-box" type="button" onClick={onOpenCart} aria-label="Open box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 7.5L12 3l9 4.5v10.5L12 21 3 18V7.5Z" />
+              <path d="M3 7.5l9 4.5 9-4.5" />
+              <path d="M12 3v4.5" />
+            </svg>
           </button>
           <button className="sv-hamburger" onClick={() => setOpen(p => !p)}>
             {[0, 1, 2].map(i => <span key={i} />)}
@@ -118,16 +117,16 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
             onClick={(e) => {
               setOpen(false);
               if (l.name === 'Shop') { e.preventDefault(); onOpenShop?.(); }
-              if (l.name === 'Cart') { e.preventDefault(); onOpenCart?.(); }
             }}
             style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}
           >
             {l.name}
           </a>
         ))}
-        <button className="sv-theme-toggle sv-theme-toggle--offcanvas" onClick={toggleTheme} aria-label="Toggle theme">
+        
+        {/* <button className="sv-theme-toggle sv-theme-toggle--offcanvas" onClick={toggleTheme} aria-label="Toggle theme">
           {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
-        </button>
+        </button> */}
       </div>
     </>
   );
@@ -241,11 +240,18 @@ export default function AlternateApp() {
     return saved || "light";
   });
   const [builderSection, setBuilderSection] = useState(null);
+  const builderRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("svara-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (builderSection && builderRef.current) {
+      builderRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [builderSection]);
 
   const toggleTheme = () => {
     setTheme(prev => prev === "dark" ? "light" : "dark");
@@ -261,12 +267,12 @@ export default function AlternateApp() {
       />
       <div style={{ position: "relative", background: "var(--gradient-body)" }}>
         {builderSection ? (
-          <>
+          <div id="shop" ref={builderRef}>
             <button type="button" className="ob-back-btn" onClick={() => setBuilderSection(null)}>
               ‹ Back to collection
             </button>
             <OutfitBuilder initialSection={builderSection} onExit={() => setBuilderSection(null)} />
-          </>
+          </div>
         ) : (
           <>
             <SvaraBox onSelectCategory={setBuilderSection} />

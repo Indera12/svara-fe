@@ -152,7 +152,7 @@ function ItemCard({ isOpen, label, delay, targetX, targetY, children, onClick })
       <button
         type="button"
         onClick={onClick}
-        aria-label={`Choose ${label}`}
+        aria-label={`Open ${label} section`}
         style={{ padding: 0, border: 0, background: "none", cursor: "inherit" }}
       >
         {children}
@@ -171,6 +171,20 @@ function ItemCard({ isOpen, label, delay, targetX, targetY, children, onClick })
       }}>
         {label}
       </span>
+      {isOpen && (
+        <span style={{
+          fontFamily: "var(--font-family-primary)",
+          color: "var(--color-overlay-teal-medium)",
+          fontSize: 8,
+          letterSpacing: 1.5,
+          textTransform: "uppercase",
+          opacity: 0.85,
+          marginTop: 2,
+          whiteSpace: "nowrap",
+        }}>
+          tap to open
+        </span>
+      )}
     </div>
   );
 }
@@ -386,6 +400,13 @@ export default function SvaraBox({ onSelectCategory }) {
           marginTop: 10,
           animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.3s both",
         }}>WEAR YOUR VOICE</div>
+        <div style={{
+          fontFamily: "var(--font-family-primary)",
+          fontSize: isMobile ? 10 : 12, letterSpacing: "0.25em", color: "var(--color-text-teal-dark)",
+          marginTop: 16,
+          opacity: 0.9,
+          animation: "svaraSubIn 1.2s cubic-bezier(0.2,0.8,0.3,1) 0.45s both",
+        }}>Tap any item on the box to open that section in the builder.</div>
       </div>
 
       {/* Stage */}
