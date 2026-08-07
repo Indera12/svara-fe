@@ -149,34 +149,35 @@
 
 /* ── Typography ── */
 :root {
-  --font-family-primary: 'Allura', cursive;
-  --font-family-accent: 'Brittany Signature', sans-serif;
+  --font-family-primary: 'Florida Vibes', serif;
+  --font-family-small: 'Holimount', sans-serif;
+  --font-family-accent: 'Holimount', sans-serif;
 
   /* Font Sizes */
-  --font-size-xs: 0.42rem;
-  --font-size-xs-alt: 0.48rem;
-  --font-size-sm: 0.5rem;
-  --font-size-sm-alt: 0.52rem;
-  --font-size-sm-plus: 0.58rem;
-  --font-size-md: 0.65rem;
-  --font-size-md-alt: 0.68rem;
-  --font-size-lg: 0.78rem;
-  --font-size-lg-alt: 0.7rem;
-  --font-size-xl: 0.82rem;
-  --font-size-xl-alt: 0.88rem;
-  --font-size-2xl: 0.92rem;
-  --font-size-3xl: 0.95rem;
-  --font-size-4xl: 1rem;
-  --font-size-5xl: 1.05rem;
-  --font-size-6xl: 1.4rem;
-  --font-size-7xl: 1.5rem;
-  --font-size-8xl: 1.7rem;
-  --font-size-logo-sm: 2.4rem;
-  --font-size-logo-lg: 2.8rem;
-  --font-size-cta-heading: clamp(2.4rem, 4.5vw, 5rem);
-  --font-size-contact-heading: clamp(2.4rem, 4vw, 4.8rem);
-  --font-size-headline-mobile: clamp(18px, 5.5vw, 26px);
-  --font-size-headline-desktop: clamp(24px, 3vw, 38px);
+  --font-size-xs: 0.7rem;
+  --font-size-xs-alt: 0.8rem;
+  --font-size-sm: 0.85rem;
+  --font-size-sm-alt: 0.9rem;
+  --font-size-sm-plus: 1rem;
+  --font-size-md: 1.1rem;
+  --font-size-md-alt: 1.15rem;
+  --font-size-lg: 1.3rem;
+  --font-size-lg-alt: 1.2rem;
+  --font-size-xl: 1.4rem;
+  --font-size-xl-alt: 1.5rem;
+  --font-size-2xl: 1.6rem;
+  --font-size-3xl: 1.7rem;
+  --font-size-4xl: 1.8rem;
+  --font-size-5xl: 1.9rem;
+  --font-size-6xl: 2.5rem;
+  --font-size-7xl: 2.7rem;
+  --font-size-8xl: 3rem;
+  --font-size-logo-sm: 3.5rem;
+  --font-size-logo-lg: 4rem;
+  --font-size-cta-heading: clamp(3.5rem, 6vw, 6rem);
+  --font-size-contact-heading: clamp(3.5rem, 5vw, 5.5rem);
+  --font-size-headline-mobile: clamp(22px, 6vw, 32px);
+  --font-size-headline-desktop: clamp(28px, 4vw, 42px);
 
   /* Font Weights */
   --font-weight-light: 300;

@@ -110,12 +110,12 @@ button { font-family: inherit; }
 .ob-outfit-title { display: flex; flex-direction: column; gap: 2px; }
 .ob-outfit-num {
   font-family: var(--font-family-accent);
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: 0.06em;
   color: var(--ob-ink);
 }
 .ob-outfit-sub {
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ob-ink-soft);
@@ -222,7 +222,7 @@ button { font-family: inherit; }
 }
 .ob-section-eyebrow {
   display: block;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ob-ink-soft);
@@ -230,7 +230,7 @@ button { font-family: inherit; }
 }
 .ob-section-title {
   font-family: var(--font-family-accent);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 500;
   margin: 0;
 }
@@ -358,7 +358,7 @@ button { font-family: inherit; }
   gap: 2px;
   padding: 10px 12px 12px;
 }
-.ob-card-name { font-size: 13.5px; font-weight: 500; }
+.ob-card-name { font-size: 16px; font-weight: 500; }
 
 /* ───────────────────────── complete / up-next cards ───────────────────────── */
 .ob-complete-card {

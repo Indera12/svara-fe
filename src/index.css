@@ -6,9 +6,21 @@
   font-weight: 400;
   font-style: normal;
 } */
-@font-face {
+/* @font-face {
   font-family: 'Brittany';
   src: url('/BrittanySignature.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+} */
+@font-face {
+  font-family: 'Florida Vibes';
+  src: url('/Florida-Vibes.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Holimount';
+  src: url('/Holimount.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
