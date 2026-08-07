@@ -1,8 +1,18 @@
 @import './tokens.css';
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--color-bg-dark); overflow-x: hidden; font-family: var(--font-family-primary); }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--color-bg-dark);
+  overflow-x: hidden;
+  font-family: var(--font-family-primary);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, textarea, select { font: inherit; }
 ::selection { background: var(--color-overlay-selection); color: var(--color-bg-offwhite-alt); }
 input::placeholder { color: var(--color-overlay-placeholder); }
 a { text-decoration: none; }
