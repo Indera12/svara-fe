@@ -228,9 +228,14 @@ a { text-decoration: none; }
   background: var(--color-primary);
 }
 .sv-nav-logo {
-  font-family: var(--font-family-accent);
-  font-size: var(--font-size-4xl);
-  color: var(--color-accent-gold); letter-spacing: var(--letter-spacing-xl);
+  font-family: 'Holimount', 'Georgia', serif;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--color-accent-gold);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  display: inline-block;
 }
 .sv-nav-links { display: flex; gap: var(--spacing-4xl); align-items: center; }
 .sv-nav-links a {
@@ -615,12 +620,15 @@ a { text-decoration: none; }
   color: var(--color-bg-offwhite-alt);
 }
 .brand-script {
-  font-family: "Brittany Signature";
-  font-size: 22px;
+  font-family: 'Holimount', 'Georgia', serif;
+  font-size: 1.7rem;
+  line-height: 1;
+  font-weight: 400;
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   margin: 0 4px;
   display: inline-block;
+  color: var(--color-accent-gold-light);
 }
 
 /* ── card ── */
