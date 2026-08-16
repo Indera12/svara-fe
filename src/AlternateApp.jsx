@@ -46,11 +46,7 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart, onNavigateHome, on
 
     if (link.name === "Contact") {
       e.preventDefault();
-      if (currentPage !== "home") {
-        onNavigateHome?.("contact");
-      } else {
-        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      onNavigateHome?.("contact");
       return;
     }
 
@@ -64,7 +60,21 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart, onNavigateHome, on
   return (
     <>
       <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
-        <div className="sv-nav-logo">Svara</div>
+        <div
+          className="sv-nav-logo"
+          onClick={() => onNavigateHome?.()}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              onNavigateHome?.();
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          style={{ cursor: "pointer" }}
+        >
+          Svara
+        </div>
         <div className="sv-nav-links">
           {links.map(l => (
             <a
@@ -275,8 +285,17 @@ export default function AlternateApp() {
     const saved = localStorage.getItem("svara-theme");
     return saved || "light";
   });
-  const [page, setPage] = useState(() => (window.location.pathname === "/about" ? "about" : "home"));
-  const [builderSection, setBuilderSection] = useState(null);
+  const [page, setPage] = useState(() => {
+    const path = window.location.pathname;
+    if (path === "/about") return "about";
+    return "home";
+  });
+  const [builderSection, setBuilderSection] = useState(() => {
+    const path = window.location.pathname;
+    if (path === "/shop") return "dress";
+    if (path === "/cart") return "cart";
+    return null;
+  });
   const [sessionTimer, setSessionTimer] = useState({ active: false, timeLeft: 10 * 60 });
   const builderRef = useRef(null);
   const TIMER_SECONDS = 10 * 60;
@@ -319,11 +338,32 @@ export default function AlternateApp() {
 
   useEffect(() => {
     const syncPageFromUrl = () => {
-      const isAboutPage = window.location.pathname === "/about";
-      setPage(isAboutPage ? "about" : "home");
+      const path = window.location.pathname;
+
+      if (path === "/about") {
+        setPage("about");
+        setBuilderSection(null);
+        return;
+      }
+
+      if (path === "/shop") {
+        setPage("home");
+        setBuilderSection("dress");
+        return;
+      }
+
+      if (path === "/cart") {
+        setPage("home");
+        setBuilderSection("cart");
+        return;
+      }
+
+      setPage("home");
+      setBuilderSection(null);
     };
 
     window.addEventListener("popstate", syncPageFromUrl);
+    syncPageFromUrl();
     return () => window.removeEventListener("popstate", syncPageFromUrl);
   }, []);
 
@@ -339,6 +379,12 @@ export default function AlternateApp() {
     }
   };
 
+  const goToBuilderPath = (path, section) => {
+    setPage("home");
+    setBuilderSection(section);
+    window.history.pushState({}, "", path);
+  };
+
   const navigateToAbout = () => {
     setPage("about");
     setBuilderSection(null);
@@ -350,9 +396,7 @@ export default function AlternateApp() {
   };
 
   const openCart = () => {
-    setPage("home");
-    setBuilderSection('cart');
-    window.history.pushState({}, "", "/");
+    goToBuilderPath("/cart", "cart");
   };
 
   return (
@@ -364,9 +408,7 @@ export default function AlternateApp() {
         onNavigateHome={navigateToHome}
         onNavigateAbout={navigateToAbout}
         onOpenShop={() => {
-          setPage("home");
-          setBuilderSection('dress');
-          window.history.pushState({}, "", "/");
+          goToBuilderPath("/shop", "dress");
         }}
         onOpenCart={openCart}
       />
@@ -394,15 +436,14 @@ export default function AlternateApp() {
       <div style={{ position: "relative", background: "var(--gradient-body)" }}>
         {builderSection ? (
           <div id="shop" ref={builderRef}>
-            <button type="button" className="ob-back-btn" onClick={() => setBuilderSection(null)}>
-              ‹ Back to collection
-            </button>
             <OutfitBuilder
               initialSection={builderSection}
-              onExit={() => setBuilderSection(null)}
+              onExit={() => {
+                setBuilderSection(null);
+                window.history.pushState({}, "", "/");
+              }}
               onTimerStateChange={setSessionTimer}
             />
-            
           </div>
         ) : page === "about" ? (
           <>

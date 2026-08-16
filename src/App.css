@@ -19,7 +19,7 @@ a { text-decoration: none; }
 .app-session-timer {
   position: fixed;
   right: 24px;
-  bottom: 28px;
+  bottom: 100px;
   z-index: 120;
   display: inline-flex;
   align-items: center;

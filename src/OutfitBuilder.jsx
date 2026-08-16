@@ -167,10 +167,12 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit, onTime
                       </span>
                     </div>
 
-                    <div className="ob-outfit-progress">
+                    <div className="ob-outfit-progress" aria-label="Outfit step progress">
                       {CATEGORIES.map((cat, catIndex) => {
                         const chosen = outfit[cat.key] !== null && outfit[cat.key] !== undefined;
                         const revealed = stepRevealed(outfit, catIndex);
+                        const stepNumber = catIndex + 1;
+
                         return (
                           <span
                             key={cat.key}
@@ -178,7 +180,9 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit, onTime
                               revealed ? '' : 'locked'
                             }`}
                           >
-                            <i className={'ti ' + (chosen ? 'ti-check' : cat.icon)} aria-hidden="true" />
+                            <span className="ob-progress-node" aria-hidden="true">
+                              {chosen ? '✓' : stepNumber}
+                            </span>
                             <span className="ob-progress-label">{cat.label}</span>
                           </span>
                         );
