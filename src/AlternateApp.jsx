@@ -3,7 +3,7 @@ import SvaraBox from "./SvaraBox";
 import HowItWorks from "./HowItWorks";
 import OutfitBuilder from "./OutfitBuilder";
 
-function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
+function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart, onNavigateHome, onNavigateAbout, currentPage }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [cartCount, setCartCount] = useState(() => Number(localStorage.getItem('svara-cart-count') || 0));
@@ -37,6 +37,30 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
     { name: "Shop", id: "Shop" },
   ];
 
+  const handleLinkClick = (e, link) => {
+    if (link.name === "About") {
+      e.preventDefault();
+      onNavigateAbout?.();
+      return;
+    }
+
+    if (link.name === "Contact") {
+      e.preventDefault();
+      if (currentPage !== "home") {
+        onNavigateHome?.("contact");
+      } else {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      return;
+    }
+
+    if (link.name === "Shop") {
+      e.preventDefault();
+      onNavigateHome?.();
+      onOpenShop?.();
+    }
+  };
+
   return (
     <>
       <nav className={`sv-nav${scrolled ? " scrolled" : ""}`}>
@@ -46,12 +70,7 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
             <a
               key={l.id}
               href={`#${l.id.toLowerCase().replace(" ", "-")}`}
-              onClick={(e) => {
-                if (l.name === 'Shop') {
-                  e.preventDefault();
-                  onOpenShop?.();
-                }
-              }}
+              onClick={(e) => handleLinkClick(e, l)}
             >
               {l.name}
             </a>
@@ -116,7 +135,7 @@ function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart }) {
             href={`#${l.id.toLowerCase().replace(" ", "-")}`}
             onClick={(e) => {
               setOpen(false);
-              if (l.name === 'Shop') { e.preventDefault(); onOpenShop?.(); }
+              handleLinkClick(e, l);
             }}
             style={{ fontFamily: "var(--font-family-primary)", fontSize: "20px", color: "#f0eee9", letterSpacing: "0.06em" }}
           >
@@ -145,29 +164,37 @@ function useReveal(threshold = 0.15) {
   }, [threshold]);
   return [ref, vis];
 }
-function Footer() {
-  const [ctaRef, ctaVis] = useReveal();
+function useJoin() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
-  const [contactRef, contactVis] = useReveal(0.25);
 
+  const handleJoin = async () => {
+    if (!email) return;
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      if (!res.ok) throw new Error("Failed to join");
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
 
-  const handleKey = (e) => { if (e.key === "Enter") handleJoin(); };
-  return (
-    <>
-    <HowItWorks />
-      {/* CTA */}
+  const JoinCard = () => {
+    const [ctaRef, ctaVis] = useReveal();
+
+    return (
       <section id="contact" ref={ctaRef} className="cta-section">
         <div className={`cta-inner reveal${ctaVis ? " in" : ""}`}>
-
-          {/* Ornament + label */}
-
-
           <div className="contact-card">
             <div className="contact-label">
               Join the <span className="brand-script">Svara</span> Circle
             </div>
-
 
             <div className="contact-label-row contact-label-row--onteal">
               <span className="contact-divider-line contact-divider-line--onteal" />
@@ -219,9 +246,17 @@ function Footer() {
           </div>
         </div>
       </section>
+    );
+  };
 
-      
+  return { email, setEmail, status, handleJoin, JoinCard };
+}
 
+function Footer() {
+
+  return (
+    <>
+     
       <footer style={{ background: "var(--color-primary)", padding: "60px 5% 38px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", borderTop: "1px solid var(--color-accent-gold-bright)" }}>
           <div style={{ paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
@@ -235,12 +270,21 @@ function Footer() {
 }
 
 export default function AlternateApp() {
+  const { JoinCard } = useJoin();
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem("svara-theme");
     return saved || "light";
   });
+  const [page, setPage] = useState(() => (window.location.pathname === "/about" ? "about" : "home"));
   const [builderSection, setBuilderSection] = useState(null);
+  const [sessionTimer, setSessionTimer] = useState({ active: false, timeLeft: 10 * 60 });
   const builderRef = useRef(null);
+
+  const formatTime = (seconds) => {
+    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    return `${mins}:${secs}`;
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -253,6 +297,34 @@ export default function AlternateApp() {
     }
   }, [builderSection]);
 
+  useEffect(() => {
+    const syncPageFromUrl = () => {
+      const isAboutPage = window.location.pathname === "/about";
+      setPage(isAboutPage ? "about" : "home");
+    };
+
+    window.addEventListener("popstate", syncPageFromUrl);
+    return () => window.removeEventListener("popstate", syncPageFromUrl);
+  }, []);
+
+  const navigateToHome = (targetId) => {
+    setPage("home");
+    setBuilderSection(null);
+    window.history.pushState({}, "", "/");
+
+    if (targetId) {
+      requestAnimationFrame(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  };
+
+  const navigateToAbout = () => {
+    setPage("about");
+    setBuilderSection(null);
+    window.history.pushState({}, "", "/about");
+  };
+
   const toggleTheme = () => {
     setTheme(prev => prev === "dark" ? "light" : "dark");
   };
@@ -262,20 +334,48 @@ export default function AlternateApp() {
       <Navbar
         theme={theme}
         toggleTheme={toggleTheme}
-        onOpenShop={() => setBuilderSection('dress')}
-        onOpenCart={() => setBuilderSection('cart')}
+        currentPage={page}
+        onNavigateHome={navigateToHome}
+        onNavigateAbout={navigateToAbout}
+        onOpenShop={() => {
+          setPage("home");
+          setBuilderSection('dress');
+          window.history.pushState({}, "", "/");
+        }}
+        onOpenCart={() => {
+          setPage("home");
+          setBuilderSection('cart');
+          window.history.pushState({}, "", "/");
+        }}
       />
+      {sessionTimer.active && (
+        <div className="app-session-timer" aria-live="polite">
+          <span className="app-session-timer__icon" aria-hidden="true">◔</span>
+          <span>{formatTime(sessionTimer.timeLeft)} to checkout</span>
+        </div>
+      )}
+
       <div style={{ position: "relative", background: "var(--gradient-body)" }}>
         {builderSection ? (
           <div id="shop" ref={builderRef}>
             <button type="button" className="ob-back-btn" onClick={() => setBuilderSection(null)}>
               ‹ Back to collection
             </button>
-            <OutfitBuilder initialSection={builderSection} onExit={() => setBuilderSection(null)} />
+            <OutfitBuilder
+              initialSection={builderSection}
+              onExit={() => setBuilderSection(null)}
+              onTimerStateChange={setSessionTimer}
+            />
           </div>
+        ) : page === "about" ? (
+          <>
+            <HowItWorks />
+            <Footer />
+          </>
         ) : (
           <>
             <SvaraBox onSelectCategory={setBuilderSection} />
+            <JoinCard />
             <Footer />
           </>
         )}

@@ -1,29 +1,25 @@
 import { CATEGORIES, getItem } from './data';
 
-// Collapsed summary card for a finished outfit.
+// Flat-lay preview for a finished outfit, styled to resemble a styled editorial board.
 export default function CompleteCard({ outfitNumber, outfit, onEdit }) {
+  const pieces = CATEGORIES.map((cat) => ({
+    cat,
+    item: getItem(outfit, cat.key),
+  })).filter(({ item }) => item);
+
   return (
     <div className="ob-complete-card">
       <div className="ob-complete-top">
-        <span className="ob-complete-label">outfit {outfitNumber} complete</span>
+        <span className="ob-complete-label">your look</span>
         <span className="ob-complete-check" aria-hidden="true">✓</span>
       </div>
 
-      <div className="ob-complete-thumbs">
-        {CATEGORIES.map((cat) => {
-          const item = getItem(outfit, cat.key);
-          return (
-            <div key={cat.key} className="ob-complete-thumb" title={`${cat.label}: ${item.name}`}>
-              <span
-                className="ob-complete-swatch"
-                style={{ background: item ? item.color : '#e8e2d8' }}
-              >
-                {item?.image && <img src={item.image} alt="" />}
-              </span>
-              <span className="ob-complete-thumb-name">{item ? item.name : cat.label}</span>
-            </div>
-          );
-        })}
+      <div className="ob-flatlay" aria-label="Selected outfit preview">
+        {pieces.map(({ cat, item }) => (
+          <div key={cat.key} className={`ob-flat-item ob-flat-item--${cat.key}`}>
+            {item.image && <img src={item.image} alt={item.name} />}
+          </div>
+        ))}
       </div>
 
       <div className="ob-complete-foot">

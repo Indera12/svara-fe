@@ -16,6 +16,48 @@ button, input, textarea, select { font: inherit; }
 ::selection { background: var(--color-overlay-selection); color: var(--color-bg-offwhite-alt); }
 input::placeholder { color: var(--color-overlay-placeholder); }
 a { text-decoration: none; }
+.app-session-timer {
+  position: fixed;
+  top: 118px;
+  right: 32px;
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: min(88vw, 420px);
+  pointer-events: none;
+}
+.app-session-timer > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 20px 0 18px;
+  border-radius: 999px;
+  background: rgba(238, 233, 226, 0.96);
+  color: var(--color-primary-deep);
+  font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(4, 11, 12, 0.14);
+}
+.app-session-timer__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: -8px;
+  border-radius: 50%;
+  background: rgba(238, 233, 226, 0.96);
+  color: var(--color-primary-deep);
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(4, 11, 12, 0.14);
+}
 @font-face {
   font-family: Brittany Signature;
   src: url('/BrittanySignature.ttf') format('truetype');
