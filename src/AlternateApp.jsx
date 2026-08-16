@@ -3,6 +3,29 @@ import SvaraBox from "./SvaraBox";
 import HowItWorks from "./HowItWorks";
 import OutfitBuilder from "./OutfitBuilder";
 
+const ROUTES = Object.freeze({
+  home: "/",
+  about: "/about",
+  shop: "/shop",
+  cart: "/cart",
+});
+
+const resolveRouteFromPath = (path) => {
+  if (path === ROUTES.about) {
+    return { page: "about", builderSection: null };
+  }
+
+  if (path === ROUTES.shop) {
+    return { page: "home", builderSection: "dress" };
+  }
+
+  if (path === ROUTES.cart) {
+    return { page: "home", builderSection: "cart" };
+  }
+
+  return { page: "home", builderSection: null };
+};
+
 function Navbar({ theme, toggleTheme, onOpenShop, onOpenCart, onNavigateHome, onNavigateAbout, currentPage }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -285,17 +308,8 @@ export default function AlternateApp() {
     const saved = localStorage.getItem("svara-theme");
     return saved || "light";
   });
-  const [page, setPage] = useState(() => {
-    const path = window.location.pathname;
-    if (path === "/about") return "about";
-    return "home";
-  });
-  const [builderSection, setBuilderSection] = useState(() => {
-    const path = window.location.pathname;
-    if (path === "/shop") return "dress";
-    if (path === "/cart") return "cart";
-    return null;
-  });
+  const [page, setPage] = useState(() => resolveRouteFromPath(window.location.pathname).page);
+  const [builderSection, setBuilderSection] = useState(() => resolveRouteFromPath(window.location.pathname).builderSection);
   const [sessionTimer, setSessionTimer] = useState({ active: false, timeLeft: 10 * 60 });
   const builderRef = useRef(null);
   const TIMER_SECONDS = 10 * 60;
@@ -338,28 +352,9 @@ export default function AlternateApp() {
 
   useEffect(() => {
     const syncPageFromUrl = () => {
-      const path = window.location.pathname;
-
-      if (path === "/about") {
-        setPage("about");
-        setBuilderSection(null);
-        return;
-      }
-
-      if (path === "/shop") {
-        setPage("home");
-        setBuilderSection("dress");
-        return;
-      }
-
-      if (path === "/cart") {
-        setPage("home");
-        setBuilderSection("cart");
-        return;
-      }
-
-      setPage("home");
-      setBuilderSection(null);
+      const nextState = resolveRouteFromPath(window.location.pathname);
+      setPage(nextState.page);
+      setBuilderSection(nextState.builderSection);
     };
 
     window.addEventListener("popstate", syncPageFromUrl);
@@ -368,9 +363,10 @@ export default function AlternateApp() {
   }, []);
 
   const navigateToHome = (targetId) => {
-    setPage("home");
-    setBuilderSection(null);
-    window.history.pushState({}, "", "/");
+    const nextState = resolveRouteFromPath(ROUTES.home);
+    setPage(nextState.page);
+    setBuilderSection(nextState.builderSection);
+    window.history.pushState({}, "", ROUTES.home);
 
     if (targetId) {
       requestAnimationFrame(() => {
@@ -380,7 +376,8 @@ export default function AlternateApp() {
   };
 
   const goToBuilderPath = (path, section) => {
-    setPage("home");
+    const nextState = resolveRouteFromPath(path);
+    setPage(nextState.page);
     setBuilderSection(section);
     window.history.pushState({}, "", path);
   };
@@ -388,7 +385,7 @@ export default function AlternateApp() {
   const navigateToAbout = () => {
     setPage("about");
     setBuilderSection(null);
-    window.history.pushState({}, "", "/about");
+    window.history.pushState({}, "", ROUTES.about);
   };
 
   const toggleTheme = () => {
@@ -440,22 +437,21 @@ export default function AlternateApp() {
               initialSection={builderSection}
               onExit={() => {
                 setBuilderSection(null);
-                window.history.pushState({}, "", "/");
+                setPage("home");
+                window.history.pushState({}, "", ROUTES.home);
               }}
               onTimerStateChange={setSessionTimer}
             />
           </div>
         ) : page === "about" ? (
-          <>
-            <HowItWorks />
-          </>
+          <HowItWorks />
         ) : (
           <>
             <SvaraBox onSelectCategory={setBuilderSection} />
             <JoinCard />
           </>
         )}
-      <Footer />
+        <Footer />
       </div>
     </>
   );
