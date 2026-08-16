@@ -279,12 +279,32 @@ export default function AlternateApp() {
   const [builderSection, setBuilderSection] = useState(null);
   const [sessionTimer, setSessionTimer] = useState({ active: false, timeLeft: 10 * 60 });
   const builderRef = useRef(null);
+  const TIMER_SECONDS = 10 * 60;
 
   const formatTime = (seconds) => {
     const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
     const secs = String(seconds % 60).padStart(2, '0');
     return `${mins}:${secs}`;
   };
+
+  useEffect(() => {
+    if (!sessionTimer.active) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      setSessionTimer((prev) => {
+        if (!prev.active) return prev;
+
+        if (prev.timeLeft <= 1) {
+          window.clearInterval(intervalId);
+          return { active: false, timeLeft: 0 };
+        }
+
+        return { ...prev, timeLeft: prev.timeLeft - 1 };
+      });
+    }, 1000);
+
+    return () => window.clearInterval(intervalId);
+  }, [sessionTimer.active]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -329,6 +349,12 @@ export default function AlternateApp() {
     setTheme(prev => prev === "dark" ? "light" : "dark");
   };
 
+  const openCart = () => {
+    setPage("home");
+    setBuilderSection('cart');
+    window.history.pushState({}, "", "/");
+  };
+
   return (
     <>
       <Navbar
@@ -342,16 +368,26 @@ export default function AlternateApp() {
           setBuilderSection('dress');
           window.history.pushState({}, "", "/");
         }}
-        onOpenCart={() => {
-          setPage("home");
-          setBuilderSection('cart');
-          window.history.pushState({}, "", "/");
-        }}
+        onOpenCart={openCart}
       />
       {sessionTimer.active && (
-        <div className="app-session-timer" aria-live="polite">
-          <span className="app-session-timer__icon" aria-hidden="true">◔</span>
-          <span>{formatTime(sessionTimer.timeLeft)} to checkout</span>
+        <div
+          className="app-session-timer"
+          aria-live="polite"
+          onClick={openCart}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              openCart();
+            }
+          }}
+        >
+          <span>
+            <span className="app-session-timer__icon" aria-hidden="true">◔</span>
+            {formatTime(sessionTimer.timeLeft)} to checkout
+          </span>
         </div>
       )}
 
@@ -366,19 +402,19 @@ export default function AlternateApp() {
               onExit={() => setBuilderSection(null)}
               onTimerStateChange={setSessionTimer}
             />
+            
           </div>
         ) : page === "about" ? (
           <>
             <HowItWorks />
-            <Footer />
           </>
         ) : (
           <>
             <SvaraBox onSelectCategory={setBuilderSection} />
             <JoinCard />
-            <Footer />
           </>
         )}
+      <Footer />
       </div>
     </>
   );

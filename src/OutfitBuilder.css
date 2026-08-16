@@ -468,6 +468,14 @@ button { font-family: inherit; }
   background: linear-gradient(180deg, #f5f0ea 0%, #efe8df 100%);
   border: 1px solid rgba(62, 78, 72, 0.08);
 }
+.ob-flatlay--cart {
+  max-width: 760px;
+  height: 540px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f5f1ed 0%, #f0efe9 100%);
+  border: 1px solid rgba(62, 78, 72, 0.08);
+}
 .ob-flat-item {
   position: absolute;
   display: flex;
@@ -511,6 +519,31 @@ button { font-family: inherit; }
   left: 29%;
   bottom: 4%;
   z-index: 3;
+}
+.ob-flatlay--cart .ob-flat-item--dress {
+  width: 56%;
+  height: 74%;
+  left: 22%;
+  top: 6%;
+}
+.ob-flatlay--cart .ob-flat-item--bag {
+  width: 28%;
+  height: 22%;
+  right: 14%;
+  top: 34%;
+  transform: rotate(8deg);
+}
+.ob-flatlay--cart .ob-flat-item--acc {
+  width: 22%;
+  height: 18%;
+  left: 18%;
+  top: 30%;
+}
+.ob-flatlay--cart .ob-flat-item--shoes {
+  width: 45%;
+  height: 19%;
+  left: 28%;
+  bottom: 6%;
 }
 .ob-complete-foot {
   display: flex;

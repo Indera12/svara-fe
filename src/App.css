@@ -18,15 +18,15 @@ input::placeholder { color: var(--color-overlay-placeholder); }
 a { text-decoration: none; }
 .app-session-timer {
   position: fixed;
-  top: 118px;
-  right: 32px;
+  right: 24px;
+  bottom: 28px;
   z-index: 120;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   max-width: min(88vw, 420px);
-  pointer-events: none;
+  cursor: pointer;
 }
 .app-session-timer > span {
   display: inline-flex;

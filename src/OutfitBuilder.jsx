@@ -78,6 +78,7 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit, onTime
     }
 
     if (outfitComplete) {
+      onTimerStateChange?.({ active: true, timeLeft: 10 * 60 });
       setTimeout(() => {
         setPhase('cart');
       }, 700);
@@ -104,51 +105,29 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit, onTime
     setOutfits([emptyOutfit()]);
     setActiveOutfit(0);
     setPhase('build');
+    onTimerStateChange?.({ active: false, timeLeft: 10 * 60 });
+  };
+
+  const handleAddToBag = () => {
+    onTimerStateChange?.({ active: false, timeLeft: 0 });
+    onExit?.();
   };
 
   const firstIncomplete = outfits.findIndex((outfit) => !isComplete(outfit));
   const outfitIsComplete = outfits.length > 0 && isComplete(outfits[0]);
-  const [timeLeft, setTimeLeft] = useState(10 * 60);
-  const timerStartedRef = useRef(false);
 
   useEffect(() => {
     if (!outfitIsComplete) {
-      timerStartedRef.current = false;
-      setTimeLeft(10 * 60);
+      if (initialSection === 'cart' || phase === 'cart') {
+        return undefined;
+      }
       onTimerStateChange?.({ active: false, timeLeft: 10 * 60 });
       return undefined;
     }
 
-    if (timerStartedRef.current) {
-      return undefined;
-    }
-
-    timerStartedRef.current = true;
-    setTimeLeft(10 * 60);
     onTimerStateChange?.({ active: true, timeLeft: 10 * 60 });
-
-    const intervalId = window.setInterval(() => {
-      setTimeLeft((prev) => {
-        const nextValue = prev <= 1 ? 0 : prev - 1;
-        onTimerStateChange?.({ active: true, timeLeft: nextValue });
-
-        if (nextValue <= 0) {
-          window.clearInterval(intervalId);
-          timerStartedRef.current = false;
-          setOutfits([emptyOutfit()]);
-          onExit?.();
-          return 0;
-        }
-
-        return nextValue;
-      });
-    }, 1000);
-
-    return () => {
-      timerStartedRef.current = false;
-      window.clearInterval(intervalId);
-    };
-  }, [outfitIsComplete, onExit, onTimerStateChange]);
+    return undefined;
+  }, [outfitIsComplete, onTimerStateChange, initialSection, phase]);
 
   return (
     <div className="ob-wrap">
@@ -280,6 +259,7 @@ export default function OutfitBuilder({ initialSection = 'dress', onExit, onTime
           outfits={outfits}
           onContinueShopping={handleContinueShopping}
           onCheckout={() => {}}
+          onAddToBag={handleAddToBag}
         />
       )}
     </div>
